@@ -12,11 +12,33 @@ export default {
         "./resources/js/**/*.vue",
         // "./app/Forms/*.php",
         // "./app/Tables/*.php",
+        "./node_modules/flowbite/**/*.js",
     ],
 
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                primary: {
+                "50": "#ffeef0",
+                "100": "#ffd6d9",
+                "200": "#ffb3b3",
+                "300": "#ff8a8a",
+                "400": "#ff5c5c",
+                "500": "#ff3333",
+                "600": "#e60000",
+                "700": "#cc0000",
+                "800": "#b20000",
+                "900": "#990000",
+                "950": "#800000"
+            }
+            }
+        },
     },
 
-    plugins: [forms, typography],
+    plugins: [
+        forms,
+        typography,
+        require('flowbite/plugin'),
+    ],
+    darkMode: 'class',
 };
