@@ -27,10 +27,6 @@ Route::middleware('splade')->group(function () {
     // Registers routes to support async File Uploads with Filepond...
     Route::spladeUploads();
 
-    Route::get('/', function () {
-        return view('pages.landing-page');
-    });
-
     Route::middleware('auth')->group(function () {
         Route::get('/dashboard', function () {
             return view('dashboard');
@@ -42,4 +38,7 @@ Route::middleware('splade')->group(function () {
     });
 
     require __DIR__.'/auth.php';
+
+    # Routing Website Utama Non Auth
+    require __DIR__.'/sub/website.php';
 });
