@@ -32,19 +32,26 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'name'         => ['required', 'string', 'max:255'],
+            'email'        => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'phone_number' => ['required', 'string', 'max:15', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'phone_code'   => ['max:6'],
+              // 'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password'     => ['required', 'min:6'],
         ]);
+
+        // Menghapus karakter '0' di awal nomor telepon yang dimasukkan oleh pengguna
+        $phone_number = ltrim($request->phone_number, '0');
 
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone_number' => $request->phone_number,
-            'password' => Hash::make($request->password),
+            'name'         => $request->name,
+            'email'        => $request->email,
+            'phone_code'   => $request->phone_code ?? '62',
+            'phone_number' => $phone_number,
+            'password'     => Hash::make($request->password),
         ]);
 
+        // Kode ini memicu event Registered setelah pengguna baru berhasil didaftarkan.
         event(new Registered($user));
 
         Auth::login($user);

@@ -3,7 +3,15 @@
 @section('content')
     <x-auth-card>
         <h1 class="text-2xl font-bold text-center py-4">Daftar Akun</h1>
-        <x-splade-form action="{{ route('register') }}" class="space-y-4">
+        <x-splade-form
+            action="{{ route('register') }}"
+            class="space-y-4"
+            confirm-text="Apakah data yang anda masukkan sudah benar ?"
+            confirm="Konfirmasi"
+            confirm-button="Benar"
+            cancel-button="Belum"
+            method="POST"
+            >
             <x-splade-input id="name" type="text" name="name" :label="__('Nama')" required autofocus />
             <x-splade-input id="email" type="email" name="email" :label="__('Email')" required />
             <div class="flex items-center">

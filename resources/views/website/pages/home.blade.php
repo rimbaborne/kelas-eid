@@ -19,7 +19,7 @@
                 Dari Ahlinya
             </h1>
             <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
-                Kami menawarkan materi yang lengkap, mentor berpengalaman, dan komunitas belajar yang suportif untuk membantu Anda mencapai tujuan bisnis Anda.
+                kelasentrepreneurid.com menawarkan materi yang lengkap, mentor berpengalaman, dan komunitas belajar yang suportif untuk membantu Anda mencapai tujuan bisnis Anda.
             </p>
 
             <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
