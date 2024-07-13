@@ -1,9 +1,8 @@
 {
-    "name": "laravel/laravel",
+    "name": "rimbaborne/kelas-eid",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
-    "license": "MIT",
+    "description": "Sistem Afiliasi dan LMS.",
+    "keywords": ["lms", "eid"],
     "require": {
         "php": "^8.2",
         "laravel/framework": "^11.9",
