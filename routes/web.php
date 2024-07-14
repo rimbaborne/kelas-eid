@@ -41,4 +41,9 @@ Route::middleware('splade')->group(function () {
 
     # Routing Website Utama Non Auth
     require __DIR__.'/sub/website.php';
+
+    Route::get('/kelas', function () {
+        return view('pages.kelas');
+    })->name('kelas');
+
 });

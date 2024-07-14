@@ -27,7 +27,7 @@
             </x-website.nav>
         </li>
         <li>
-            <x-website.nav :href="route('website.kelas')" :active="request()->routeIs('website.kelas')" >
+            <x-website.nav :href="route('kelas')" :active="request()->routeIs('kelas')" >
                 Kelas
             </x-website.nav>
         </li>
