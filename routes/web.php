@@ -46,4 +46,12 @@ Route::middleware('splade')->group(function () {
         return view('pages.kelas');
     })->name('kelas');
 
+    Route::get('/data', function () {
+        return view('pages.data');
+    })->name('data');
+
+    Route::get('/pembayaran', function () {
+        return view('pages.pembayaran');
+    })->name('pembayaran');
+
 });
