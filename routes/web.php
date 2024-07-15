@@ -75,7 +75,7 @@ Route::middleware('splade')->group(function () {
             'returnUrl'   => 'https://kelasentrepreneurid.com/pemesanan/selesai',
             'cancelUrl'   => 'https://kelasentrepreneurid.com/pemesanan/cancel',
             'notifyUrl'   => 'https://kelasentrepreneurid.com/pemesanan/callback',
-            'referenceId' => auth()->user()->id,                                           //your reference id
+            'referenceId' => 'ref_'.auth()->user()->id,                                           //your reference id
             'buyerName'   => auth()->user()->name,
             'buyerEmail'  => auth()->user()->email,
             'buyerPhone'  => auth()->user()->phone_code . auth()->user()->phone_number,
