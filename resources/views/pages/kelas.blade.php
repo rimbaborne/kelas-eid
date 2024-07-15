@@ -20,11 +20,11 @@
                                 Informasi
                             </a>
 
-                            <Link href="#" title=""
+                            <Link href="{{ route('pemesanan') }}" title=""
                                 class="text-white mt-4 sm:mt-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-1.5 md:py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 flex items-center justify-center"
                                 role="button">
 
-                                Daftar
+                                Pesan
                             </Link>
                         </div>
                     </div>

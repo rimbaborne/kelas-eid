@@ -27,7 +27,7 @@
 
                 <div class="gap-4 pb-2 items-center justify-center flex">
 
-                    <Link href="#"
+                    <Link href="{{ route('pemesanan') }}"
                         class="text-white mt-2 sm:mt-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-1.5 md:py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
                         >
                         Pesan

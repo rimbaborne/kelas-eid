@@ -111,7 +111,7 @@ Route::middleware('splade')->group(function () {
         } else {
             return response()->json($ret);
         }
-    });
+    })->name('pemesanan');
 
     Route::get('/pemesanan/selesai', function(){
         // return view('pages.pemesanan.selesai');
