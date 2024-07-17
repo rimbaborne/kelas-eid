@@ -28,7 +28,7 @@ class KelasController extends BaseController
 
     function profit_2()
     {
-        return view('pages.kelas-profit');
+        return view('pages.kelas-profit-2');
     }
 
     function profit_3()
