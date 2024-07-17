@@ -16,7 +16,7 @@
           </section>
     </div>
 
-    @if (!session('modal_shown') || now()->diffInHours(session('modal_shown')) >= 1)
+    {{-- @if (!session('modal_shown') || now()->diffInHours(session('modal_shown')) >= 1) --}}
         <x-splade-modal opened>
             <div class="flex flex-col border justify-center bg-white rounded-xl items-center">
                 <img class="h-64 p-4" src="https://admin.entrepreneurid.org/img/produk/KPS-2024-1.png">
@@ -35,6 +35,6 @@
                 </div>
             </div>
         </x-splade-modal>
-        {{ session(['modal_shown' => now()]) }}
+        {{-- {{ session(['modal_shown' => now()]) }} --}}
     @endif
 @endsection
