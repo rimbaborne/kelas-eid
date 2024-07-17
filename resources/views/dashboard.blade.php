@@ -36,5 +36,5 @@
             </div>
         </x-splade-modal>
         {{-- {{ session(['modal_shown' => now()]) }} --}}
-    @endif
+    {{-- @endif --}}
 @endsection
