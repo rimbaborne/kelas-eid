@@ -16,24 +16,25 @@
           </section>
     </div>
 
-    <x-splade-modal opened>
-        <div class="flex flex-col border justify-center bg-white rounded-xl items-center">
-            <img class="h-64 p-4" src="https://dashboard.agen-entrepreneurid.com/img/produk/WMH-2024-3.png">
-            <div class="p-3 md:p-6 text-center">
-                <small class="text-gray-900 text-xs hidden md:block">new</small>
-                <h1 class="text-xl sm:text-2xl font-semibold text-gray-700 pb-2 underline underline-offset-4 decoration-3 decoration-primary-700">Kelas Profit 10 Juta</h1>
-                {{-- <p class="text-sm sm:text text-gray-500 leading-6">Kelas Online mindset usaha</p> --}}
-                <h1 class="text-xl sm:text-2xl font-semibold text-gray-900 pb-2 ">Rp 49.000</h1>
+    @if (!session('modal_shown') || now()->diffInHours(session('modal_shown')) >= 1)
+        <x-splade-modal opened>
+            <div class="flex flex-col border justify-center bg-white rounded-xl items-center">
+                <img class="h-64 p-4" src="https://admin.entrepreneurid.org/img/produk/KPS-2024-1.png">
+                <div class="p-3 md:p-6 text-center">
+                    <h1 class="text-xl sm:text-2xl font-semibold text-gray-700 pb-2 ">Kelas Profit 10 Juta</h1>
+                    <h1 class="text-xl sm:text-2xl font-semibold text-gray-900 pb-2 ">Rp 57.000</h1>
 
-                <div class="gap-4 pb-2 items-center justify-center flex">
+                    <div class="gap-4 pb-2 items-center justify-center flex">
 
-                    <Link href="{{ route('pemesanan') }}"
-                        class="text-white mt-2 sm:mt-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-1.5 md:py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
-                        >
-                        Pesan
-                    </Link>
+                        <a href="{{ route('pemesanan') }}" target="_blank"
+                            class="text-white mt-2 sm:mt-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-1.5 md:py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+                            >
+                            Pesan
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </x-splade-modal>
+        </x-splade-modal>
+        {{ session(['modal_shown' => now()]) }}
+    @endif
 @endsection
