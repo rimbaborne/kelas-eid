@@ -25,11 +25,30 @@
                             Download File
                         </a>
                     </div>
-                    <div class="aspect-[16/9]">
-                        <iframe class="h-full w-full rounded-lg" src="{{ url('/') }}/pdf/skripsi.pdf" title="PDF viewer" frameborder="0" allow="fullscreen"></iframe>
+                    <div class="py-4">
+                        <button onclick="toggleFullScreen()" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                            Full Screen
+                        </button>
                     </div>
-
+                    <div class="aspect-[16/9]">
+                        <iframe id="pdfViewer" class="h-full w-full rounded-lg" src="{{ url('/') }}/pdf/skripsi.pdf" title="PDF viewer" frameborder="0" allow="fullscreen"></iframe>
+                    </div>
                 </div>
+
+                <script>
+                    function toggleFullScreen() {
+                        var iframe = document.getElementById('pdfViewer');
+                        if (iframe.requestFullscreen) {
+                            iframe.requestFullscreen();
+                        } else if (iframe.mozRequestFullScreen) { // Firefox
+                            iframe.mozRequestFullScreen();
+                        } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari and Opera
+                            iframe.webkitRequestFullscreen();
+                        } else if (iframe.msRequestFullscreen) { // IE/Edge
+                            iframe.msRequestFullscreen();
+                        }
+                    }
+                </script>
             </div>
         </div>
     </div>
