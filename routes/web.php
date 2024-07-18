@@ -226,9 +226,12 @@ Route::middleware('splade')->group(function () {
             'paymentChannel' => 'qris',
             'feeDirection'   => 'BUYER',
             'expired'        => '24',                                                    //your reference id
-            'buyerName'      => auth()->user()->name,
-            'buyerEmail'     => auth()->user()->email,
-            'buyerPhone'     => auth()->user()->phone_code . auth()->user()->phone_number,
+            // 'buyerName'      => auth()->user()->name,
+            // 'buyerEmail'     => auth()->user()->email,
+            // 'buyerPhone'     => auth()->user()->phone_code . auth()->user()->phone_number,
+            'name'      => auth()->user()->name,
+            'email'     => auth()->user()->email,
+            'phone'     => auth()->user()->phone_code . auth()->user()->phone_number,
         ];
         //End Request Body//
 
