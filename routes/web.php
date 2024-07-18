@@ -170,4 +170,97 @@ Route::middleware('splade')->group(function () {
     Route::get('/kelas/kelas-profit-10-juta/2', [KelasController::class, 'profit_2'])->name('kelas.profit.2');
     Route::get('/kelas/kelas-profit-10-juta/3', [KelasController::class, 'profit_3'])->name('kelas.profit.3');
 
+    Route::get('/signature', function(){
+
+        $httpMethod = 'POST';
+        $vaNumber = '0000008125144744'; // Contoh VA Number
+        $apiKey = 'SANDBOXDF3E6F1F-5E4A-44EF-9EDB-98D7BD737DAA'; // Contoh API Key
+        $requestBody = [
+            'name' => 'Putu',
+            'phone' => '081999501092',
+            'email' => 'putu@mail.com',
+            'amount' => '2000000',
+            'notifyUrl' => 'https://kelasentrepreneurid.com/callback',
+            'expired' => '24',
+            'comments' => 'Payment to XYZ',
+            'referenceId' => '1',
+            'paymentMethod' => 'qris',
+            'paymentChannel' => 'qris',
+            'product' => ['produk 1'],
+            'qty' => ['1'],
+            'price' => ['2000000'],
+            'feeDirection' => 'BUYER'
+        ];
+
+        $requestBodyJson = json_encode($requestBody);
+        $requestBodyHash = strtolower(hash('sha256', $requestBodyJson));
+        $stringToSign = strtoupper($httpMethod) . ":$vaNumber:$requestBodyHash:$apiKey";
+        $signature = hash_hmac('sha256', $stringToSign, $apiKey);
+
+        return "Signature: " . $signature;
+    })->name('signature');
+
+    Route::get('/pemesanan/direct', function(){
+
+        // $va           = '1179001364818964'; //get on iPaymu dashboard
+        // $apiKey       = '516A6C4F-D5F7-4D3B-AC26-18FFFEEF3B87'; //get on iPaymu dashboard
+
+        $va           = '0000008125144744'; //get on iPaymu dashboard
+        $apiKey       = 'SANDBOXDF3E6F1F-5E4A-44EF-9EDB-98D7BD737DAA'; //get on iPaymu dashboard
+
+        $url          = 'https://sandbox.ipaymu.com/api/v2/payment/direct'; // for development mode
+        // $url          = 'https://my.ipaymu.com/api/v2/payment'; // for production mode
+
+        $method       = 'POST'; //method
+
+        //Request Body//
+        $body    = [
+            'product'        => ['Pemesanan Kelas Profit 10 Juta'],
+            'qty'            => ['1'],
+            'price'          => ['57000'],
+            'returnUrl'      => 'https://kelasentrepreneurid.com/pemesanan/selesai',
+            'cancelUrl'      => 'https://kelasentrepreneurid.com/pemesanan/cancel',
+            'notifyUrl'      => 'https://kelasentrepreneurid.com/pemesanan/callback',
+            'referenceId'    => 'ref_'.auth()->user()->id,
+            'paymentMethod'  => 'qris',
+            'paymentChannel' => 'qris',
+            'feeDirection'   => 'BUYER',
+            'expired'        => '24',                                                    //your reference id
+            'buyerName'      => auth()->user()->name,
+            'buyerEmail'     => auth()->user()->email,
+            'buyerPhone'     => auth()->user()->phone_code . auth()->user()->phone_number,
+        ];
+        //End Request Body//
+
+        //Generate Signature
+        // *Don't change this
+        $jsonBody     = json_encode($body, JSON_UNESCAPED_SLASHES);
+        $requestBody  = strtolower(hash('sha256', $jsonBody));
+        $stringToSign = strtoupper($method) . ':' . $va . ':' . $requestBody . ':' . $apiKey;
+        $signature    = hash_hmac('sha256', $stringToSign, $apiKey);
+        $timestamp    = Date('YmdHis');
+        //End Generate Signature
+
+        $response = Http::withHeaders([
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+            'va' => $va,
+            'signature' => $signature,
+            'timestamp' => $timestamp,
+        ])->post($url, $body);
+
+        if ($response->failed()) {
+            return response()->json($response->json());
+        }
+
+        $ret = $response->json();
+        if ($ret['Status'] == 200) {
+            $sessionId  = $ret['Data']['SessionID'];
+            $url        =  $ret['Data']['Url'];
+            return redirect($url);
+        } else {
+            return response()->json($ret);
+        }
+    })->name('pemesanan');
+
 });
