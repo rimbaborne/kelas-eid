@@ -227,8 +227,8 @@ Route::middleware('splade')->group(function () {
             'notifyUrl'      => 'https://kelasentrepreneurid.com/pemesanan/callback',
             'referenceId'    => 'ref_'.auth()->user()->id,
             'comments'       => 'Payment to XYZ',
-            'paymentMethod'  => 'qris',
-            'paymentChannel' => 'qris',
+            'paymentMethod'  => 'va',
+            'paymentChannel' => 'bni',
             'feeDirection'   => 'BUYER',
             'expired'        => '24',                                                    //your reference id
             // 'buyerName'      => auth()->user()->name,
@@ -262,15 +262,7 @@ Route::middleware('splade')->group(function () {
         }
 
         $ret = $response->json();
-        if ($ret['Status'] == 200) {
-            $sessionId  = $ret['Data']['SessionID'];
-            $url        =  $ret['Data']['Url'];
-            return redirect($url);
-            return response()->json($ret);
-
-        } else {
-            return response()->json($ret);
-        }
+        return response()->json($ret);
     })->name('pemesanan');
 
     Route::get('/pemesanan/direct-payment', function () {
