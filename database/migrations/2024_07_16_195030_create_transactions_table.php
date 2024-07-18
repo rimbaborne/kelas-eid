@@ -19,9 +19,9 @@ return new class extends Migration
             $table->unsignedBigInteger('invoice_id')->nullable();
             $table->unsignedBigInteger('sistem_lama_id')->nullable();
             $table->string('id_ipaymu');
-            $table->decimal('subtotal', 8, 2);
-            $table->decimal('fee', 8, 2); // biaya transaksi
-            $table->decimal('total', 8, 2);
+            $table->integer('subtotal')->default(0);
+            $table->integer('fee')->default(0); // biaya transaksi
+            $table->integer('total')->default(0);
             $table->timestamp('batas_bayar'); // expired payment
             $table->timestamp('berhasil_bayar')->nullable(); // expired payment
             $table->string('via'); // jenis pembayaran

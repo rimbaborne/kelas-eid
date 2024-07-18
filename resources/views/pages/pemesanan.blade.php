@@ -303,41 +303,41 @@
                         <h3 class="text-lg font-semibold mb-2">Virtual Account (VA)</h3>
                         <div class="space-y-2">
                             <label class="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
-                                <input type="radio" name="payment_method" value="bca" class="mr-2" data-fee="3500" data-name="Bank BSI" data-type="virtual_account" required>
+                                <x-splade-radio name="payment_method" value="bsi" class="mr-2" data-fee="3500" data-inis="Bank BSI" data-type="virtual_account"/>
                                 <img src="{{ url('/') }}/assets/pembayaran/bsi.png" alt="Bank BCA" class="h-6 mr-2">
                                 Bank BSI
                             </label>
                             <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
-                                <input type="radio" name="payment_method" value="bca" class="mr-2" data-fee="3500" data-name="Bank Muamalat" data-type="virtual_account">
+                                <x-splade-radio name="payment_method" value="bmi" class="mr-2" data-fee="3500" data-inis="Bank Muamalat" data-type="virtual_account"/>
                                 <img src="{{ url('/') }}/assets/pembayaran/bmi.png" alt="Bank BCA" class="h-6 mr-2">
                                 Bank Muamalat
                             </label>
                             <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
-                                <input type="radio" name="payment_method" value="bca" class="mr-2" data-fee="4000" data-name="Bank BCA" data-type="virtual_account">
+                                <x-splade-radio name="payment_method" value="bca" class="mr-2" data-fee="4000" data-inis="Bank BCA" data-type="virtual_account"/>
                                 <img src="{{ url('/') }}/assets/pembayaran/bank_bca.png" alt="Bank BCA"
                                     class="h-6 mr-2">
                                 Bank BCA
                             </label>
                             <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
-                                <input type="radio" name="payment_method" value="bni" class="mr-2" data-fee="3500" data-name="Bank BNI" data-type="virtual_account">
+                                <x-splade-radio name="payment_method" value="bni" class="mr-2" data-fee="3500" data-inis="Bank BNI" data-type="virtual_account"/>
                                 <img src="{{ url('/') }}/assets/pembayaran/bank_bni.png" alt="Bank BNI"
                                     class="h-6 mr-2">
                                 Bank BNI
                             </label>
                             <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
-                                <input type="radio" name="payment_method" value="bri" class="mr-2" data-fee="3500" data-name="Bank BRI" data-type="virtual_account">
+                                <x-splade-radio name="payment_method" value="bri" class="mr-2" data-fee="3500" data-inis="Bank BRI" data-type="virtual_account"/>
                                 <img src="{{ url('/') }}/assets/pembayaran/bank_bri.png" alt="Bank BRI"
                                     class="h-6 mr-2">
                                 Bank BRI
                             </label>
                             <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
-                                <input type="radio" name="payment_method" value="mandiri" class="mr-2" data-fee="3500" data-name="Bank Mandiri" data-type="virtual_account">
+                                <x-splade-radio name="payment_method" value="mandiri" class="mr-2" data-fee="3500" data-inis="Bank Mandiri" data-type="virtual_account"/>
                                 <img src="{{ url('/') }}/assets/pembayaran/bank_mandiri.png" alt="Bank Mandiri"
                                     class="h-6 mr-2">
-                                Bank MANDIRI
+                                Bank MANDIRIa
                             </label>
                             <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
-                                <input type="radio" name="payment_method" value="permata" class="mr-2" data-fee="3500" data-name="Bank Permata" data-type="virtual_account">
+                                <x-splade-radio name="payment_method" value="permata" class="mr-2" data-fee="3500" />
                                 <img src="{{ url('/') }}/assets/pembayaran/bank_permata.png" alt="Bank Permata"
                                     class="h-6 mr-2">
                                 Bank PERMATA
@@ -348,13 +348,13 @@
                         <h3 class="text-lg font-semibold mb-2">e-Wallet</h3>
                         <div class="space-y-2">
                             <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
-                                <input type="radio" name="payment_method" value="linkaja" class="mr-2" data-fee="{{ 57000 * 0.007 }}" data-name="LinkAja" data-type="e_wallet">
+                                <x-splade-radio name="payment_method" value="linkaja" class="mr-2" data-fee="{{ 57000 * 0.007 }}" data-inis="LinkAja" data-type="e_wallet"/>
                                 <img src="{{ url('/') }}/assets/pembayaran/linkaja.svg" alt="LinkAja"
                                     class="h-6 mr-2">
                                 LinkAja
                             </label>
                             <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
-                                <input type="radio" name="payment_method" value="dana" class="mr-2" data-fee="{{ 57000 * 0.007 }}" data-name="Dana" data-type="e_wallet">
+                                <x-splade-radio name="payment_method" value="dana" class="mr-2" data-fee="{{ 57000 * 0.007 }}" data-inis="Dana" data-type="e_wallet"/>
                                 <img src="{{ url('/') }}/assets/pembayaran/dana.svg" alt="Dana"
                                     class="h-6 mr-2">
                                 Dana
@@ -365,7 +365,7 @@
                         <h3 class="text-lg font-semibold mb-2">QR Code</h3>
                         <div class="space-y-2">
                             <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
-                                <input type="radio" name="payment_method" value="qris" class="mr-2" data-fee="{{ 57000 * 0.007 }}" data-name="QRIS" data-type="qris">
+                                <x-splade-radio name="payment_method" value="qris" class="mr-2" data-fee="{{ 57000 * 0.007 }}"/>
                                 <img src="{{ url('/') }}/assets/pembayaran/qris.svg" alt="QRIS"
                                     class="h-6 mr-2">
                                 QRIS
@@ -403,7 +403,7 @@
                     document.querySelectorAll('input[name="payment_method"]').forEach((elem) => {
                         elem.addEventListener("change", function(event) {
                             var fee = event.target.getAttribute('data-fee');
-                            var name = event.target.getAttribute('data-name');
+                            var name = event.target.getAttribute('data-inis');
                             var total = 57000 + parseInt(fee);
                             document.getElementById('transaction-fee').innerText = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(fee);
                             document.getElementById('total-cost').innerText = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(total);

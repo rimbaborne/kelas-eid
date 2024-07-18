@@ -22,12 +22,14 @@ class TransactionController extends Controller
 
     public function pemesanan_kelasprofit_store(Request $request)
     {
+        dd($request->all());
         $request->validate([
-            'name'         => ['required', 'string', 'max:255'],
-            'email'        => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'phone_number' => ['required', 'string', 'max:15', 'unique:'.User::class],
-            'phone_code'   => ['max:6'],
-            'password'     => ['required', 'min:6'],
+            'name'           => ['required', 'string', 'max:255'],
+            'email'          => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'phone_number'   => ['required', 'string', 'max:15', 'unique:'.User::class],
+            'phone_code'     => ['max:6'],
+            'password'       => ['required', 'min:6'],
+            'payment_method' => ['required'],
         ]);
 
         // Menghapus karakter '0' di awal nomor telepon yang dimasukkan oleh pengguna
@@ -60,10 +62,10 @@ class TransactionController extends Controller
 
         if ($request->payment_method == 'qris') {
             $method_ = 'qris';
-            $channel_ = 'qris';
+            $channel_ = 'mpm';
         } else {
             $method_ = 'va';
-            $channel_ = $request->payment_method;
+            $channel_ = (string) $request->payment_method;
         }
 
         //Request Body//
@@ -175,7 +177,7 @@ class TransactionController extends Controller
             $get_sistem_lama = $response_sistem_lama->json();
 
             $simpan->invoice_id     = date('Ymd') . $simpan->id;
-            $simpan->sistem_lama_id = $get_sistem_lama['data']['uuid'];
+            $simpan->sistem_lama_id = $get_sistem_lama['data']['id'];
             $simpan->save();
 
 
