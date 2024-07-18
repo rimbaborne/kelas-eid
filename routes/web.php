@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\KelasController;
-require_once base_path('vendor/ipaymu-php-api/iPaymu/iPaymu.php');
+// require_once base_path('vendor/ipaymu-php-api/iPaymu/iPaymu.php');
 use iPaymu\iPaymu;
 
 /*
