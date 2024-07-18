@@ -315,6 +315,6 @@ Route::middleware('splade')->group(function () {
     });
 
     Route::get('/transaksi', [TransactionController::class, 'transaksi'])->name('transaksi');
-    Route::get('/transaksi/pembayaran/{signature}/{transactionId}', [TransactionController::class, 'pembayaran'])->name('transaksi.pembayaran');
+    Route::get('/transaksi/pembayaran/{signature}/{transactionId}/{timestamp}', [TransactionController::class, 'pembayaran'])->name('transaksi.pembayaran');
 
 });
