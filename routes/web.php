@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\KelasController;
+require_once base_path('vendor/ipaymu-php-api/iPaymu/iPaymu.php');
+use iPaymu\iPaymu;
 
 /*
 |--------------------------------------------------------------------------
@@ -260,12 +262,57 @@ Route::middleware('splade')->group(function () {
 
         $ret = $response->json();
         if ($ret['Status'] == 200) {
-            $sessionId  = $ret['Data']['SessionID'];
-            $url        =  $ret['Data']['Url'];
-            return redirect($url);
+            // $sessionId  = $ret['Data']['SessionID'];
+            // $url        =  $ret['Data']['Url'];
+            // return redirect($url);
+            return response()->json($ret);
+
         } else {
             return response()->json($ret);
         }
     })->name('pemesanan');
+
+    Route::get('/pemesanan/direct-payment', function () {
+        $va           = '0000008125144744'; //get on iPaymu dashboard
+        $apiKey       = 'SANDBOXDF3E6F1F-5E4A-44EF-9EDB-98D7BD737DAA'; //get on iPaymu dashboard
+        $production   = false;
+
+        $ipaymu = new iPaymu($apiKey, $va, $production);
+
+        $ipaymu->setURL([
+            'returnUrl'      => 'https://kelasentrepreneurid.com/pemesanan/selesai',
+            'cancelUrl'      => 'https://kelasentrepreneurid.com/pemesanan/cancel',
+            'notifyUrl'      => 'https://kelasentrepreneurid.com/pemesanan/callback',
+        ]);
+
+        $ipaymu->setBuyer([
+            'name'      => auth()->user()->name,
+            'email'     => auth()->user()->email,
+            'phone'     => auth()->user()->phone_code . auth()->user()->phone_number,
+        ]);
+
+        $ipaymu->addCart([
+            'product' => 'Kelas Profit 10 Juta',
+            'quantity' => 1,
+            'price' => 57000,
+            'description' => 'Kelas Profit 10 Juta',
+            'weight' => 1,
+        ]);
+
+        //payment - direct
+        $directData = [
+            'amount' => 57000,
+            'expired' => 24,
+            'expiredType' => 'hours',
+            'referenceId' => 10101011,
+            'paymentMethod' => 'qris', //va, cstore
+            'paymentChannel' => 'qris', //bag, mandiri, cimb, bni,
+
+        ];
+
+        $direct = $ipaymu->directPayment($directData);
+
+        return $direct;
+    });
 
 });

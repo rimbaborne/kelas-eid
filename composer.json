@@ -6,6 +6,7 @@
     "require": {
         "php": "^8.2",
         "codeat3/blade-carbon-icons": "^2.28",
+        "ipaymu/ipaymu-php-api": "^3.0",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "protonemedia/laravel-splade": "^1.4",
