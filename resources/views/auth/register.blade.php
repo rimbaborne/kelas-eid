@@ -294,7 +294,7 @@
                 </div>
             </div>
             <x-splade-input id="password" type="password" name="password" min="6"
-                placeholder="Password Minimal 6 Karakter" :label="__('Password')" required autocomplete="new-password" />
+                placeholder="Password Minimal 6 Karakter" :label="__('Password (untuk login member area nanti)')" required autocomplete="new-password" />
 
             <div class="container mx-auto py-8">
                 <div class="max-w-lg mx-auto bg-white rounded-lg ">
@@ -302,42 +302,42 @@
                     <div class="mb-4">
                         <h3 class="text-lg font-semibold mb-2">Virtual Account (VA)</h3>
                         <div class="space-y-2">
-                            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
-                                <input type="radio" name="bank" value="bca" class="mr-2">
+                            <label class="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <input type="radio" name="payment_method" value="bca" class="mr-2" data-fee="3500" data-name="Bank BSI">
                                 <img src="{{ url('/') }}/assets/pembayaran/bsi.png" alt="Bank BCA" class="h-6 mr-2">
                                 Bank BSI
                             </label>
-                            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
-                                <input type="radio" name="bank" value="bca" class="mr-2">
+                            <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <input type="radio" name="payment_method" value="bca" class="mr-2" data-fee="3500" data-name="Bank Muamalat">
                                 <img src="{{ url('/') }}/assets/pembayaran/bmi.png" alt="Bank BCA" class="h-6 mr-2">
                                 Bank Muamalat
                             </label>
-                            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
-                                <input type="radio" name="bank" value="bca" class="mr-2">
+                            <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <input type="radio" name="payment_method" value="bca" class="mr-2" data-fee="4000" data-name="Bank BCA">
                                 <img src="{{ url('/') }}/assets/pembayaran/bank_bca.png" alt="Bank BCA"
                                     class="h-6 mr-2">
                                 Bank BCA
                             </label>
-                            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
-                                <input type="radio" name="bank" value="bni" class="mr-2">
+                            <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <input type="radio" name="payment_method" value="bni" class="mr-2" data-fee="3500" data-name="Bank BNI">
                                 <img src="{{ url('/') }}/assets/pembayaran/bank_bni.png" alt="Bank BNI"
                                     class="h-6 mr-2">
                                 Bank BNI
                             </label>
-                            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
-                                <input type="radio" name="bank" value="bri" class="mr-2">
+                            <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <input type="radio" name="payment_method" value="bri" class="mr-2" data-fee="3500" data-name="Bank BRI">
                                 <img src="{{ url('/') }}/assets/pembayaran/bank_bri.png" alt="Bank BRI"
                                     class="h-6 mr-2">
                                 Bank BRI
                             </label>
-                            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
-                                <input type="radio" name="bank" value="mandiri" class="mr-2">
+                            <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <input type="radio" name="payment_method" value="mandiri" class="mr-2" data-fee="3500" data-name="Bank Mandiri">
                                 <img src="{{ url('/') }}/assets/pembayaran/bank_mandiri.png" alt="Bank Mandiri"
                                     class="h-6 mr-2">
                                 Bank MANDIRI
                             </label>
-                            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
-                                <input type="radio" name="bank" value="permata" class="mr-2">
+                            <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <input type="radio" name="payment_method" value="permata" class="mr-2" data-fee="3500" data-name="Bank Permata">
                                 <img src="{{ url('/') }}/assets/pembayaran/bank_permata.png" alt="Bank Permata"
                                     class="h-6 mr-2">
                                 Bank PERMATA
@@ -347,14 +347,14 @@
                     <div class="mb-4">
                         <h3 class="text-lg font-semibold mb-2">e-Wallet</h3>
                         <div class="space-y-2">
-                            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
-                                <input type="radio" name="ewallet" value="linkaja" class="mr-2">
+                            <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <input type="radio" name="payment_method" value="linkaja" class="mr-2" data-fee="{{ 57000 * 0.007 }}" data-name="LinkAja">
                                 <img src="{{ url('/') }}/assets/pembayaran/linkaja.svg" alt="LinkAja"
                                     class="h-6 mr-2">
                                 LinkAja
                             </label>
-                            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
-                                <input type="radio" name="ewallet" value="dana" class="mr-2">
+                            <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <input type="radio" name="payment_method" value="dana" class="mr-2" data-fee="{{ 57000 * 0.007 }}" data-name="Dana">
                                 <img src="{{ url('/') }}/assets/pembayaran/dana.svg" alt="Dana"
                                     class="h-6 mr-2">
                                 Dana
@@ -364,8 +364,8 @@
                     <div>
                         <h3 class="text-lg font-semibold mb-2">QR Code</h3>
                         <div class="space-y-2">
-                            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
-                                <input type="radio" name="qr" value="qris" class="mr-2">
+                            <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <input type="radio" name="payment_method" value="qris" class="mr-2" data-fee="{{ 57000 * 0.007 }}" data-name="QRIS">
                                 <img src="{{ url('/') }}/assets/pembayaran/qris.svg" alt="QRIS"
                                     class="h-6 mr-2">
                                 QRIS
@@ -385,35 +385,42 @@
 
                         <dl class="flex items-center justify-between gap-4">
                             <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Biaya Transaksi</dt>
-                            <dd class="text-base font-medium text-green-500">Rp 499</dd>
+                            <dd id="transaction-fee" class="text-base font-medium text-gray-500">Rp 399</dd>
+                        </dl>
+                        <dl class="flex items-center justify-between gap-4">
+                            <dt class="text-sm font-normal italic text-gray-800 dark:text-gray-400">- <text id="metode-pembayaran"></text></dt>
                         </dl>
                     </div>
 
                     <dl class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
                         <dt class="text-base font-bold text-gray-900 dark:text-white">Total</dt>
-                        <dd class="text-base font-bold text-gray-900 dark:text-white">Rp 57.499</dd>
+                        <dd id="total-cost" class="text-base font-bold text-gray-900 dark:text-white">Rp 57.499</dd>
                     </dl>
                 </div>
             </div>
+            <x-splade-script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    document.querySelectorAll('input[name="payment_method"]').forEach((elem) => {
+                        elem.addEventListener("change", function(event) {
+                            var fee = event.target.getAttribute('data-fee');
+                            var name = event.target.getAttribute('data-name');
+                            var total = 57000 + parseInt(fee);
+                            document.getElementById('transaction-fee').innerText = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(fee);
+                            document.getElementById('total-cost').innerText = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(total);
+                            document.getElementById('metode-pembayaran').innerText = name;
+                        });
+                    });
+                });
+            </x-splade-script>
 
             <div class="flex items-center justify-center">
                 <x-splade-submit class="bg-primary-700 text-white" :label="__('Proses Pemesanan')" />
             </div>
-            <div class="flex items-center justify-end">
+            <div class="flex items-center justify-end py-10">
                 <Link class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
                 {{ __('Login') }}
                 </Link>
             </div>
-            <div class="flex items-center justify-center">
-                <img src="{{ url('/') }}/assets/pembayaran/SSL-Secured.svg" alt="ssl"
-                                    class="h-24 pt-3">
-                <img class="h-12 mt-5 rounded-md" src="https://ipaymu.com/wp-content/themes/ipaymu_v2/assets/new-assets/image/iPaymu-PCIDSS.jpeg" alt="ipaymu">
-            </div>
         </x-splade-form>
     </x-auth-card>
-    <div class="text-center py-8 bg-gray-100">
-        <p class="text-sm text-gray-600">
-            &copy; {{ date('Y') }} entrepreneurID. All rights reserved.
-        </p>
-    </div>
 @endsection
