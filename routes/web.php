@@ -292,11 +292,9 @@ Route::middleware('splade')->group(function () {
         ]);
 
         $ipaymu->addCart([
-            'product' => 'Kelas Profit 10 Juta',
-            'quantity' => 1,
-            'price' => 57000,
-            'description' => 'Kelas Profit 10 Juta',
-            'weight' => 1,
+            'product' => ['Kelas Profit 10 Juta'],
+            'quantity' => [1],
+            'price' => [57000],
         ]);
 
         //payment - direct
@@ -310,7 +308,7 @@ Route::middleware('splade')->group(function () {
 
         ];
 
-        $direct = $ipaymu->directPayment([$directData]);
+        $direct = $ipaymu->directPayment($directData);
 
         return $direct;
     });
