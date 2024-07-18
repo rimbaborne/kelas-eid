@@ -69,7 +69,7 @@ class TransactionController extends Controller
 
         $ret = $response->json();
         if ($ret['Status'] == 200) {
-            $transactionId = $ret['Data']['TransactionID'];
+            $transactionId = $ret['Data']['TransactionId'];
             return redirect()->route('transaksi.bayar', ['signature' => $signature, 'transactionId' => $transactionId]);
 
         } else {
