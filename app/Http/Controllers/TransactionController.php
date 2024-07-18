@@ -87,11 +87,27 @@ class TransactionController extends Controller
         $va           = '0000008125144744'; //get on iPaymu dashboard
         $apiKey       = 'SANDBOXDF3E6F1F-5E4A-44EF-9EDB-98D7BD737DAA'; //get on iPaymu dashboard
 
+        $url          = 'https://sandbox.ipaymu.com/api/v2/payment/direct'; // for development mode
+        // $url          = 'https://my.ipaymu.com/api/v2/payment'; // for production mode
+
+        $method       = 'POST'; //method
+
+        $body    = [
+            'transactionId' => $transactionId,
+            'account' => $va
+        ];
+
+        $jsonBody     = json_encode($body, JSON_UNESCAPED_SLASHES);
+        $requestBody  = strtolower(hash('sha256', $jsonBody));
+        $stringToSign = strtoupper($method) . ':' . $va . ':' . $requestBody . ':' . $apiKey;
+        $signature_    = hash_hmac('sha256', $stringToSign, $apiKey);
+        $timestamp_    = Date('YmdHis');
+
         $response = Http::withHeaders([
             'Content-Type' => 'application/json',
-            'signature' => $signature,
+            'signature' => $signature_,
             'va' => $va,
-            'timestamp' => $timestamp,
+            'timestamp' => $timestamp_,
         ])->post('https://sandbox.ipaymu.com/api/v2/transaction', [
             'transactionId' => $transactionId,
             'account' => $va
