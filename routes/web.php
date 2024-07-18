@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\KelasController;
 // require_once base_path('vendor/ipaymu-php-api/iPaymu/iPaymu.php');
 use iPaymu\iPaymu;
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -262,9 +263,9 @@ Route::middleware('splade')->group(function () {
 
         $ret = $response->json();
         if ($ret['Status'] == 200) {
-            // $sessionId  = $ret['Data']['SessionID'];
-            // $url        =  $ret['Data']['Url'];
-            // return redirect($url);
+            $sessionId  = $ret['Data']['SessionID'];
+            $url        =  $ret['Data']['Url'];
+            return redirect($url);
             return response()->json($ret);
 
         } else {
@@ -312,5 +313,8 @@ Route::middleware('splade')->group(function () {
 
         return $direct;
     });
+
+    Route::get('/transaksi', [TransactionController::class, 'transaksi'])->name('transaksi');
+    Route::get('/transaksi/pembayaran/{signature}/{transactionId}', [TransactionController::class, 'pembayaran'])->name('transaksi.pembayaran');
 
 });
