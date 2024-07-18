@@ -70,14 +70,14 @@ class TransactionController extends Controller
         $ret = $response->json();
         if ($ret['Status'] == 200) {
             $transactionId = $ret['Data']['TransactionId'];
-            return redirect()->route('transaksi.bayar', ['signature' => $signature, 'transactionId' => $transactionId]);
+            return redirect()->route('transaksi.pembayaran', ['signature' => $signature, 'transactionId' => $transactionId]);
 
         } else {
             return response()->json($ret);
         }
     }
 
-    function pembayar($signature, $transactionId)
+    function pembayaran($signature, $transactionId)
     {
         $va           = '0000008125144744'; //get on iPaymu dashboard
         $apiKey       = 'SANDBOXDF3E6F1F-5E4A-44EF-9EDB-98D7BD737DAA'; //get on iPaymu dashboard
