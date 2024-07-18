@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('kelas', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
+            $table->boolean('tampil'); // ditampilkan di halaman web
+            $table->boolean('aktif'); // pemesanan
             $table->timestamps();
         });
     }

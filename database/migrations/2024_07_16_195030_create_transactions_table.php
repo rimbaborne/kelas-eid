@@ -13,15 +13,21 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid'); // session id ipaymu
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('kelas_id');
-            $table->decimal('amount', 8, 2);
-            $table->string('status');
-            $table->string('status_code');
-            $table->string('sid');
-            $table->string('reference_id');
-            $table->string('trx_id');
+            $table->string('id_ipaymu');
+            $table->decimal('subtotal', 8, 2);
+            $table->decimal('fee', 8, 2); // biaya transaksi
+            $table->decimal('total', 8, 2);
+            $table->timestamp('batas_bayar'); // expired payment
+            $table->string('via'); // jenis pembayaran
+            $table->string('channel'); // jenis tujuan pembayaraan
+            $table->string('status_desc'); // UPDATE AFTER SUBMIT
+            $table->string('status_pembayaran'); // UPDATE AFTER SUBMIT
+
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('kelas_id')->references('id')->on('kelas');
             $table->timestamps();
         });
     }

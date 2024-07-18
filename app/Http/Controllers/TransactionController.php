@@ -27,7 +27,7 @@ class TransactionController extends Controller
             'product'        => ['Pemesanan Kelas Profit 10 Juta'],
             'qty'            => ['1'],
             'price'          => ['57000'],
-            'amount'          => '57000',
+            'amount'         => '57000',
             'returnUrl'      => 'https://kelasentrepreneurid.com/pemesanan/selesai',
             'cancelUrl'      => 'https://kelasentrepreneurid.com/pemesanan/cancel',
             'notifyUrl'      => 'https://kelasentrepreneurid.com/pemesanan/callback',
