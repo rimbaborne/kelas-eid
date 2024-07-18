@@ -16,13 +16,18 @@ return new class extends Migration
             $table->uuid('uuid'); // session id ipaymu
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('kelas_id');
+            $table->unsignedBigInteger('invoice_id')->nullable();
+            $table->unsignedBigInteger('sistem_lama_id')->nullable();
             $table->string('id_ipaymu');
             $table->decimal('subtotal', 8, 2);
             $table->decimal('fee', 8, 2); // biaya transaksi
             $table->decimal('total', 8, 2);
             $table->timestamp('batas_bayar'); // expired payment
+            $table->timestamp('berhasil_bayar')->nullable(); // expired payment
             $table->string('via'); // jenis pembayaran
             $table->string('channel'); // jenis tujuan pembayaraan
+            $table->string('payment_number')->nullable();
+            $table->string('payment_name')->nullable();
             $table->string('status_desc'); // UPDATE AFTER SUBMIT
             $table->string('status_pembayaran'); // UPDATE AFTER SUBMIT
 

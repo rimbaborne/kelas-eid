@@ -306,7 +306,39 @@ Route::middleware('splade')->group(function () {
         return $direct;
     });
 
+    Route::get('/pemesanan/kelas-profit-10-juta', [TransactionController::class, 'pemesanan_kelasprofit'])->name('pemesanan');
+    Route::post('/pemesanan/kelas-profit-10-juta/store', [TransactionController::class, 'pemesanan_kelasprofit_store'])->name('pemesanan.profit.store');
+
+
     Route::get('/transaksi', [TransactionController::class, 'transaksi'])->name('transaksi');
-    Route::get('/transaksi/pembayaran/{signature}/{transactionId}/{timestamp}', [TransactionController::class, 'pembayaran'])->name('transaksi.pembayaran');
+    Route::get('/transaksi/pembayaran', [TransactionController::class, 'pembayaran'])->name('transaksi.pembayaran');
+
+    Route::get('/kirim-data', function () {
+        $url_sistem_lama = 'https://admin.entrepreneurid.org/api/transaction/create';
+        $apiKey_sistem_lama = '09619678a1403be5dcab79c793f3fa0f';
+
+        $data_ke_sistem_lama = [
+            'id_event'  => 64,
+            'id_agen'   => 100001,
+            'nama'      => 'John Doe',
+            'email'     => 'john@example.com',
+            'kode_nohp' => '62',
+            'nohp'      => '8123456789',
+            'panggilan' => 'John',
+            'domisili'  => 'Jakarta',
+            'tgllahir'  => '1990-01-01',
+            'gender'    => '1',
+            'kodeunik'  => 123,
+            'total'     => 10000,
+        ];
+
+        $response_sistem_lama = Http::withHeaders([
+            'api_key' => $apiKey_sistem_lama,
+            'Content-Type' => 'application/json',
+        ])->post($url_sistem_lama, $data_ke_sistem_lama);
+
+        return $response_sistem_lama->json();
+
+    });
 
 });
