@@ -9,6 +9,10 @@ use Illuminate\Support\Str;
 class TransactionController extends Controller
 {
 
+    public function index()
+    {
+
+    }
     public function transaksi()
     {
         // $va           = '1179001364818964'; //get on iPaymu dashboard

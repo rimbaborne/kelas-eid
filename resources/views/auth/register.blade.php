@@ -1,21 +1,42 @@
-@extends('website.layouts.web')
+@extends('website.layouts.pembayaran')
 
 @section('content')
+    <div class="text-center py-8 bg-gray-100">
+        <p class="text-sm text-gray-600">
+            <Link href="{{ url('/') }}" class="text-md text-gray-600 hover:text-gray-900">
+                &larr; Kembali
+            </Link>
+        </p>
+    </div>
+
     <x-auth-card>
-        <h1 class="text-2xl font-bold text-center py-4">Daftar Akun</h1>
-        <x-splade-form
-            action="{{ route('register') }}"
-            class="space-y-4"
-            confirm-text="Apakah data yang anda masukkan sudah benar ?"
-            confirm="Konfirmasi"
-            confirm-button="Benar"
-            cancel-button="Belum"
-            method="POST"
-            >
+        <h1 class="text-2xl font-bold text-center py-4">Pemesanan</h1>
+        <div class="flex flex-col border justify-center bg-white rounded-xl items-center">
+            <div class="rounded-lg bg-white p-2 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-4">
+                    <div class="space-y-2 flex items-center justify-between gap-6 md:space-y-0">
+                        <a href="#" class="shrink-0">
+                            <img class="w-32 p-2 sm:p-3" src="https://admin.entrepreneurid.org/img/produk/KPS-2024-1.png">
+                        </a>
+
+                        <div class="w-full min-w-0 flex-1 space-y-2 md:max-w-md">
+                            <h1 class="text-xl font-semibold text-gray-900 hover:underline dark:text-white">
+                                Kelas Profit 10 Juta
+                            </h1>
+                            <h1 class="text-lg font-semibold text-gray-900 hover:underline dark:text-white">
+                                Rp. 57.000
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <x-splade-form action="{{ route('register') }}" class="space-y-4"
+            confirm-text="Apakah data yang anda masukkan sudah benar ?" confirm="Konfirmasi" confirm-button="Benar"
+            cancel-button="Belum" method="POST">
             <x-splade-input id="name" type="text" name="name" :label="__('Nama')" required autofocus />
             <x-splade-input id="email" type="email" name="email" :label="__('Email')" required />
             <div class="flex items-center">
-                <x-splade-select name="phone_code" :label="__('Nomor HP Whatsapp')" value="62" class="py-0 w-60 text-sm block" choices required>
+                <x-splade-select name="phone_code" :label="__('Nomor HP Whatsapp')" value="62" class="py-0 w-60 text-sm block" choices
+                    required>
                     <option value="62">🇮🇩 Indonesia</option>
                     <option value="60">🇲🇾 Malaysia</option>
                     <option value="65">🇸🇬 Singapore</option>
@@ -272,15 +293,127 @@
                     Contoh : 08123456789
                 </div>
             </div>
-            <x-splade-input id="password" type="password" name="password" :label="__('Password')" required autocomplete="new-password" />
+            <x-splade-input id="password" type="password" name="password" min="6"
+                placeholder="Password Minimal 6 Karakter" :label="__('Password')" required autocomplete="new-password" />
 
+            <div class="container mx-auto py-8">
+                <div class="max-w-lg mx-auto bg-white rounded-lg ">
+                    <h2 class="text-2xl font-bold mb-6 text-center">Pilih Metode Pembayaran</h2>
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold mb-2">Virtual Account (VA)</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <input type="radio" name="bank" value="bca" class="mr-2">
+                                <img src="{{ url('/') }}/assets/pembayaran/bsi.png" alt="Bank BCA" class="h-6 mr-2">
+                                Bank BSI
+                            </label>
+                            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <input type="radio" name="bank" value="bca" class="mr-2">
+                                <img src="{{ url('/') }}/assets/pembayaran/bmi.png" alt="Bank BCA" class="h-6 mr-2">
+                                Bank Muamalat
+                            </label>
+                            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <input type="radio" name="bank" value="bca" class="mr-2">
+                                <img src="{{ url('/') }}/assets/pembayaran/bank_bca.png" alt="Bank BCA"
+                                    class="h-6 mr-2">
+                                Bank BCA
+                            </label>
+                            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <input type="radio" name="bank" value="bni" class="mr-2">
+                                <img src="{{ url('/') }}/assets/pembayaran/bank_bni.png" alt="Bank BNI"
+                                    class="h-6 mr-2">
+                                Bank BNI
+                            </label>
+                            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <input type="radio" name="bank" value="bri" class="mr-2">
+                                <img src="{{ url('/') }}/assets/pembayaran/bank_bri.png" alt="Bank BRI"
+                                    class="h-6 mr-2">
+                                Bank BRI
+                            </label>
+                            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <input type="radio" name="bank" value="mandiri" class="mr-2">
+                                <img src="{{ url('/') }}/assets/pembayaran/bank_mandiri.png" alt="Bank Mandiri"
+                                    class="h-6 mr-2">
+                                Bank MANDIRI
+                            </label>
+                            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <input type="radio" name="bank" value="permata" class="mr-2">
+                                <img src="{{ url('/') }}/assets/pembayaran/bank_permata.png" alt="Bank Permata"
+                                    class="h-6 mr-2">
+                                Bank PERMATA
+                            </label>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold mb-2">e-Wallet</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <input type="radio" name="ewallet" value="linkaja" class="mr-2">
+                                <img src="{{ url('/') }}/assets/pembayaran/linkaja.svg" alt="LinkAja"
+                                    class="h-6 mr-2">
+                                LinkAja
+                            </label>
+                            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <input type="radio" name="ewallet" value="dana" class="mr-2">
+                                <img src="{{ url('/') }}/assets/pembayaran/dana.svg" alt="Dana"
+                                    class="h-6 mr-2">
+                                Dana
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">QR Code</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <input type="radio" name="qr" value="qris" class="mr-2">
+                                <img src="{{ url('/') }}/assets/pembayaran/qris.svg" alt="QRIS"
+                                    class="h-6 mr-2">
+                                QRIS
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-6 grow sm:mt-8 lg:mt-0">
+                <div
+                    class="space-y-4 rounded-lg border border-gray-100 bg-gray-50 p-6 dark:border-gray-700 dark:bg-gray-800">
+                    <div class="space-y-2">
+                        <dl class="flex items-center justify-between gap-4">
+                            <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Harga</dt>
+                            <dd class="text-base font-medium text-gray-900 dark:text-white">Rp 57.000</dd>
+                        </dl>
+
+                        <dl class="flex items-center justify-between gap-4">
+                            <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Biaya Transaksi</dt>
+                            <dd class="text-base font-medium text-green-500">Rp 499</dd>
+                        </dl>
+                    </div>
+
+                    <dl class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
+                        <dt class="text-base font-bold text-gray-900 dark:text-white">Total</dt>
+                        <dd class="text-base font-bold text-gray-900 dark:text-white">Rp 57.499</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-center">
+                <x-splade-submit class="bg-primary-700 text-white" :label="__('Proses Pemesanan')" />
+            </div>
             <div class="flex items-center justify-end">
                 <Link class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Login') }}
+                {{ __('Login') }}
                 </Link>
-
-                <x-splade-submit class="ml-4 bg-primary-700 text-white" :label="__('Daftar')" />
+            </div>
+            <div class="flex items-center justify-center">
+                <img src="{{ url('/') }}/assets/pembayaran/SSL-Secured.svg" alt="ssl"
+                                    class="h-24 pt-3">
+                <img class="h-12 mt-5 rounded-md" src="https://ipaymu.com/wp-content/themes/ipaymu_v2/assets/new-assets/image/iPaymu-PCIDSS.jpeg" alt="ipaymu">
             </div>
         </x-splade-form>
     </x-auth-card>
+    <div class="text-center py-8 bg-gray-100">
+        <p class="text-sm text-gray-600">
+            &copy; {{ date('Y') }} entrepreneurID. All rights reserved.
+        </p>
+    </div>
 @endsection
