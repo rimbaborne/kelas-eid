@@ -310,7 +310,7 @@ Route::middleware('splade')->group(function () {
 
         ];
 
-        $direct[] = $ipaymu->directPayment($directData);
+        $direct = $ipaymu->directPayment([$directData]);
 
         return $direct;
     });
