@@ -256,7 +256,7 @@ class TransactionController extends Controller
             'amount'         => '57000',
             'returnUrl'      => 'https://kelasentrepreneurid.com/pemesanan/selesai',
             'cancelUrl'      => 'https://kelasentrepreneurid.com/pemesanan/cancel',
-            'notifyUrl'      => 'https://kelasentrepreneurid.com/pemesanan/callback',
+            'notifyUrl'      => 'https://kelasentrepreneurid.com/transaksi/callback',
             'referenceId'    => Str::uuid(),
             'comments'       => 'Payment to XYZ',
             'paymentMethod'  => 'qris',
@@ -348,38 +348,46 @@ class TransactionController extends Controller
         $status       = $request->input('status');
         $status_code  = $request->input('status_code');
         $sid          = $request->input('sid');
-        $reference_id = $request->input('reference_id');
 
-        $transaction  = Transaction::where('id_ipaymu', $sid)->first();
+        $transaction  = Transaction::where('id_ipaymu', $trx_id)->first();
 
         if ($transaction) {
-            if ($status == 'berhasil' && $status_code == '1') {
-                $transaction->update([
-                    'status_pembayaran' => 'paid',
-                    'berhasil_bayar' => now(),
-                ]);
+
 
                 // ke sistem lama
                 $url_sistem_lama = 'https://admin.entrepreneurid.org/api/transaction/create';
                 $apiKey_sistem_lama = '09619678a1403be5dcab79c793f3fa0f';
+                if ($status_code == '1') {
 
-                $data_ke_sistem_lama = [
-                    'id'     => 79,
-                    'status' => 2,
-                ];
+                    $transaction->update([
+                        'status_pembayaran_code' => $status_code,
+                        'status_pembayaran'      => 'paid',
+                        'status_desc'            => 'Pembayaran Berhasil',
+                        'berhasil_bayar'         => now(),
+                    ]);
 
-                $response_sistem_lama = Http::withHeaders([
-                    'api_key' => $apiKey_sistem_lama,
-                    'Content-Type' => 'application/json',
-                ])->post($url_sistem_lama, $data_ke_sistem_lama);
+                    $data_ke_sistem_lama = [
+                        'id'     => 79,
+                        'status' => 3,
+                        'uuid' => $sid,
+                    ];
 
-                $get_sistem_lama = $response_sistem_lama->json();
+                    $response_sistem_lama = Http::withHeaders([
+                        'api_key' => $apiKey_sistem_lama,
+                        'Content-Type' => 'application/json',
+                    ])->post($url_sistem_lama, $data_ke_sistem_lama);
+
+                    $get_sistem_lama = $response_sistem_lama->json();
+                } else {
+                    $transaction->update([
+                        'status_pembayaran_code' => $status_code,
+                        'status_pembayaran'      => $status,
+                    ]);
+                }
+
                 return response()->json(['message' => 'Transaksi berhasil diterima.'], 200);
-            } else {
-                return response()->json(['message' => 'Transaksi gagal.'], 400);
-            }
         } else {
-            return response()->json(['message' => 'Transaksi tidak ditemukan.'], 404);
+            return response()->json(['message' => 'Transaksi tidak berhasil.'], 404);
         }
     }
 }

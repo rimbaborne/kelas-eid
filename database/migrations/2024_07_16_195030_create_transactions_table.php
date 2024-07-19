@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('payment_name')->nullable();
             $table->string('status_desc'); // UPDATE AFTER SUBMIT
             $table->string('status_pembayaran'); // UPDATE AFTER SUBMIT
+            $table->tinyInteger('status_pembayaran_code')->default(0); // UPDATE AFTER SUBMIT
             $table->text('qris_string')->nullable(); // jika qris
             $table->string('qris_nmid')->nullable(); // jika qris
 

@@ -20,6 +20,8 @@ return new class extends Migration
         });
     }
 
+    // INSERT INTO `kelas` (`id`, `nama`, `tampil`, `aktif`, `created_at`, `updated_at`) VALUES ('1', 'proit', '1', '1', '2024-07-18 21:13:15', '2024-07-18 21:13:15');
+
     /**
      * Reverse the migrations.
      */
