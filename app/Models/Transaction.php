@@ -26,6 +26,7 @@ class Transaction extends Model
         'payment_name',
         'status_desc',
         'status_pembayaran',
+        'status_pembayaran_code',
         'qris_string',
         'qris_nmid',
     ];
