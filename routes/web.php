@@ -308,7 +308,7 @@ Route::middleware('splade')->group(function () {
 
     Route::get('/pemesanan/kelas-profit-10-juta', [TransactionController::class, 'pemesanan_kelasprofit'])->name('pemesanan');
     Route::post('/pemesanan/kelas-profit-10-juta/store', [TransactionController::class, 'pemesanan_kelasprofit_store'])->name('pemesanan.profit.store');
-
+    Route::get('/pemesanan/invoice/{uuid}', [TransactionController::class, 'invoice'])->name('pemesanan.invoice');
 
     Route::get('/transaksi', [TransactionController::class, 'transaksi'])->name('transaksi');
     Route::get('/transaksi/pembayaran', [TransactionController::class, 'pembayaran'])->name('transaksi.pembayaran');

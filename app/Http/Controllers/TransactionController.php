@@ -17,31 +17,59 @@ class TransactionController extends Controller
 
     public function pemesanan_kelasprofit()
     {
+        if (Auth::check()) {
+            $user = Auth::user();
+            $transaction = Transaction::where('user_id', $user->id)
+                                        ->where('kelas_id', 1)
+                                        ->first();
+            if ($transaction) {
+                if ($transaction->status_pembayaran == 'paid') {
+                    return redirect()->route('kelas.profit.1');
+                } elseif ($transaction->status_pembayaran == 'unpaid' && $transaction->batas_bayar >= now()) {
+                    return redirect()->route('pemesanan.invoice', [ 'uuid' => $transaction->uuid]);
+                } elseif ($transaction->status_pembayaran == 'unpaid' && $transaction->batas_bayar < now()) {
+                    return view('pages.pemesanan');
+                }
+            }
+        }
         return view('pages.pemesanan');
     }
 
     public function pemesanan_kelasprofit_store(Request $request)
     {
-        dd($request->all());
-        $request->validate([
-            'name'           => ['required', 'string', 'max:255'],
-            'email'          => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'phone_number'   => ['required', 'string', 'max:15', 'unique:'.User::class],
-            'phone_code'     => ['max:6'],
-            'password'       => ['required', 'min:6'],
-            'payment_method' => ['required'],
-        ]);
+        if (!Auth::check()) {
+            $request->validate([
+                'name'           => ['required', 'string', 'max:255'],
+                'email'          => ['required', 'string', 'email', 'max:255'],
+                'phone_number'   => ['required', 'string', 'max:15'],
+                'phone_code'     => ['max:6'],
+                'password'       => ['required', 'min:6'],
+                'payment_method' => ['required'],
+            ]);
 
-        // Menghapus karakter '0' di awal nomor telepon yang dimasukkan oleh pengguna
-        $phone_number = ltrim($request->phone_number, '0');
+            // Menghapus karakter '0' di awal nomor telepon yang dimasukkan oleh pengguna
+            $phone_number = ltrim($request->phone_number, '0');
 
-        $user = User::create([
-            'name'         => $request->name,
-            'email'        => $request->email,
-            'phone_code'   => $request->phone_code ?? '62',
-            'phone_number' => $phone_number,
-            'password'     => Hash::make($request->password),
-        ]);
+            // Cek apakah user sudah ada di database
+            $user = User::where('email', $request->email)
+                        ->orWhere('phone_number', $phone_number)
+                        ->first();
+
+            if (!$user) {
+                $user = User::create([
+                    'name'         => $request->name,
+                    'email'        => $request->email,
+                    'phone_code'   => $request->phone_code ?? '62',
+                    'phone_number' => $phone_number,
+                    'password'     => Hash::make($request->password),
+                ]);
+            }
+        } else {
+            $request->validate([
+                'payment_method' => ['required'],
+            ]);
+            $user = Auth::user();
+        }
 
         // Kode ini memicu event Registered setelah pengguna baru berhasil didaftarkan.
         // event(new Registered($user));
@@ -65,7 +93,7 @@ class TransactionController extends Controller
             $channel_ = 'mpm';
         } else {
             $method_ = 'va';
-            $channel_ = (string) $request->payment_method;
+            $channel_ = $request->payment_method;
         }
 
         //Request Body//
@@ -184,6 +212,16 @@ class TransactionController extends Controller
             return 'berhasil';
         } else {
             return $status_api;
+        }
+    }
+
+    public function invoice($uuid)
+    {
+        $transaction = Transaction::where('uuid', $uuid)->first();
+        if ($transaction) {
+            return view('pages.invoice', compact('transaction'));
+        } else {
+            return redirect()->route('dashboard');
         }
     }
     public function transaksi()
