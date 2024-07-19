@@ -13,11 +13,32 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Transaction;
 use ProtoneMedia\Splade\Facades\Toast;
 
+use ProtoneMedia\Splade\Facades\SEO;
+
+
 class TransactionController extends Controller
 {
+    public $description, $keywords, $sitename;
+    public function __construct()
+    {
+        $this->description = 'Menawarkan materi yang lengkap, mentor berpengalaman, dan komunitas belajar yang suportif untuk membantu Anda mencapai tujuan bisnis Anda.';
+        $this->keywords = 'Belajar Bisnis Online, entrepreneurID, Bisnis,';
+        $this->sitename = 'Kelas entrepreneurID';
+    }
 
     public function pemesanan_kelasprofit()
     {
+        $page_title = 'Kelas entrepreneurID | Kelas Profit 10 Juta';
+        SEO::title($page_title)
+            ->description($this->description)
+            ->keywords($this->keywords)
+            ->openGraphType('WebPage')
+            ->openGraphSiteName($page_title)
+            ->openGraphTitle($page_title)
+            ->openGraphUrl('kelasentrepreneurid.or.id')
+            ->openGraphImage(asset('/assets/img/logo-eid-merah.png'))
+            ;
+
         if (Auth::check()) {
             $user = Auth::user();
             $transaction = Transaction::where('user_id', $user->id)
@@ -228,6 +249,17 @@ class TransactionController extends Controller
     }
     public function invoice($uuid)
     {
+        $page_title = 'invoice | Kelas Profit 10 Juta';
+        SEO::title($page_title)
+            ->description($this->description)
+            ->keywords($this->keywords)
+            ->openGraphType('WebPage')
+            ->openGraphSiteName($page_title)
+            ->openGraphTitle($page_title)
+            ->openGraphUrl('kelasentrepreneurid.or.id')
+            ->openGraphImage(asset('/assets/img/logo-eid-merah.png'))
+            ;
+
         $transaction = Transaction::where('uuid', $uuid)->first();
         if ($transaction) {
             return view('pages.invoice', compact('transaction'));
