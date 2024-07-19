@@ -83,7 +83,7 @@
                                     @elseif($transaction->status_pembayaran == 'unpaid')
                                         <span class="bg-red-500 text-white px-2 py-1 rounded text-sm">BELUM LUNAS</span>
                                     @elseif($transaction->status_pembayaran == 'expired')
-                                        <span class="bg-red-500 text-white px-2 py-1 rounded text-sm">BELUM LUNAS</span>
+                                        <span class="bg-red-500 text-white px-2 py-1 rounded text-sm">EXPIRED</span>
                                     @endif
                                 </dd>
                             </dl>
@@ -153,32 +153,51 @@
                                         </h5>
                                         <div class="flex items-center justify-between mb-4">
                                             <h1 class="text-xl mt-0 font-semibold text-gray-900 hover:underline dark:text-white">
-                                                Bank BCA
+                                                @if($transaction->channel == 'QRIS')
+                                                    Scan QRIS
+                                                @else
+                                                    Bank {{ $transaction->channel }}
+                                                @endif
                                             </h1>
-                                            <img src="{{ url('/') }}/assets/pembayaran/bank_bca.png" alt="Bank BCA" class="h-6 mr-2">
+                                            <img src="{{ url('/') }}/assets/pembayaran/{{ strtolower($transaction->channel) }}.png" alt="{{ $transaction->channel }}" class="h-6 mr-2">
                                         </div>
-                                        <h5 class="text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            Nomor Virtual Akun
-                                        </h5>
-                                        <div class="flex items-center justify-between mb-4">
-                                            <h1 class="text-xl mt-0 font-semibold text-gray-900 hover:underline dark:text-white">
-                                                {{ $transaction->payment_number }}
-                                            </h1>
-                                            <button id="copyButton" class="ml-2 border border-gray-200 px-2 py-1 rounded text-sm">Copy</button>
-                                            <x-splade-script>
-                                                document.addEventListener("DOMContentLoaded", function() {
-                                                    document.getElementById('copyButton').addEventListener('click', function() {
-                                                        var tempInput = document.createElement('input');
-                                                        tempInput.value = '{!! $transaction->payment_number !!}';
-                                                        document.body.appendChild(tempInput);
-                                                        tempInput.select();
-                                                        document.execCommand('copy');
-                                                        document.body.removeChild(tempInput);
-                                                        alert('Nomor Virtual Akun berhasil disalin');
+                                        @if($transaction->channel == 'QRIS')
+                                            <h5 class="text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                                Barcode
+                                            </h5>
+                                            <h4 class="text-lg font-medium">
+                                                NMID : {{ $transaction->qris_nmid }}
+                                            </h4>
+                                            <div class="flex items-center justify-center mb-4">
+                                                <x-splade-lazy>
+                                                    <x-slot:placeholder>Loading QRIS ...</x-slot:placeholder>
+                                                    <img src="https://api.qrserver.com/v1/create-qr-code/?data={{ $transaction->qris_string }}&size=250x250" alt="QRIS" class="">
+                                                </x-splade-lazy>
+                                            </div>
+                                        @else
+                                            <h5 class="text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                                Nomor Virtual Akun
+                                            </h5>
+                                            <div class="flex items-center justify-between mb-4">
+                                                <h1 class="text-xl mt-0 font-semibold text-gray-900 hover:underline dark:text-white">
+                                                    {{ $transaction->payment_number }}
+                                                </h1>
+                                                <button id="copyButton" class="ml-2 border border-gray-200 px-2 py-1 rounded text-sm">Copy</button>
+                                                <x-splade-script>
+                                                    document.addEventListener("DOMContentLoaded", function() {
+                                                        document.getElementById('copyButton').addEventListener('click', function() {
+                                                            var tempInput = document.createElement('input');
+                                                            tempInput.value = '{!! $transaction->payment_number !!}';
+                                                            document.body.appendChild(tempInput);
+                                                            tempInput.select();
+                                                            document.execCommand('copy');
+                                                            document.body.removeChild(tempInput);
+                                                            alert('Nomor Virtual Akun berhasil disalin');
+                                                        });
                                                     });
-                                                });
-                                            </x-splade-script>
-                                        </div>
+                                                </x-splade-script>
+                                            </div>
+                                        @endif
                                         <h5 class="text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
                                             Total Pembayaran
                                         </h5>

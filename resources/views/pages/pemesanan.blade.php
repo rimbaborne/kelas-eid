@@ -342,31 +342,31 @@
                             </label>
                             <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
                                 <x-splade-radio name="payment_method" value="bca" class="mr-2" data-fee="4000" data-inis="Bank BCA" data-type="virtual_account"/>
-                                <img src="{{ url('/') }}/assets/pembayaran/bank_bca.png" alt="Bank BCA"
+                                <img src="{{ url('/') }}/assets/pembayaran/bca.png" alt="Bank BCA"
                                     class="h-6 mr-2">
                                 Bank BCA
                             </label>
                             <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
                                 <x-splade-radio name="payment_method" value="bni" class="mr-2" data-fee="3500" data-inis="Bank BNI" data-type="virtual_account"/>
-                                <img src="{{ url('/') }}/assets/pembayaran/bank_bni.png" alt="Bank BNI"
+                                <img src="{{ url('/') }}/assets/pembayaran/bni.png" alt="Bank BNI"
                                     class="h-6 mr-2">
                                 Bank BNI
                             </label>
                             <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
                                 <x-splade-radio name="payment_method" value="bri" class="mr-2" data-fee="3500" data-inis="Bank BRI" data-type="virtual_account"/>
-                                <img src="{{ url('/') }}/assets/pembayaran/bank_bri.png" alt="Bank BRI"
+                                <img src="{{ url('/') }}/assets/pembayaran/bri.png" alt="Bank BRI"
                                     class="h-6 mr-2">
                                 Bank BRI
                             </label>
                             <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
                                 <x-splade-radio name="payment_method" value="mandiri" class="mr-2" data-fee="3500" data-inis="Bank Mandiri" data-type="virtual_account"/>
-                                <img src="{{ url('/') }}/assets/pembayaran/bank_mandiri.png" alt="Bank Mandiri"
+                                <img src="{{ url('/') }}/assets/pembayaran/mandiri.png" alt="Bank Mandiri"
                                     class="h-6 mr-2">
                                 Bank MANDIRIa
                             </label>
                             <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
-                                <x-splade-radio name="payment_method" value="permata" class="mr-2" data-fee="3500" />
-                                <img src="{{ url('/') }}/assets/pembayaran/bank_permata.png" alt="Bank Permata"
+                                <x-splade-radio name="payment_method" value="permata" class="mr-2" data-fee="3500" data-inis="Bank Permata"/>
+                                <img src="{{ url('/') }}/assets/pembayaran/permata.png" alt="Bank Permata"
                                     class="h-6 mr-2">
                                 Bank PERMATA
                             </label>
@@ -393,7 +393,7 @@
                         <h3 class="text-lg font-semibold mb-2">QR Code</h3>
                         <div class="space-y-2">
                             <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
-                                <x-splade-radio name="payment_method" value="qris" class="mr-2" data-fee="{{ 57000 * 0.007 }}"/>
+                                <x-splade-radio name="payment_method" value="qris" class="mr-2" data-fee="{{ 57000 * 0.007 }}" data-inis="QRIS"/>
                                 <img src="{{ url('/') }}/assets/pembayaran/qris.svg" alt="QRIS"
                                     class="h-6 mr-2">
                                 QRIS
@@ -413,7 +413,7 @@
 
                         <dl class="flex items-center justify-between gap-4">
                             <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Biaya Transaksi</dt>
-                            <dd id="transaction-fee" class="text-base font-medium text-gray-500">Rp 399</dd>
+                            <dd id="transaction-fee" class="text-base font-medium text-gray-500">Rp </dd>
                         </dl>
                         <dl class="flex items-center justify-between gap-4">
                             <dt class="text-sm font-normal italic text-gray-800 dark:text-gray-400">- <text id="metode-pembayaran"></text></dt>
@@ -422,7 +422,7 @@
 
                     <dl class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
                         <dt class="text-base font-bold text-gray-900 dark:text-white">Total</dt>
-                        <dd id="total-cost" class="text-base font-bold text-gray-900 dark:text-white">Rp 57.499</dd>
+                        <dd id="total-cost" class="text-base font-bold text-gray-900 dark:text-white">Rp </dd>
                     </dl>
                 </div>
             </div>

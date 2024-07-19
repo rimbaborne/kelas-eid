@@ -26,6 +26,8 @@ class Transaction extends Model
         'payment_name',
         'status_desc',
         'status_pembayaran',
+        'qris_string',
+        'qris_nmid',
     ];
 
     public function user()

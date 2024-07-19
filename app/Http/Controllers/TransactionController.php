@@ -11,6 +11,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Transaction;
+use ProtoneMedia\Splade\Facades\Toast;
 
 class TransactionController extends Controller
 {
@@ -27,8 +28,6 @@ class TransactionController extends Controller
                     return redirect()->route('kelas.profit.1');
                 } elseif ($transaction->status_pembayaran == 'unpaid' && $transaction->batas_bayar >= now()) {
                     return redirect()->route('pemesanan.invoice', [ 'uuid' => $transaction->uuid]);
-                } elseif ($transaction->status_pembayaran == 'unpaid' && $transaction->batas_bayar < now()) {
-                    return view('pages.pemesanan');
                 }
             }
         }
@@ -70,6 +69,19 @@ class TransactionController extends Controller
             $user = Auth::user();
         }
 
+        $transaction_check = Transaction::where('user_id', $user->id)
+                                        ->where('kelas_id', 1)
+                                        ->first();
+        if ($transaction_check) {
+            if ($transaction_check->status_pembayaran == 'paid') {
+                Toast::title('Akun Anda sudah memiliki kelas ini, silahkan login.');
+                return redirect()->route('kelas.profit.1');
+            } elseif ($transaction_check->status_pembayaran == 'unpaid' && $transaction_check->batas_bayar >= now()) {
+                Toast::title('Akun Anda sudah memesan kelas ini, silahkan lanjutkan pembayarannya.');
+                return redirect()->route('pemesanan.invoice', [ 'uuid' => $transaction_check->uuid]);
+            }
+        }
+
         // Kode ini memicu event Registered setelah pengguna baru berhasil didaftarkan.
         // event(new Registered($user));
 
@@ -95,6 +107,8 @@ class TransactionController extends Controller
             $channel_ = $request->payment_method;
         }
 
+        $ref_id = Str::uuid();
+
         //Request Body//
         $body    = [
             'product'        => ['Kelas Profit 10 Juta'],
@@ -104,7 +118,7 @@ class TransactionController extends Controller
             'returnUrl'      => 'https://kelasentrepreneurid.com/pemesanan/selesai',
             'cancelUrl'      => 'https://kelasentrepreneurid.com/pemesanan/cancel',
             'notifyUrl'      => 'https://kelasentrepreneurid.com/pemesanan/callback',
-            'referenceId'    => Str::uuid(),
+            'referenceId'    => $ref_id,
             'paymentMethod'  => $method_,
             'paymentChannel' => $channel_,
             'feeDirection'   => 'BUYER',
@@ -175,6 +189,8 @@ class TransactionController extends Controller
                 'payment_name'      => $cek['Data']['PaymentName'],
                 'status_desc'       => $cek['Data']['StatusDesc'],
                 'status_pembayaran' => $cek['Data']['PaidStatus'],
+                'qris_string'       => $status_api['Data']['QrString'],
+                'qris_nmid'         => $status_api['Data']['NMID'],
             ]);
 
             // ke sistem lama
@@ -205,7 +221,7 @@ class TransactionController extends Controller
             $simpan->save();
 
 
-            return 'berhasil';
+            return redirect()->route('pemesanan.invoice', ['uuid' => $ref_id]);
         } else {
             return $status_api;
         }
@@ -302,7 +318,7 @@ class TransactionController extends Controller
         $method       = 'POST'; //method
 
         $body    = [
-            'transactionId' => 138557,
+            'transactionId' => 138719,
             'account' => $va
         ];
 
@@ -318,7 +334,7 @@ class TransactionController extends Controller
             'va' => $va,
             'timestamp' => $timestamp_,
         ])->post('https://sandbox.ipaymu.com/api/v2/transaction', [
-            'transactionId' => 138557,
+            'transactionId' => 138719,
             'account' => $va
         ]);
 
@@ -342,6 +358,22 @@ class TransactionController extends Controller
                     'status_pembayaran' => 'paid',
                     'berhasil_bayar' => now(),
                 ]);
+
+                // ke sistem lama
+                $url_sistem_lama = 'https://admin.entrepreneurid.org/api/transaction/create';
+                $apiKey_sistem_lama = '09619678a1403be5dcab79c793f3fa0f';
+
+                $data_ke_sistem_lama = [
+                    'id'     => 79,
+                    'status' => 2,
+                ];
+
+                $response_sistem_lama = Http::withHeaders([
+                    'api_key' => $apiKey_sistem_lama,
+                    'Content-Type' => 'application/json',
+                ])->post($url_sistem_lama, $data_ke_sistem_lama);
+
+                $get_sistem_lama = $response_sistem_lama->json();
                 return response()->json(['message' => 'Transaksi berhasil diterima.'], 200);
             } else {
                 return response()->json(['message' => 'Transaksi gagal.'], 400);

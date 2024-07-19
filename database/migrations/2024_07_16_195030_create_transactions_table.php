@@ -30,6 +30,8 @@ return new class extends Migration
             $table->string('payment_name')->nullable();
             $table->string('status_desc'); // UPDATE AFTER SUBMIT
             $table->string('status_pembayaran'); // UPDATE AFTER SUBMIT
+            $table->text('qris_string')->nullable(); // jika qris
+            $table->string('qris_nmid')->nullable(); // jika qris
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('kelas_id')->references('id')->on('kelas');

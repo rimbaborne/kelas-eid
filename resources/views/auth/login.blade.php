@@ -24,12 +24,12 @@
 
                 <x-splade-submit class="ml-3 bg-primary-700 text-white" :label="__('Log in')" />
             </div>
-            <div class="flex items-center justify-end">
+            {{-- <div class="flex items-center justify-end">
                 <Link class="text-sm text-primary-600 hover:text-gray-900 p-2 rounded-md border border-primary-400"
                     href="{{ route('register') }}">
                 Daftar Akun
                 </Link>
-            </div>
+            </div> --}}
             {{-- <div class="flex items-center justify-center max-w-full">
                 <button aria-label="Sign in with Google"
                     class="flex items-center  bg-white border border-button-border-light rounded-full p-0.5 pr-4">
