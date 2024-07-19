@@ -80,7 +80,9 @@
                                 <dd class="col-span-2 text-gray-500 dark:text-neutral-500">
                                     @if($transaction->status_pembayaran == 'paid')
                                         <span class="bg-green-500 text-white px-2 py-1 rounded text-sm">LUNAS</span>
-                                    @else
+                                    @elseif($transaction->status_pembayaran == 'unpaid')
+                                        <span class="bg-red-500 text-white px-2 py-1 rounded text-sm">BELUM LUNAS</span>
+                                    @elseif($transaction->status_pembayaran == 'expired')
                                         <span class="bg-red-500 text-white px-2 py-1 rounded text-sm">BELUM LUNAS</span>
                                     @endif
                                 </dd>

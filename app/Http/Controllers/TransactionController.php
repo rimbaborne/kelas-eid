@@ -34,7 +34,6 @@ class TransactionController extends Controller
         }
         return view('pages.pemesanan');
     }
-
     public function pemesanan_kelasprofit_store(Request $request)
     {
         if (!Auth::check()) {
@@ -185,16 +184,13 @@ class TransactionController extends Controller
             $data_ke_sistem_lama = [
                 'id_event'  => 79,
                 'id_agen'   => 100001,
-                'nama'      => 'John Doe',
-                'email'     => 'john@example.com',
-                'kode_nohp' => '62',
-                'nohp'      => '8123456789',
-                'panggilan' => 'John',
-                'domisili'  => 'Jakarta',
-                'tgllahir'  => '1990-01-01',
-                'gender'    => '1',
-                'kodeunik'  => 123,
-                'total'     => 10000,
+                'nama'      => $user->name,
+                'email'     => $user->email,
+                'kode_nohp' => $user->phone_code,
+                'nohp'      => $phone_number,
+                'panggilan' => $user->name,
+                'kodeunik'  => 0,
+                'total'     => 57000,
             ];
 
             $response_sistem_lama = Http::withHeaders([
@@ -214,7 +210,6 @@ class TransactionController extends Controller
             return $status_api;
         }
     }
-
     public function invoice($uuid)
     {
         $transaction = Transaction::where('uuid', $uuid)->first();
@@ -296,8 +291,7 @@ class TransactionController extends Controller
             return response()->json($ret);
         }
     }
-
-    function pembayaran()
+    public function pembayaran()
     {
         $va           = '0000008125144744'; //get on iPaymu dashboard
         $apiKey       = 'SANDBOXDF3E6F1F-5E4A-44EF-9EDB-98D7BD737DAA'; //get on iPaymu dashboard
@@ -331,5 +325,29 @@ class TransactionController extends Controller
         $ret = $response->json();
         return response()->json($ret);
 
+    }
+    public function callback(Request $request){
+
+        $trx_id       = $request->input('trx_id');
+        $status       = $request->input('status');
+        $status_code  = $request->input('status_code');
+        $sid          = $request->input('sid');
+        $reference_id = $request->input('reference_id');
+
+        $transaction  = Transaction::where('id_ipaymu', $sid)->first();
+
+        if ($transaction) {
+            if ($status == 'berhasil' && $status_code == '1') {
+                $transaction->update([
+                    'status_pembayaran' => 'paid',
+                    'berhasil_bayar' => now(),
+                ]);
+                return response()->json(['message' => 'Transaksi berhasil diterima.'], 200);
+            } else {
+                return response()->json(['message' => 'Transaksi gagal.'], 400);
+            }
+        } else {
+            return response()->json(['message' => 'Transaksi tidak ditemukan.'], 404);
+        }
     }
 }
