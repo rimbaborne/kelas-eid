@@ -210,8 +210,8 @@ class TransactionController extends Controller
                 'payment_name'      => $cek['Data']['PaymentName'],
                 'status_desc'       => $cek['Data']['StatusDesc'],
                 'status_pembayaran' => $cek['Data']['PaidStatus'],
-                'qris_string'       => $status_api['Data']['QrString'],
-                'qris_nmid'         => $status_api['Data']['NMID'],
+                'qris_string'       => $status_api['Data']['QrString'] ?? null,
+                'qris_nmid'         => $status_api['Data']['NMID'] ?? null,
             ]);
 
             // ke sistem lama

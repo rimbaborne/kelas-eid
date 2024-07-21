@@ -28,8 +28,7 @@
                 <!-- Grid -->
                 <div class="flex justify-between">
                     <div>
-                        <img src="{{ url('/') }}/assets/img/logo-eid-merah.png" alt="eID" class="h-12">
-
+                        <img src="{{ url('/') }}/assets/img/lttq.png" alt="eID" class="h-12">
                         <h1 class="mt-2 text-lg md:text-xl font-semibold text-gray-800 dark:text-white">entreprenurID
                         </h1>
                     </div>
