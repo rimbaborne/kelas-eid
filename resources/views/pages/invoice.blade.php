@@ -152,7 +152,7 @@
                                         </h5>
                                         <div class="flex items-center justify-between mb-4">
                                             <h1 class="text-xl mt-0 font-semibold text-gray-900 hover:underline dark:text-white">
-                                                @if($transaction->channel == 'QRIS')
+                                                @if($transaction->channel == 'QRIS' || $transaction->channel == 'MPM')
                                                     Scan QRIS
                                                 @else
                                                     Bank {{ $transaction->channel }}
@@ -160,7 +160,7 @@
                                             </h1>
                                             <img src="{{ url('/') }}/assets/pembayaran/{{ strtolower($transaction->channel) }}.png" alt="{{ $transaction->channel }}" class="h-6 mr-2">
                                         </div>
-                                        @if($transaction->channel == 'QRIS')
+                                        @if($transaction->channel == 'QRIS' || $transaction->channel == 'MPM')
                                             <h5 class="text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
                                                 Barcode
                                             </h5>
