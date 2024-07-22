@@ -159,7 +159,7 @@ class TransactionController extends Controller
         // $apiKey       = 'SANDBOXDF3E6F1F-5E4A-44EF-9EDB-98D7BD737DAA'; //get on iPaymu dashboard
 
         // $url          = 'https://sandbox.ipaymu.com/api/v2/payment/direct'; // for development mode
-        $url          = 'https://my.ipaymu.com/api/v2/payment'; // for production mode
+        $url          = 'https://my.ipaymu.com/api/v2/payment/direct'; // for production mode
 
         $method       = 'POST'; //method
 
