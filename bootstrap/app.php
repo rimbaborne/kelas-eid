@@ -13,7 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
 ->withMiddleware(function (Middleware $middleware) {
     $middleware->group('splade', [\ProtoneMedia\Splade\Http\SpladeMiddleware::class]);
-    $middleware->use([\App\Http\Middleware\VerifyCsrfToken::class]);
+    $middleware->group('ipaymu', [\App\Http\Middleware\VerifyCsrfToken::class]);
     //
 })
     ->withExceptions(function (Exceptions $exceptions) {
