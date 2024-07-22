@@ -21,7 +21,7 @@
 
 <div class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="webmenu">
     <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
-        <li>
+        {{-- <li>
             <x-website.nav :href="route('website.home')" :active="request()->routeIs('website.home')" >
                 Home
             </x-website.nav>
@@ -30,7 +30,7 @@
             <x-website.nav :href="route('kelas')" :active="request()->routeIs('kelas')" >
                 Kelas
             </x-website.nav>
-        </li>
+        </li> --}}
         {{-- <li>
             <x-website.nav :href="route('website.lttq')" :active="request()->routeIs('website.lttq')">
                 Pendidikan LTTQ

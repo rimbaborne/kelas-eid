@@ -188,8 +188,8 @@ class TransactionController extends Controller
         $body    = [
             'product'        => ['Kelas Profit 10 Juta'],
             'qty'            => ['1'],
-            'price'          => ['10000'],
-            'amount'         => '10000',
+            'price'          => ['57000'],
+            'amount'         => '57000',
             'returnUrl'      => 'https://kelasentrepreneurid.com/transaksi/selesai',
             'cancelUrl'      => 'https://kelasentrepreneurid.com/transaksi/cancel',
             'notifyUrl'      => 'https://kelasentrepreneurid.com/transaksi/callback',
@@ -459,7 +459,7 @@ Selamat telah menjadi peserta di Kelas Profit 10 Juta. 😇
 Silahkan akses materinya disini https://kelasentrepreneurid.com/login
 
 Masuk dengan akun Anda
-Email : '.$user->name.'
+Email : '.$user->email.'
 Password : '.$user->show_password.'
 
 Selain akses materi diatas, Anda juga bisa dapat bimbingan via WA dan dapat update materi kursus ini dengan cara
@@ -485,7 +485,7 @@ Selamat telah menjadi peserta di Kelas Profit 10 Juta. 😇 <br>
 Silahkan akses materinya disini https://kelasentrepreneurid.com/login <br><br>
 
 Masuk dengan akun Anda <br>
-Email : '.$user->name.'<br>
+Email : '.$user->email.'<br>
 Password : '.$user->show_password.'<br><br>
 
 Selain akses materi diatas, Anda juga bisa dapat bimbingan via WA dan dapat update materi kursus ini dengan cara <br>

@@ -42,7 +42,15 @@ Route::middleware('splade')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::get('/dashboard', function () {
             return view('dashboard');
-        })->middleware(['verified'])->name('dashboard');
+        })->name('dashboard');
+
+        Route::get('/dashboard/data', function () {
+            return view('dashboard');
+        })->name('dashboard.data');
+
+        Route::get('/dashboard/pembayaran', function () {
+            return view('dashboard');
+        })->name('dashboard.pembayaran');
 
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -79,5 +87,7 @@ Route::middleware('splade')->group(function () {
     Route::get('/transaksi/pembayaran', [TransactionController::class, 'pembayaran'])->name('transaksi.pembayaran');
     Route::get('/transaksi/cancel', [TransactionController::class, 'cancel'])->name('transaksi.cancel');
     Route::get('/transaksi/selesai', [TransactionController::class, 'selesai'])->name('transaksi.selesai');
+
+
 
 });
