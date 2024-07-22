@@ -240,25 +240,25 @@ class TransactionController extends Controller
 
             // $get_sistem_lama = $response_sistem_lama->json();
 
-            try {
-                $transaksi_hq = new TransactionHQ;
-                $transaksi_hq->uuid        = $ref_id;
-                $transaksi_hq->nama        = $user->name;
-                $transaksi_hq->email       = $user->email;
-                $transaksi_hq->panggilan   = $user->name;;
-                $transaksi_hq->kode_nohp   = $user->phone_code ?? 62;
-                $transaksi_hq->nohp        = $user->phone_number;
-                $transaksi_hq->gender      = null;
-                $transaksi_hq->tgllahir    = null;
-                $transaksi_hq->id_agen     = $request->agen ?? 100001;
-                $transaksi_hq->id_event    = 79;
-                $transaksi_hq->total       = 57000;
-                $transaksi_hq->status      = 1;
-                $transaksi_hq->jenis       = 1;
-                $transaksi_hq->save();
-            } catch (\Exception $e) {
-                // jika terjadi error maka tidak perlu dilanjutkan
-            }
+            // try {
+            //     $transaksi_hq = new TransactionHQ;
+            //     $transaksi_hq->uuid        = $ref_id;
+            //     $transaksi_hq->nama        = $user->name;
+            //     $transaksi_hq->email       = $user->email;
+            //     $transaksi_hq->panggilan   = $user->name;;
+            //     $transaksi_hq->kode_nohp   = $user->phone_code ?? 62;
+            //     $transaksi_hq->nohp        = $user->phone_number;
+            //     $transaksi_hq->gender      = null;
+            //     $transaksi_hq->tgllahir    = null;
+            //     $transaksi_hq->id_agen     = $request->agen ?? 100001;
+            //     $transaksi_hq->id_event    = 79;
+            //     $transaksi_hq->total       = 57000;
+            //     $transaksi_hq->status      = 1;
+            //     $transaksi_hq->jenis       = 1;
+            //     $transaksi_hq->save();
+            // } catch (\Exception $e) {
+            //     // jika terjadi error maka tidak perlu dilanjutkan
+            // }
 
             $simpan->invoice_id     = date('Ymd') . $simpan->id;
             $simpan->sistem_lama_id = $transaksi_hq->id;
