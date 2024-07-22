@@ -13,9 +13,7 @@ use App\Domain\Website\Controllers\WebController;
 use App\Http\Middleware\VerifyCsrfToken;
 
 Route::get("/", [WebController::class, "home"])->name("website.home");
-Route::middleware('ipaymu')->group(function () {
-    Route::post('/transaksi/callback', [TransactionController::class, 'callback'])->name('transaksi.callback');
-});
+Route::post('/transaksi/callback', [TransactionController::class, 'callback'])->name('transaksi.callback');
 
 /*
 |--------------------------------------------------------------------------

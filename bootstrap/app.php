@@ -13,8 +13,10 @@ return Application::configure(basePath: dirname(__DIR__))
     )
 ->withMiddleware(function (Middleware $middleware) {
     $middleware->group('splade', [\ProtoneMedia\Splade\Http\SpladeMiddleware::class]);
-    $middleware->group('ipaymu', [\App\Http\Middleware\VerifyCsrfToken::class]);
-    //
+    // $middlewar   e->group('ipaymu', [\App\Http\Middleware\VerifyCsrfToken::class]);
+    $middleware->validateCsrfTokens(except: [
+        '/transaksi/callback',
+    ]);
 })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->renderable(\ProtoneMedia\Splade\SpladeCore::exceptionHandler($exceptions->handler));
