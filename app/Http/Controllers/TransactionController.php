@@ -224,7 +224,7 @@ class TransactionController extends Controller
         $status_api = $response->json();
 
         if ($status_api['Status'] == 200) {
-
+            $payment_number_ = $method_ == 'qris' ? 'QRIS' : $status_api['Data']['PaymentNo'];
             $simpan = Transaction::create([
                 'uuid'              => $status_api['Data']['SessionId'],
                 'user_id'           => $user->id,
@@ -237,7 +237,7 @@ class TransactionController extends Controller
                 'batas_bayar'       => $status_api['Data']['Expired'],
                 'via'               => $method_,
                 'channel'           => $status_api['Data']['Channel'],
-                'payment_number'    => $status_api['Data']['PaymentNo'],
+                'payment_number'    => $payment_number_,
                 'payment_name'      => $status_api['Data']['PaymentName'],
                 'status_desc'       => 'Menunggu Pembayaran',
                 'status_pembayaran' => 'unpaid',
