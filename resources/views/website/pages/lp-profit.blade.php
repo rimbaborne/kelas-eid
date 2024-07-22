@@ -598,7 +598,7 @@
                                                          <div class="elementor-widget-container">
                                                             </p>
                                                             <p style="text-align: center;">
-                                                               <a href="https://kelasentrepreneurid.com/pemesanan/kelas-profit-10-juta?ref={{ request()->ref }}" ></a>
+                                                               <a href="https://kelasentrepreneurid.com/pemesanan/kelas-profit-10-juta?ref={{ request()->ref }}" >
                                                                   <img loading="lazy" decoding="async" class="alignnone wp-image-558 size-medium" src="https://wamarketinghack.com/wp-content/uploads/2024/07/Red-Button-300x76.png" alt="" width="300" height="76" />
                                                                </a>
                                                             </p>
@@ -898,7 +898,7 @@
                                                          <div class="elementor-widget-container">
                                                             </p>
                                                             <p style="text-align: center;">
-                                                               <a href="https://kelasentrepreneurid.com/pemesanan/kelas-profit-10-juta?ref={{ request()->ref }}" ></a>
+                                                               <a href="https://kelasentrepreneurid.com/pemesanan/kelas-profit-10-juta?ref={{ request()->ref }}" >
                                                                   <img loading="lazy" decoding="async" class="alignnone wp-image-558 size-medium" src="https://wamarketinghack.com/wp-content/uploads/2024/07/Red-Button-300x76.png" alt="" width="300" height="76" />
                                                                </a>
                                                             </p>
@@ -1092,7 +1092,7 @@
                                              <div class="elementor-widget-container">
                                                 </p>
                                                 <p style="text-align: center;">
-                                                   <a href="https://kelasentrepreneurid.com/pemesanan/kelas-profit-10-juta?ref={{ request()->ref }}" ></a>
+                                                   <a href="https://kelasentrepreneurid.com/pemesanan/kelas-profit-10-juta?ref={{ request()->ref }}" >
                                                       <img loading="lazy" decoding="async" class="alignnone wp-image-558 size-medium" src="https://wamarketinghack.com/wp-content/uploads/2024/07/Red-Button-300x76.png" alt="" width="300" height="76" />
                                                    </a>
                                                 </p>
