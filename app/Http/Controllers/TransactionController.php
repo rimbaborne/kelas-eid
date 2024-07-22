@@ -172,6 +172,17 @@ class TransactionController extends Controller
         }
 
         $ref_id = Str::uuid();
+        if ($request->payment_method == 'qris') {
+            $expired = '24';
+        } elseif ($request->payment_method == 'bsi') {
+            $expired = '3';
+        } elseif ($request->payment_method == 'br') {
+            $expired = '2';
+        } elseif ($request->payment_method == 'bca') {
+            $expired = '12';
+        } else {
+            $expired = '3';
+        }
 
         //Request Body//
         $body    = [
@@ -186,7 +197,7 @@ class TransactionController extends Controller
             'paymentMethod'  => $method_,
             'paymentChannel' => $channel_,
             'feeDirection'   => 'BUYER',
-            'expired'        => '1',
+            'expired'        => $expired,
             'name'           => $user->name,
             'email'          => $user->email,
             'phone'          => $user->phone_code . $user->phone_number,
@@ -231,7 +242,7 @@ class TransactionController extends Controller
                 'signature'    => $signature_,
                 'va'           => $va,
                 'timestamp'    => $timestamp_,
-            ])->post('https://sandbox.ipaymu.com/api/v2/transaction', [
+            ])->post('https://my.ipaymu.com/api/v2/transaction', [
                 'transactionId' => $transactionId,
                 'account'       => $va
             ]);
