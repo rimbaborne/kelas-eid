@@ -10,9 +10,10 @@ use App\Http\Controllers\KelasController;
 use iPaymu\iPaymu;
 use App\Http\Controllers\TransactionController;
 use App\Domain\Website\Controllers\WebController;
+use App\Http\Middleware\VerifyCsrfToken;
 
 Route::get("/", [WebController::class, "home"])->name("website.home");
-Route::post('/transaksi/callback', [TransactionController::class, 'callback'])->name('transaksi.callback');
+Route::post('/transaksi/callback', [TransactionController::class, 'callback'])->name('transaksi.callback')->middleware(VerifyCsrfToken::class);
 
 /*
 |--------------------------------------------------------------------------
