@@ -15,6 +15,10 @@ use ProtoneMedia\Splade\Facades\Toast;
 
 use ProtoneMedia\Splade\Facades\SEO;
 USE App\Models\TransactionHQ;
+use Throwable;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Pemesanan;
+use App\Mail\PemesananSelesai;
 
 
 class TransactionController extends Controller
@@ -25,6 +29,42 @@ class TransactionController extends Controller
         $this->description = 'Menawarkan materi yang lengkap, mentor berpengalaman, dan komunitas belajar yang suportif untuk membantu Anda mencapai tujuan bisnis Anda.';
         $this->keywords = 'Belajar Bisnis Online, entrepreneurID, Bisnis,';
         $this->sitename = 'Kelas entrepreneurID';
+    }
+
+    public function notifwa($nomorhp, $isipesan)
+    {
+        $datawa = json_decode($isipesan);
+
+        $apikey     = env('WAHA_API_KEY');
+        $url        = env('WAHA_API_URL');
+        $sessionApi = env('WAHA_API_SESSION');
+        $requestApi = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Accept'       => 'application/json',
+            'X-Api-Key'    => $apikey,
+        ]);
+
+        try {
+            #1 Send Seen
+            $requestApi->post($url.'/api/sendSeen', [ "session" => $sessionApi, "chatId"  => $nomorhp.'@c.us', ]);
+
+            #2 Start Typing
+            $requestApi->post($url.'/api/startTyping', [ "session" => $sessionApi, "chatId"  => $nomorhp.'@c.us', ]);
+
+            sleep(1); // jeda seolah olah ngetik
+
+            #3 Stop Typing
+            $requestApi->post($url.'/api/stopTyping', [ "session" => $sessionApi, "chatId"  => $nomorhp.'@c.us', ]);
+
+            #4 Send Message
+            $requestApi->post($url.'/api/sendText', [
+                "session" => $sessionApi,
+                "chatId"  => $nomorhp.'@c.us',
+                "text"    => $isipesan,
+            ]);
+        } catch (Throwable $th) {
+            throw $th;
+        }
     }
 
     public function pemesanan_kelasprofit(Request $request)
@@ -56,7 +96,7 @@ class TransactionController extends Controller
         }
         return view('pages.pemesanan', compact('agen'));
     }
-    public function pemesanan_kelasprofit_store(Request $request)
+    public function pemesanan_kelasprofit_store($agen, Request $request)
     {
         if (!Auth::check()) {
             $request->validate([
@@ -82,6 +122,7 @@ class TransactionController extends Controller
                     'email'        => strtolower($request->email),
                     'phone_code'   => $request->phone_code ?? '62',
                     'phone_number' => $phone_number,
+                    'show_password'=> $request->password,
                     'password'     => Hash::make($request->password),
                 ]);
             }
@@ -201,7 +242,7 @@ class TransactionController extends Controller
                 'uuid'              => $cek['Data']['SessionId'],
                 'user_id'           => $user->id,
                 'kelas_id'          => 1,
-                'agen_id'           => $request->agen ?? 100001,
+                'agen_id'           => $agen ?? 100001,
                 'id_ipaymu'         => $cek['Data']['TransactionId'],
                 'subtotal'          => 57000,
                 'fee'               => $cek['Data']['Fee'],
@@ -216,30 +257,6 @@ class TransactionController extends Controller
                 'qris_string'       => $status_api['Data']['QrString'] ?? null,
                 'qris_nmid'         => $status_api['Data']['NMID'] ?? null,
             ]);
-
-            // ke sistem lama
-            // $url_sistem_lama = 'https://admin.entrepreneurid.org/api/transaction/create';
-            // $apiKey_sistem_lama = '09619678a1403be5dcab79c793f3fa0f';
-
-            // $data_ke_sistem_lama = [
-            //     'id_event'  => 79,
-            //     'id_agen'   => 100001,
-            //     'nama'      => $user->name,
-            //     'email'     => $user->email,
-            //     'kode_nohp' => $user->phone_code,
-            //     'nohp'      => $phone_number,
-            //     'panggilan' => $user->name,
-            //     'kodeunik'  => 0,
-            //     'total'     => 57000,
-            // ];
-
-            // $response_sistem_lama = Http::withHeaders([
-            //     'api_key' => $apiKey_sistem_lama,
-            //     'Content-Type' => 'application/json',
-            // ])->post($url_sistem_lama, $data_ke_sistem_lama);
-
-            // $get_sistem_lama = $response_sistem_lama->json();
-
             // try {
             //     $transaksi_hq = new TransactionHQ;
             //     $transaksi_hq->uuid        = $ref_id;
@@ -261,9 +278,43 @@ class TransactionController extends Controller
             // }
 
             $simpan->invoice_id     = date('Ymd') . $simpan->id;
-            $simpan->sistem_lama_id = $transaksi_hq->id;
+            $simpan->sistem_lama_id = null;
             $simpan->save();
 
+            $isiwa = 'Halo '.$user->name.',
+
+Segera selesaikan pendaftaran Kelas Profit 10 Juta Anda dengan cara transfer sebesar Rp '.number_format($simpan->total, 0, ',', '.').'
+di link berikut : '.route('pemesanan.invoice', ['uuid' => $ref_id]).'
+
+Masa berlaku invoice ini hanya sampai '.$simpan->batas_bayar.'
+
+Salam,
+
+Tim entrepreneurID
+
+Nb : Jika Anda ada pertanyaan, silahkan balas chat ini. 🙂';
+
+            $this->notifwa($user->phone_code . $user->phone_number, $isiwa);
+
+            $isiemail = 'Dear '.$user->name.', <br><br>
+
+Segera selesaikan pendaftaran Kelas Profit 10 Juta Anda dengan cara transfer sebesar Rp '.number_format($simpan->total, 0, ',', '.').'<br>
+di link berikut : '.route('pemesanan.invoice', ['uuid' => $ref_id]).'<br><br>
+
+Masa berlaku invoice ini hanya sampai '.$simpan->batas_bayar.'<br><br>
+
+Salam,<br><br>
+
+Tim entrepreneurID <br><br>
+
+Nb : Jika Anda ada pertanyaan, silahkan hubungi Customer Support kami di link ini ➡️ bit.ly/CS-eID';
+
+            $data = [
+                'subject'  => '[Invoice Pendaftaran Kelas 10 Juta]',
+                'isi' => $isiemail,
+            ];
+
+            Mail::to($user->email)->send(new Pemesanan($data));
 
             return redirect()->route('pemesanan.invoice', ['uuid' => $ref_id]);
         } else {
@@ -405,43 +456,77 @@ class TransactionController extends Controller
         $sid          = $request->input('sid');
 
         $transaction  = Transaction::where('id_ipaymu', $trx_id)->first();
+        $user         = User::find($transaction->user_id);
 
         if ($transaction) {
+            $transaction->update([
+                'status_pembayaran_code' => $status_code,
+                'status_pembayaran'      => 'paid',
+                'status_desc'            => 'Pembayaran Berhasil',
+                'berhasil_bayar'         => now(),
+            ]);
 
+            $isiwa = 'Halo '.$user->name.',
 
-                // ke sistem lama
-                $url_sistem_lama = 'https://admin.entrepreneurid.org/api/transaction/create';
-                $apiKey_sistem_lama = '09619678a1403be5dcab79c793f3fa0f';
-                if ($status_code == '1') {
+Selamat telah menjadi peserta di Kelas Profit 10 Juta. 😇
+Silahkan akses materinya disini https://kelasentrepreneurid.com/login
 
-                    $transaction->update([
-                        'status_pembayaran_code' => $status_code,
-                        'status_pembayaran'      => 'paid',
-                        'status_desc'            => 'Pembayaran Berhasil',
-                        'berhasil_bayar'         => now(),
-                    ]);
+Masuk dengan akun Anda
+Email : '.$user->name.'
+Password : '.$user->show_password.'
 
-                    $data_ke_sistem_lama = [
-                        'id'     => 79,
-                        'status' => 3,
-                        'uuid' => $sid,
-                    ];
+Selain akses materi diatas, Anda juga bisa dapat bimbingan via WA dan dapat update materi kursus ini dengan cara
+👇👇👇
+Chat nomor WA 082318989848
+Dengan format : Peserta KPS eID
+Atau kalau mau lebih cepat, bisa klik link ini https://wa.me/6282318989848?text=Peserta%20KPS%20eID
 
-                    $response_sistem_lama = Http::withHeaders([
-                        'api_key' => $apiKey_sistem_lama,
-                        'Content-Type' => 'application/json',
-                    ])->post($url_sistem_lama, $data_ke_sistem_lama);
+Sekali lagi selamat belajar.
+Semoga ini jadi wasilah untuk pertumbuhan bisnis Anda, aamiin. 🤲
 
-                    $get_sistem_lama = $response_sistem_lama->json();
-                } else {
-                    $transaction->update([
-                        'status_pembayaran_code' => $status_code,
-                        'status_pembayaran'      => $status,
-                    ]);
-                }
+Salam,
+
+Tim entrepreneurID
+
+Nb : Jika Anda mengalami kendala saat mengakses materinya, silahkan hubungi Customer Support kami di link ini ➡️ bit.ly/CS-eID';
+
+            $this->notifwa($user->phone_code . $user->phone_number, $isiwa);
+
+            $isiemail = 'Dear '.$user->name.', <br><br>
+
+Selamat telah menjadi peserta di Kelas Profit 10 Juta. 😇 <br>
+Silahkan akses materinya disini https://kelasentrepreneurid.com/login <br><br>
+
+Masuk dengan akun Anda <br>
+Email : '.$user->name.'<br>
+Password : '.$user->show_password.'<br><br>
+
+Selain akses materi diatas, Anda juga bisa dapat bimbingan via WA dan dapat update materi kursus ini dengan cara <br>
+👇👇👇<br>
+Chat nomor WA 082318989848<br>
+Dengan format : Peserta KPS eID<br>
+Atau kalau mau lebih cepat, bisa klik link ini https://wa.me/6282318989848?text=Peserta%20KPS%20eID <br><br>
+
+Salam,<br><br>
+
+Tim entrepreneurID <br><br>
+
+Nb : Jika Anda ada pertanyaan, silahkan hubungi Customer Support kami di link ini ➡️ bit.ly/CS-eID';
+
+            $data = [
+                'subject'  => '[Akses Kelas Profit 10 Juta Anda]',
+                'isi' => $isiemail,
+            ];
+
+            Mail::to($user->email)->send(new Pemesanan($data));
 
                 return response()->json(['message' => 'Transaksi berhasil diterima.'], 200);
         } else {
+
+            $transaction->update([
+                'status_pembayaran_code' => $status_code,
+                'status_pembayaran'      => $status,
+            ]);
             return response()->json(['message' => 'Transaksi tidak berhasil.'], 404);
         }
     }

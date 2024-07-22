@@ -29,10 +29,9 @@
                 </div>
             </div>
         </div>
-        <x-splade-form action="{{ route('pemesanan.profit.store') }}" class="space-y-4"
+        <x-splade-form action="/pemesanan/kelas-profit-10-juta/store/{{ request()->ref ?? 100001 }}" class="space-y-4"
             confirm-text="Apakah data yang anda masukkan sudah benar ?" confirm="Konfirmasi" confirm-button="Benar"
             cancel-button="Belum" method="POST">
-            <input type="hidden" name="agen" value="{{ $agen }}">
             @if(Auth::check())
                 <label class="block">
                     <span class="block mb-1 text-gray-700 font-sans"> Nama </span>
@@ -328,6 +327,18 @@
             <div class="container mx-auto py-8">
                 <div class="max-w-lg mx-auto bg-white rounded-lg ">
                     <h2 class="text-2xl font-bold mb-6 text-center">Pilih Metode Pembayaran</h2>
+                    <div class="pb-2">
+                        <h3 class="text-lg font-semibold mb-2">QR Code</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <x-splade-radio name="payment_method" value="qris" class="mr-2" data-fee="{{ 57000 * 0.007 }}" data-inis="QRIS"/>
+                                <img src="{{ url('/') }}/assets/pembayaran/qris.svg" alt="QRIS"
+                                    class="h-6 mr-2">
+                                QRIS
+                            </label>
+                        </div>
+                    </div>
+
                     <div class="mb-4">
                         <h3 class="text-lg font-semibold mb-2">Virtual Account (VA)</h3>
                         <div class="space-y-2">
@@ -363,7 +374,7 @@
                                 <x-splade-radio name="payment_method" value="mandiri" class="mr-2" data-fee="3500" data-inis="Bank Mandiri" data-type="virtual_account"/>
                                 <img src="{{ url('/') }}/assets/pembayaran/mandiri.png" alt="Bank Mandiri"
                                     class="h-6 mr-2">
-                                Bank MANDIRIa
+                                Bank MANDIRI
                             </label>
                             <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
                                 <x-splade-radio name="payment_method" value="permata" class="mr-2" data-fee="3500" data-inis="Bank Permata"/>
@@ -390,17 +401,7 @@
                             </label>
                         </div>
                     </div> --}}
-                    <div>
-                        <h3 class="text-lg font-semibold mb-2">QR Code</h3>
-                        <div class="space-y-2">
-                            <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
-                                <x-splade-radio name="payment_method" value="qris" class="mr-2" data-fee="{{ 57000 * 0.007 }}" data-inis="QRIS"/>
-                                <img src="{{ url('/') }}/assets/pembayaran/qris.svg" alt="QRIS"
-                                    class="h-6 mr-2">
-                                QRIS
-                            </label>
-                        </div>
-                    </div>
+
                 </div>
             </div>
             <div class="mt-6 grow sm:mt-8 lg:mt-0">
