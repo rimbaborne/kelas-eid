@@ -9,7 +9,9 @@ use App\Http\Controllers\KelasController;
 // require_once base_path('vendor/ipaymu-php-api/iPaymu/iPaymu.php');
 use iPaymu\iPaymu;
 use App\Http\Controllers\TransactionController;
+use App\Domain\Website\Controllers\WebController;
 
+Route::get("/", [WebController::class, "home"])->name("website.home");
 /*
 |--------------------------------------------------------------------------
 | Web Routes
