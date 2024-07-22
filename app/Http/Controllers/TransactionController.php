@@ -14,6 +14,7 @@ use App\Models\Transaction;
 use ProtoneMedia\Splade\Facades\Toast;
 
 use ProtoneMedia\Splade\Facades\SEO;
+USE App\Models\TransactionHQ;
 
 
 class TransactionController extends Controller
@@ -26,8 +27,9 @@ class TransactionController extends Controller
         $this->sitename = 'Kelas entrepreneurID';
     }
 
-    public function pemesanan_kelasprofit()
+    public function pemesanan_kelasprofit(Request $request)
     {
+        $agen = $request->ref ?? 100001;
         $page_title = 'Kelas entrepreneurID | Kelas Profit 10 Juta';
         SEO::title($page_title)
             ->description($this->description)
@@ -52,7 +54,7 @@ class TransactionController extends Controller
                 }
             }
         }
-        return view('pages.pemesanan');
+        return view('pages.pemesanan', compact('agen'));
     }
     public function pemesanan_kelasprofit_store(Request $request)
     {
@@ -76,8 +78,8 @@ class TransactionController extends Controller
 
             if (!$user) {
                 $user = User::create([
-                    'name'         => $request->name,
-                    'email'        => $request->email,
+                    'name'         => strtolower($request->name),
+                    'email'        => strtolower($request->email),
                     'phone_code'   => $request->phone_code ?? '62',
                     'phone_number' => $phone_number,
                     'password'     => Hash::make($request->password),
@@ -199,6 +201,7 @@ class TransactionController extends Controller
                 'uuid'              => $cek['Data']['SessionId'],
                 'user_id'           => $user->id,
                 'kelas_id'          => 1,
+                'agen_id'           => $request->agen ?? 100001,
                 'id_ipaymu'         => $cek['Data']['TransactionId'],
                 'subtotal'          => 57000,
                 'fee'               => $cek['Data']['Fee'],
@@ -215,30 +218,50 @@ class TransactionController extends Controller
             ]);
 
             // ke sistem lama
-            $url_sistem_lama = 'https://admin.entrepreneurid.org/api/transaction/create';
-            $apiKey_sistem_lama = '09619678a1403be5dcab79c793f3fa0f';
+            // $url_sistem_lama = 'https://admin.entrepreneurid.org/api/transaction/create';
+            // $apiKey_sistem_lama = '09619678a1403be5dcab79c793f3fa0f';
 
-            $data_ke_sistem_lama = [
-                'id_event'  => 79,
-                'id_agen'   => 100001,
-                'nama'      => $user->name,
-                'email'     => $user->email,
-                'kode_nohp' => $user->phone_code,
-                'nohp'      => $phone_number,
-                'panggilan' => $user->name,
-                'kodeunik'  => 0,
-                'total'     => 57000,
-            ];
+            // $data_ke_sistem_lama = [
+            //     'id_event'  => 79,
+            //     'id_agen'   => 100001,
+            //     'nama'      => $user->name,
+            //     'email'     => $user->email,
+            //     'kode_nohp' => $user->phone_code,
+            //     'nohp'      => $phone_number,
+            //     'panggilan' => $user->name,
+            //     'kodeunik'  => 0,
+            //     'total'     => 57000,
+            // ];
 
-            $response_sistem_lama = Http::withHeaders([
-                'api_key' => $apiKey_sistem_lama,
-                'Content-Type' => 'application/json',
-            ])->post($url_sistem_lama, $data_ke_sistem_lama);
+            // $response_sistem_lama = Http::withHeaders([
+            //     'api_key' => $apiKey_sistem_lama,
+            //     'Content-Type' => 'application/json',
+            // ])->post($url_sistem_lama, $data_ke_sistem_lama);
 
-            $get_sistem_lama = $response_sistem_lama->json();
+            // $get_sistem_lama = $response_sistem_lama->json();
+
+            try {
+                $transaksi_hq = new TransactionHQ;
+                $transaksi_hq->uuid        = $ref_id;
+                $transaksi_hq->nama        = $user->name;
+                $transaksi_hq->email       = $user->email;
+                $transaksi_hq->panggilan   = $user->name;;
+                $transaksi_hq->kode_nohp   = $user->phone_code ?? 62;
+                $transaksi_hq->nohp        = $user->phone_number;
+                $transaksi_hq->gender      = null;
+                $transaksi_hq->tgllahir    = null;
+                $transaksi_hq->id_agen     = $request->agen ?? 100001;
+                $transaksi_hq->id_event    = 79;
+                $transaksi_hq->total       = 57000;
+                $transaksi_hq->status      = 1;
+                $transaksi_hq->jenis       = 1;
+                $transaksi_hq->save();
+            } catch (\Exception $e) {
+                // jika terjadi error maka tidak perlu dilanjutkan
+            }
 
             $simpan->invoice_id     = date('Ymd') . $simpan->id;
-            $simpan->sistem_lama_id = $get_sistem_lama['data']['id'];
+            $simpan->sistem_lama_id = $transaksi_hq->id;
             $simpan->save();
 
 

@@ -12,6 +12,7 @@ class Transaction extends Model
         'uuid',
         'user_id',
         'kelas_id',
+        'agen_id',
         'invoice_id',
         'sistem_lama_id',
         'id_ipaymu',

@@ -32,6 +32,7 @@
         <x-splade-form action="{{ route('pemesanan.profit.store') }}" class="space-y-4"
             confirm-text="Apakah data yang anda masukkan sudah benar ?" confirm="Konfirmasi" confirm-button="Benar"
             cancel-button="Belum" method="POST">
+            <input type="hidden" name="agen" value="{{ $agen }}">
             @if(Auth::check())
                 <label class="block">
                     <span class="block mb-1 text-gray-700 font-sans"> Nama </span>
@@ -337,7 +338,7 @@
                             </label>
                             <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
                                 <x-splade-radio name="payment_method" value="bmi" class="mr-2" data-fee="3500" data-inis="Bank Muamalat" data-type="virtual_account"/>
-                                <img src="{{ url('/') }}/assets/pembayaran/bmi.png" alt="Bank BCA" class="h-6 mr-2">
+                                <img src="{{ url('/') }}/assets/pembayaran/muamalat.png" alt="Bank BCA" class="h-6 mr-2">
                                 Bank Muamalat
                             </label>
                             <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">

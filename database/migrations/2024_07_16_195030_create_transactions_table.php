@@ -16,6 +16,7 @@ return new class extends Migration
             $table->uuid('uuid'); // session id ipaymu
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('kelas_id');
+            $table->unsignedBigInteger('agen_id')->nullable();
             $table->unsignedBigInteger('invoice_id')->nullable();
             $table->unsignedBigInteger('sistem_lama_id')->nullable();
             $table->string('id_ipaymu');
