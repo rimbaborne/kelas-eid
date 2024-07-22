@@ -75,5 +75,7 @@ Route::middleware('splade')->group(function () {
     Route::get('/transaksi', [TransactionController::class, 'transaksi'])->name('transaksi');
     Route::get('/transaksi/pembayaran', [TransactionController::class, 'pembayaran'])->name('transaksi.pembayaran');
     Route::post('/transaksi/callback', [TransactionController::class, 'callback'])->name('transaksi.callback');
+    Route::post('/transaksi/cancel', [TransactionController::class, 'cancel'])->name('transaksi.cancel');
+    Route::post('/transaksi/selesai', [TransactionController::class, 'selesai'])->name('transaksi.selesai');
 
 });

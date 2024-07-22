@@ -179,9 +179,9 @@ class TransactionController extends Controller
             'qty'            => ['1'],
             'price'          => ['57000'],
             'amount'         => '57000',
-            'returnUrl'      => 'https://kelasentrepreneurid.com/pemesanan/selesai',
-            'cancelUrl'      => 'https://kelasentrepreneurid.com/pemesanan/cancel',
-            'notifyUrl'      => 'https://kelasentrepreneurid.com/pemesanan/callback',
+            'returnUrl'      => 'https://kelasentrepreneurid.com/transaksi/selesai',
+            'cancelUrl'      => 'https://kelasentrepreneurid.com/transaksi/cancel',
+            'notifyUrl'      => 'https://kelasentrepreneurid.com/transaksi/callback',
             'referenceId'    => $ref_id,
             'paymentMethod'  => $method_,
             'paymentChannel' => $channel_,
@@ -450,15 +450,15 @@ Nb : Jika Anda ada pertanyaan, silahkan hubungi Customer Support kami di link in
     }
     public function callback(Request $request){
 
-        $trx_id       = $request->input('trx_id');
-        $status       = $request->input('status');
-        $status_code  = $request->input('status_code');
-        $sid          = $request->input('sid');
+        $trx_id       = $request->trx_id;
+        $status       = $request->status;
+        $status_code  = $request->status_code;
+        $sid          = $request->sid;
 
         $transaction  = Transaction::where('id_ipaymu', $trx_id)->first();
         $user         = User::find($transaction->user_id);
 
-        if ($transaction) {
+        if ($request->status == 'berhasil') {
             $transaction->update([
                 'status_pembayaran_code' => $status_code,
                 'status_pembayaran'      => 'paid',
@@ -520,7 +520,7 @@ Nb : Jika Anda ada pertanyaan, silahkan hubungi Customer Support kami di link in
 
             Mail::to($user->email)->send(new Pemesanan($data));
 
-                return response()->json(['message' => 'Transaksi berhasil diterima.'], 200);
+            return response()->json(['message' => 'Transaksi berhasil diterima.'], 200);
         } else {
 
             $transaction->update([
@@ -529,5 +529,13 @@ Nb : Jika Anda ada pertanyaan, silahkan hubungi Customer Support kami di link in
             ]);
             return response()->json(['message' => 'Transaksi tidak berhasil.'], 404);
         }
+    }
+
+    public function cancel() {
+        return view('pages.cancel');
+    }
+
+    public function selesai() {
+        return view('pages.selesai');
     }
 }
