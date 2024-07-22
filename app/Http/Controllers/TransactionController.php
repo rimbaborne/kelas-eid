@@ -152,14 +152,14 @@ class TransactionController extends Controller
         // Auth::login($user);
 
 
-        // $va           = '1179001364818964'; //get on iPaymu dashboard
-        // $apiKey       = '516A6C4F-D5F7-4D3B-AC26-18FFFEEF3B87'; //get on iPaymu dashboard
+        $va           = '1179001364818964'; //get on iPaymu dashboard
+        $apiKey       = '516A6C4F-D5F7-4D3B-AC26-18FFFEEF3B87'; //get on iPaymu dashboard
 
-        $va           = '0000008125144744'; //get on iPaymu dashboard
-        $apiKey       = 'SANDBOXDF3E6F1F-5E4A-44EF-9EDB-98D7BD737DAA'; //get on iPaymu dashboard
+        // $va           = '0000008125144744'; //get on iPaymu dashboard
+        // $apiKey       = 'SANDBOXDF3E6F1F-5E4A-44EF-9EDB-98D7BD737DAA'; //get on iPaymu dashboard
 
-        $url          = 'https://sandbox.ipaymu.com/api/v2/payment/direct'; // for development mode
-        // $url          = 'https://my.ipaymu.com/api/v2/payment'; // for production mode
+        // $url          = 'https://sandbox.ipaymu.com/api/v2/payment/direct'; // for development mode
+        $url          = 'https://my.ipaymu.com/api/v2/payment'; // for production mode
 
         $method       = 'POST'; //method
 
@@ -177,8 +177,8 @@ class TransactionController extends Controller
         $body    = [
             'product'        => ['Kelas Profit 10 Juta'],
             'qty'            => ['1'],
-            'price'          => ['57000'],
-            'amount'         => '57000',
+            'price'          => ['10000'],
+            'amount'         => '10000',
             'returnUrl'      => 'https://kelasentrepreneurid.com/transaksi/selesai',
             'cancelUrl'      => 'https://kelasentrepreneurid.com/transaksi/cancel',
             'notifyUrl'      => 'https://kelasentrepreneurid.com/transaksi/callback',
