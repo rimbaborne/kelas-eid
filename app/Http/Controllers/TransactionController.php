@@ -224,47 +224,23 @@ class TransactionController extends Controller
         $status_api = $response->json();
 
         if ($status_api['Status'] == 200) {
-            $transactionId = $status_api['Data']['TransactionId'];
-
-            $body_c    = [
-                'transactionId' => $transactionId,
-                'account' => $va
-            ];
-
-            $jsonBody     = json_encode($body_c, JSON_UNESCAPED_SLASHES);
-            $requestBody  = strtolower(hash('sha256', $jsonBody));
-            $stringToSign = strtoupper($method) . ':' . $va . ':' . $requestBody . ':' . $apiKey;
-            $signature_   = hash_hmac('sha256', $stringToSign, $apiKey);
-            $timestamp_   = Date('YmdHis');
-
-            $response = Http::withHeaders([
-                'Content-Type' => 'application/json',
-                'signature'    => $signature_,
-                'va'           => $va,
-                'timestamp'    => $timestamp_,
-            ])->post('https://my.ipaymu.com/api/v2/transaction', [
-                'transactionId' => $transactionId,
-                'account'       => $va
-            ]);
-
-            $cek = $response->json();
 
             $simpan = Transaction::create([
-                'uuid'              => $cek['Data']['SessionId'],
+                'uuid'              => $status_api['Data']['SessionId'],
                 'user_id'           => $user->id,
                 'kelas_id'          => 1,
                 'agen_id'           => $agen ?? 100001,
-                'id_ipaymu'         => $cek['Data']['TransactionId'],
+                'id_ipaymu'         => $status_api['Data']['TransactionId'],
                 'subtotal'          => 57000,
-                'fee'               => $cek['Data']['Fee'],
-                'total'             => $cek['Data']['Amount'],
-                'batas_bayar'       => $cek['Data']['ExpiredDate'],
+                'fee'               => $status_api['Data']['Fee'],
+                'total'             => $status_api['Data']['Fee']+$status_api['Data']['Total'],
+                'batas_bayar'       => $status_api['Data']['Expired'],
                 'via'               => $method_,
-                'channel'           => $cek['Data']['PaymentChannel'],
-                'payment_number'    => $cek['Data']['PaymentCode'],
-                'payment_name'      => $cek['Data']['PaymentName'],
-                'status_desc'       => $cek['Data']['StatusDesc'],
-                'status_pembayaran' => $cek['Data']['PaidStatus'],
+                'channel'           => $status_api['Data']['Channel'],
+                'payment_number'    => $status_api['Data']['PaymentNo'],
+                'payment_name'      => $status_api['Data']['PaymentName'],
+                'status_desc'       => 'Menunggu Pembayaran',
+                'status_pembayaran' => 'unpaid',
                 'qris_string'       => $status_api['Data']['QrString'] ?? null,
                 'qris_nmid'         => $status_api['Data']['NMID'] ?? null,
             ]);
