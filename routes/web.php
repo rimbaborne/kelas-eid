@@ -12,6 +12,8 @@ use App\Http\Controllers\TransactionController;
 use App\Domain\Website\Controllers\WebController;
 
 Route::get("/", [WebController::class, "home"])->name("website.home");
+Route::post('/transaksi/callback', [TransactionController::class, 'callback'])->name('transaksi.callback');
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -74,8 +76,7 @@ Route::middleware('splade')->group(function () {
 
     Route::get('/transaksi', [TransactionController::class, 'transaksi'])->name('transaksi');
     Route::get('/transaksi/pembayaran', [TransactionController::class, 'pembayaran'])->name('transaksi.pembayaran');
-    Route::post('/transaksi/callback', [TransactionController::class, 'callback'])->name('transaksi.callback');
-    Route::post('/transaksi/cancel', [TransactionController::class, 'cancel'])->name('transaksi.cancel');
-    Route::post('/transaksi/selesai', [TransactionController::class, 'selesai'])->name('transaksi.selesai');
+    Route::get('/transaksi/cancel', [TransactionController::class, 'cancel'])->name('transaksi.cancel');
+    Route::get('/transaksi/selesai', [TransactionController::class, 'selesai'])->name('transaksi.selesai');
 
 });
