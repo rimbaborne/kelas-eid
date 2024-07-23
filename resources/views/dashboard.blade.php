@@ -8,7 +8,13 @@
             <div class="container px-5 py-5 mx-auto border border-gray-200 rounded-lg">
               <div class="lg:w-2/3 flex flex-col sm:flex-row sm:items-center items-start mx-auto">
                 <h1 class="flex-grow sm:pr-16 text-xl font-medium title-font text-gray-900">Halo, Selamat belajar di entrepreneurID.</h1>
-
+                <div class="gap-4 pb-2 items-center justify-center flex">
+                    <Link href="{{ route('dashboard.data') }}" target="_blank"
+                        class="text-white mt-2 sm:mt-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-1.5 md:py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+                        >
+                        Lihat Kelas
+                </Link>
+                </div>
               </div>
             </div>
           </section>
