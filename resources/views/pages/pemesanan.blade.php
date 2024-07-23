@@ -342,11 +342,11 @@
                     <div class="mb-4">
                         <h3 class="text-lg font-semibold mb-2">Virtual Account (VA)</h3>
                         <div class="space-y-2">
-                            <label class="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                            {{-- <label class="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
                                 <x-splade-radio name="payment_method" value="bsi" class="mr-2" data-fee="3500" data-inis="Bank BSI" data-type="virtual_account"/>
                                 <img src="{{ url('/') }}/assets/pembayaran/bsi.png" alt="Bank BCA" class="h-6 mr-2">
                                 Bank BSI
-                            </label>
+                            </label> --}}
                             <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
                                 <x-splade-radio name="payment_method" value="bmi" class="mr-2" data-fee="3500" data-inis="Bank Muamalat" data-type="virtual_account"/>
                                 <img src="{{ url('/') }}/assets/pembayaran/muamalat.png" alt="Bank BCA" class="h-6 mr-2">
