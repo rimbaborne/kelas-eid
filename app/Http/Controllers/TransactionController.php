@@ -233,7 +233,7 @@ class TransactionController extends Controller
                 'id_ipaymu'         => $status_api['Data']['TransactionId'],
                 'subtotal'          => 57000,
                 'fee'               => $status_api['Data']['Fee'],
-                'total'             => $status_api['Data']['Fee']+$status_api['Data']['Total'],
+                'total'             => $status_api['Data']['Total'],
                 'batas_bayar'       => $status_api['Data']['Expired'],
                 'via'               => $method_,
                 'channel'           => $status_api['Data']['Channel'],
