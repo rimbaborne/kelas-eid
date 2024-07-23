@@ -331,7 +331,7 @@
                         <h3 class="text-lg font-semibold mb-2">QR Code</h3>
                         <div class="space-y-2">
                             <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
-                                <x-splade-radio name="payment_method" value="qris" class="mr-2" data-fee="{{ 57000 * 0.007 }}" data-inis="QRIS"/>
+                                <x-splade-radio name="payment_method" value="qris" class="mr-2" data-fee="399" data-inis="QRIS"/>
                                 <img src="{{ url('/') }}/assets/pembayaran/qris.svg" alt="QRIS"
                                     class="h-6 mr-2">
                                 QRIS
