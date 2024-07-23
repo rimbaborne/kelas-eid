@@ -8,7 +8,7 @@
           </Link>
     </li>
     <li class="border-b border-gray-200 hover:bg-gray-100">
-        <Link href="{{ route('data') }}" class="flex items-center space-x-4 p-4 block {{ request()->routeIs('data') ? 'bg-slate-50 text-primary-600' : '' }}">
+        <Link href="{{ route('dashboard.data') }}" class="flex items-center space-x-4 p-4 block {{ request()->routeIs('data') ? 'bg-slate-50 text-primary-600' : '' }}">
             <x-carbon-data-1 class="w-6 h-6 {{ request()->routeIs('data') ? 'text-primary-600' : '' }}"/>
             <div>
                 <h6 class="text-sm font-semibold dark:text-white {{ request()->routeIs('data') ? 'text-primary-600' : 'text-gray-900' }}">Data</h6>
@@ -16,7 +16,7 @@
           </Link>
     </li>
     <li class="border-gray-200 hover:bg-gray-100">
-        <Link href="{{ route('pembayaran') }}" class="flex items-center space-x-4 p-4 block {{ request()->routeIs('pembayaran') ? 'bg-slate-50 text-primary-600' : '' }}">
+        <Link href="{{ route('dashboard.pembayaran') }}" class="flex items-center space-x-4 p-4 block {{ request()->routeIs('pembayaran') ? 'bg-slate-50 text-primary-600' : '' }}">
             <x-carbon-money class="w-6 h-6 {{ request()->routeIs('pembayaran') ? 'text-primary-600' : '' }}"/>
             <div>
                 <h6 class="text-sm font-semibold dark:text-white {{ request()->routeIs('pembayaran') ? 'text-primary-600' : 'text-gray-900' }}">Pembayaran</h6>

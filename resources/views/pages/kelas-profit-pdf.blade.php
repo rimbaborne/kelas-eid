@@ -18,20 +18,19 @@
                 <!-- Konten untuk grid 3/4 -->
                 <div class="h-full p-6 flex-1 bg-white divide-y rounded-lg divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                     <div class="text-3xl font-bold pb-3">
-                        Judul
+                        {{ $judul }}
                     </div>
-                    <div class="py-4">
-                        <a href="{{ url('/') }}/pdf/skripsi.pdf" download class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                    <div class="py-4 flex items-center justify-between">
+                        <a href="{{ url('/') }}/download/kelas-profit-10-juta/{{ $file }}.pdf" download class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                             Download File
                         </a>
-                    </div>
-                    <div class="py-4">
-                        <button onclick="toggleFullScreen()" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+
+                        <button onclick="toggleFullScreen()" class=" border border-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                             Full Screen
                         </button>
                     </div>
                     <div class="aspect-[16/9]">
-                        <iframe id="pdfViewer" class="h-full w-full rounded-lg" src="{{ url('/') }}/pdf/skripsi.pdf" title="PDF viewer" frameborder="0" allow="fullscreen"></iframe>
+                        <iframe id="pdfViewer" class="h-full w-full rounded-lg" src="{{ $pdf_ }}" title="PDF viewer" frameborder="0" allow="fullscreen"></iframe>
                     </div>
                 </div>
 

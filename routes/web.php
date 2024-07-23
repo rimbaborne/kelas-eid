@@ -11,6 +11,7 @@ use iPaymu\iPaymu;
 use App\Http\Controllers\TransactionController;
 use App\Domain\Website\Controllers\WebController;
 use App\Http\Middleware\VerifyCsrfToken;
+use App\Http\Controllers\DashboardController;
 
 Route::get("/", [WebController::class, "home"])->name("website.home");
 Route::post('/transaksi/callback', [TransactionController::class, 'callback'])->name('transaksi.callback');
@@ -44,13 +45,9 @@ Route::middleware('splade')->group(function () {
             return view('dashboard');
         })->name('dashboard');
 
-        Route::get('/dashboard/data', function () {
-            return view('dashboard');
-        })->name('dashboard.data');
+        Route::get('/dashboard/data', [DashboardController::class, 'data'])->name('dashboard.data');
 
-        Route::get('/dashboard/pembayaran', function () {
-            return view('dashboard');
-        })->name('dashboard.pembayaran');
+        Route::get('/dashboard/pembayaran', [DashboardController::class, 'pembayaran'])->name('dashboard.pembayaran');
 
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -60,6 +57,10 @@ Route::middleware('splade')->group(function () {
         Route::get('/data', function () {
             return view('pages.data');
         })->name('data');
+
+        Route::get('/kelas/kelas-profit-10-juta', [KelasController::class, 'profit'])->name('kelas.profit');
+        Route::get('/kelas/kelas-profit-10-juta/1', [KelasController::class, 'profit_1'])->name('kelas.profit.1');
+        Route::get('/kelas/kelas-profit-10-juta/pdf/{link}', [KelasController::class, 'profit_pdf']);
 
     });
 
@@ -72,10 +73,7 @@ Route::middleware('splade')->group(function () {
         return view('pages.kelas');
     })->name('kelas');
 
-    Route::get('/kelas/kelas-profit-10-juta', [KelasController::class, 'profit'])->name('kelas.profit');
-    Route::get('/kelas/kelas-profit-10-juta/1', [KelasController::class, 'profit_1'])->name('kelas.profit.1');
-    Route::get('/kelas/kelas-profit-10-juta/2', [KelasController::class, 'profit_2'])->name('kelas.profit.2');
-    Route::get('/kelas/kelas-profit-10-juta/3', [KelasController::class, 'profit_3'])->name('kelas.profit.3');
+
 
 
     Route::get('/pemesanan/kelas-profit-10-juta/', [TransactionController::class, 'pemesanan_kelasprofit'])->name('pemesanan');
