@@ -10,10 +10,10 @@
     </button>
     <ul id="dropdown-playground-1" class="space-y-2 py-2">
         <li>
-            <Link href="{{ url('/') }}/kelas/kelas-profit-10-juta/1" class="text-base ml-4 text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-400 transition duration-75 dark:text-gray-200 dark:hover:bg-gray-700 {{ request()->is('kelas/kelas-profit-10-juta/1') ? 'bg-slate-200' : '' }}">
+            <a href="{{ url('/') }}/kelas/kelas-profit-10-juta/1" class="text-base ml-4 text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-400 transition duration-75 dark:text-gray-200 dark:hover:bg-gray-700 {{ request()->is('kelas/kelas-profit-10-juta/1') ? 'bg-slate-200' : '' }}">
                 <x-carbon-triangle-right-solid class="w-2 h-2 mx-4" />
                 Video Pembelajaran
-            </Link>
+            </a>
         </li>
     </ul>
 </li>
@@ -43,12 +43,12 @@
     <ul id="dropdown-playground-2" class="space-y-2 py-2">
         @foreach ($data_pdf as $pdf)
             <li>
-                <Link href="{{ url('/') }}/kelas/kelas-profit-10-juta/pdf/{{ $pdf['link'] }}"
+                <a href="{{ url('/') }}/kelas/kelas-profit-10-juta/pdf/{{ $pdf['link'] }}"
                     class="text-base ml-4 text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-400 transition duration-75 dark:text-gray-200 dark:hover:bg-gray-700
                             {{ request()->is('kelas/kelas-profit-10-juta/pdf/'.$pdf['link']) ? 'bg-slate-200' : '' }}">
                     <x-carbon-triangle-right-solid class="w-2 h-2 mx-4" />
                     {{ $pdf['nama'] }}
-                </Link>
+                </a>
             </li>
         @endforeach
     </ul>

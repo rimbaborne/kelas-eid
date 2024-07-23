@@ -69,8 +69,8 @@
         <!-- Responsive Navigation Menu -->
         <div v-bind:class="{ block: toggled, hidden: !toggled }" class="sm:hidden">
             <div class="pt-2 pb-3 space-y-1">
-                <x-responsive-nav-link href="{{ url('/') }}" >
-                    {{ __('Home') }}
+                <x-responsive-nav-link href="{{ url('/dashboard') }}" >
+                    {{ __('Dashboard') }}
                 </x-responsive-nav-link>
             </div>
 

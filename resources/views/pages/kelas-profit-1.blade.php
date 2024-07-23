@@ -12,8 +12,8 @@
                 </ul>
             </div>
         </div>
-        <div class="w-full lg:w-3/4 p-4 order-1 lg:order-2 mb-4">
-            <div class="bg-white rounded-lg shadow-md p-4 dark:bg-gray-800">
+        <div class="w-full lg:w-3/4 md:p-4 order-1 lg:order-2 mb-4">
+            <div class="bg-white rounded-lg shadow-md md:p-4 dark:bg-gray-800">
                 <!-- Konten untuk grid 3/4 -->
                 <div class="h-full p-6 flex-1 bg-white divide-y rounded-lg divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                     <div class="text-3xl font-bold pb-3">

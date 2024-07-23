@@ -7,10 +7,8 @@
         <section class="text-gray-600 body-font">
             <div class="container px-5 py-5 mx-auto border border-gray-200 rounded-lg">
               <div class="lg:w-2/3 flex flex-col sm:flex-row sm:items-center items-start mx-auto">
-                <h1 class="flex-grow sm:pr-16 text-xl font-medium title-font text-gray-900">Cek program kelas dari entrepreneurID.</h1>
-                <Link href="{{ route('kelas') }}" class="flex items-center text-white bg-primary-500 border-0 py-2 px-4 focus:outline-none hover:bg-primary-600 rounded-lg text-lg mt-2 sm:mt-0">
-                    Cek <x-carbon-arrow-right class="pl-4 w-10 h-10" />
-                </Link>
+                <h1 class="flex-grow sm:pr-16 text-xl font-medium title-font text-gray-900">Halo, Selamat belajar di entrepreneurID.</h1>
+
               </div>
             </div>
           </section>

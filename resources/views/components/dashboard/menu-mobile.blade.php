@@ -12,10 +12,10 @@
             <span class="text-md">Data</span>
         </Link>
         <!-- Informasi Button -->
-        <Link href="{{ route('dashboard.pembayaran') }}" class="flex flex-col items-center justify-center p-2 pt-3 {{ request()->routeIs('dashboard.pembayaran') ? 'text-primary-600' : 'text-gray-600' }} hover:bg-gray-100 hover:text-primary-600">
+        {{-- <Link href="{{ route('dashboard.pembayaran') }}" class="flex flex-col items-center justify-center p-2 pt-3 {{ request()->routeIs('dashboard.pembayaran') ? 'text-primary-600' : 'text-gray-600' }} hover:bg-gray-100 hover:text-primary-600">
             <x-carbon-money class="w-6 h-6 mb-1 {{ request()->routeIs('dashboard.pembayaran') ? 'text-primary-600' : '' }}"/>
             <span class="text-md">Pembayaran</span>
-        </Link>
+        </Link> --}}
         <!-- Akun Button -->
         <Link href="{{ route('profile.edit') }}" class="flex flex-col items-center justify-center p-2 pt-3 {{ request()->routeIs('profile.edit') ? 'text-primary-600' : 'text-gray-600' }} hover:bg-gray-100 hover:text-primary-600">
             <x-carbon-user-profile class="w-6 h-6 mb-1 {{ request()->routeIs('profile.edit') ? 'text-primary-600' : '' }}"/>

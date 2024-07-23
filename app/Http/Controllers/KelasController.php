@@ -64,8 +64,8 @@ class KelasController extends BaseController
                 $file =  'entrepreneurID - Mulai dari Awal Lagi';
                 $pdf_ = 'https://drive.google.com/file/d/1pnqGmp7FeHx6cW_ZFAPp-m4ANvPcfA1E/preview';
             } elseif($link == 3) {
-                $judul =  '7 Ide Bisnis Puluhan Juta';
-                $file =  'entrepreneurID - 7 Ide Bisnis Puluhan Juta';
+                $judul =  '7 Ide Bisnis Puluan Juta';
+                $file =  'entrepreneurID - 7 Ide Bisnis Puluan Juta';
                 $pdf_ = 'https://drive.google.com/file/d/15lAN1JK-oJbu0xQ5Ri4JKmKCC5B6tZ6r/preview';
             } elseif($link == 4) {
                 $judul =  'Jangan Dulu Bisnis Sebelum Punya Ini';
@@ -84,8 +84,8 @@ class KelasController extends BaseController
                 $file =  'entrepreneurID - Rahasia Jualan Anti Gagal';
                 $pdf_ = 'https://drive.google.com/file/d/1ZxQ75M_1TpamocVzKVP_yVL4v16kjy5w/preview';
             } elseif($link == 8) {
-                $judul =  'Cara Konsiten Tanpa Tekanan';
-                $file =  'entrepreneurID - Cara Konsiten Tanpa Tekanan';
+                $judul =  'Cara Konsisten Tanpa Tekanan';
+                $file =  'entrepreneurID - Cara Konsisten Tanpa Tekanan';
                 $pdf_ = 'https://drive.google.com/file/d/1SpJQDQFWIlif_gEy3yPKm-2CBA7y9Tn7/preview';
             } elseif($link == 9) {
                 $judul =  'Waktu Pilihan Allah';
