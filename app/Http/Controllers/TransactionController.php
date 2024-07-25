@@ -219,7 +219,7 @@ class TransactionController extends Controller
             'va' => $va,
             'signature' => $signature,
             'timestamp' => $timestamp,
-        ])->post($url, $body);
+        ])->timeout(60)->post($url, $body);
 
         $status_api = $response->json();
 
@@ -244,25 +244,28 @@ class TransactionController extends Controller
                 'qris_string'       => $status_api['Data']['QrString'] ?? null,
                 'qris_nmid'         => $status_api['Data']['NMID'] ?? null,
             ]);
-            // try {
-            //     $transaksi_hq = new TransactionHQ;
-            //     $transaksi_hq->uuid        = $ref_id;
-            //     $transaksi_hq->nama        = $user->name;
-            //     $transaksi_hq->email       = $user->email;
-            //     $transaksi_hq->panggilan   = $user->name;;
-            //     $transaksi_hq->kode_nohp   = $user->phone_code ?? 62;
-            //     $transaksi_hq->nohp        = $user->phone_number;
-            //     $transaksi_hq->gender      = null;
-            //     $transaksi_hq->tgllahir    = null;
-            //     $transaksi_hq->id_agen     = $request->agen ?? 100001;
-            //     $transaksi_hq->id_event    = 79;
-            //     $transaksi_hq->total       = 57000;
-            //     $transaksi_hq->status      = 1;
-            //     $transaksi_hq->jenis       = 1;
-            //     $transaksi_hq->save();
-            // } catch (\Exception $e) {
-            //     // jika terjadi error maka tidak perlu dilanjutkan
-            // }
+            try {
+                $transaksi_hq = new TransactionHQ;
+                $transaksi_hq->uuid        = $ref_id;
+                $transaksi_hq->nama        = $user->name;
+                $transaksi_hq->email       = $user->email;
+                $transaksi_hq->panggilan   = $user->name;;
+                $transaksi_hq->kode_nohp   = $user->phone_code ?? 62;
+                $transaksi_hq->nohp        = $user->phone_number;
+                $transaksi_hq->gender      = null;
+                $transaksi_hq->tgllahir    = null;
+                $transaksi_hq->id_agen     = $request->agen ?? 100001;
+                $transaksi_hq->id_event    = 79;
+                $transaksi_hq->total       = 57000;
+                $transaksi_hq->status      = 1;
+                $transaksi_hq->jenis       = 1;
+                $transaksi_hq->save();
+            } catch (\Exception $e) {
+                // jika terjadi error maka tidak perlu dilanjutkan
+            } finally {
+                // Menambahkan waktu timeout jika perlu
+                Http::timeout(60);
+            }
 
             $simpan->invoice_id     = date('Ymd') . $simpan->id;
             $simpan->sistem_lama_id = null;
