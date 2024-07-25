@@ -13,6 +13,8 @@ use App\Domain\Website\Controllers\WebController;
 use App\Http\Middleware\VerifyCsrfToken;
 use App\Http\Controllers\DashboardController;
 
+Route::get("/", [WebController::class, "home"])->name("website.home");
+
 Route::post('/transaksi/callback', [TransactionController::class, 'callback'])->name('transaksi.callback');
 
 /*
@@ -39,7 +41,6 @@ Route::middleware('splade')->group(function () {
     // Registers routes to support async File Uploads with Filepond...
     Route::spladeUploads();
 
-    Route::get("/", [WebController::class, "home"])->name("website.home");
 
 
     Route::middleware('auth')->group(function () {
