@@ -37,7 +37,7 @@
                     class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                     Daftar
                 </Link> --}}
-                @if(Auth::check())
+                {{-- @if(Auth::check())
                     <Link href="{{ url('/dashboard') }}"
                     class="inline-flex justify-center items-center py-3 px-5 text-base font-bold text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
                         Dashboard
@@ -59,7 +59,7 @@
                                     clip-rule="evenodd"></path>
                             </svg>
                     </Link>
-                @endif
+                @endif --}}
             </div>
         </div>
     </section>
