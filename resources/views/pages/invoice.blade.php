@@ -225,19 +225,6 @@
                         </div>
                     </div>
                 </div>
-
-
-                <div class="mt-8 sm:mt-12">
-                    <h4 class="text-lg font-semibold text-gray-800 dark:text-neutral-200">Terima Kasih !</h4>
-                    <p class="text-gray-500 text-sm dark:text-neutral-500">
-                        Semoga produk kami dapat membantu dalam kehidupan bisnis Anda.
-                    </p>
-                    <div class="">
-                        <p class="block text-sm  text-gray-500 dark:text-neutral-200">kelasentrepreneurid.com</p>
-                        {{-- <p class="block text-sm  text-gray-800 dark:text-neutral-200">+1 (062) 109-9222</p> --}}
-                    </div>
-                </div>
-
             </div>
             <!-- End Card -->
 
