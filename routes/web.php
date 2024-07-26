@@ -13,7 +13,6 @@ use App\Domain\Website\Controllers\WebController;
 use App\Http\Middleware\VerifyCsrfToken;
 use App\Http\Controllers\DashboardController;
 
-Route::get("/", [WebController::class, "home"])->name("website.home");
 
 Route::post('/transaksi/callback', [TransactionController::class, 'callback'])->name('transaksi.callback');
 
@@ -29,6 +28,8 @@ Route::post('/transaksi/callback', [TransactionController::class, 'callback'])->
 */
 
 Route::middleware('splade')->group(function () {
+    Route::get("/", [WebController::class, "home"])->name("website.home");
+
     // Registers routes to support the interactive components...
     Route::spladeWithVueBridge();
 

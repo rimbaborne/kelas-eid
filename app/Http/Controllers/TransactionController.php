@@ -94,7 +94,7 @@ class TransactionController extends Controller
                 }
             }
         }
-        return view('pages.pemesanan', compact('agen'));
+        return view('pages.pemesanan-tutup', compact('agen'));
     }
     public function pemesanan_kelasprofit_store($agen, Request $request)
     {
