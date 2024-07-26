@@ -67,20 +67,20 @@
         <li>
             <a href="https://api.whatsapp.com/send?phone=6281348119393" target="_blank" class="text-base ml-4 text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-400 transition duration-75 dark:text-gray-200 dark:hover:bg-gray-700">
                 <x-carbon-triangle-right-solid class="w-2 h-2 mx-4" />
-                Konsultasi (Link chat WA)
+                Chat Konsultasi
             </a>
         </li>
 
         <li>
             <a href="https://api.whatsapp.com/send?phone=6285787572580" target="_blank" class="text-base ml-4 text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-400 transition duration-75 dark:text-gray-200 dark:hover:bg-gray-700">
                 <x-carbon-triangle-right-solid class="w-2 h-2 mx-4" />
-                Customer Care (Link chat WA)
+                Chat Customer Care
             </a>
         </li>
         <li>
             <a href="https://chat.whatsapp.com/Ldun5GaGtEW8Tp9KQIcVqL" target="_blank" class="text-base ml-4 text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-400 transition duration-75 dark:text-gray-200 dark:hover:bg-gray-700">
                 <x-carbon-triangle-right-solid class="w-2 h-2 mx-4" />
-                Tips Bisnis Mingguan (Link ke WA)
+                Tips Bisnis Gratis Mingguan Di WA
             </a>
         </li>
     </ul>
