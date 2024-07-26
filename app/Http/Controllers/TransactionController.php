@@ -280,7 +280,7 @@ Masa berlaku invoice ini hanya sampai '.$simpan->batas_bayar.'
 
 Salam,
 
-Tim entrepreneurID
+*Tim entrepreneurID*
 
 Nb : Jika Anda ada pertanyaan, silahkan balas chat ini. 🙂';
 
@@ -476,7 +476,7 @@ Semoga ini jadi wasilah untuk pertumbuhan bisnis Anda, aamiin. 🤲
 
 Salam,
 
-Tim entrepreneurID
+*Tim entrepreneurID*
 
 Nb : Jika Anda mengalami kendala saat mengakses materinya, silahkan hubungi Customer Support kami di link ini ➡️ bit.ly/CS-eID';
 
