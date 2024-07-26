@@ -62,6 +62,10 @@ Route::middleware('splade')->group(function () {
             return view('pages.data');
         })->name('data');
 
+        Route::get('/kelas', function () {
+            return redirect()->route('dashboard');
+        });
+
         Route::get('/kelas/kelas-profit-10-juta', [KelasController::class, 'profit'])->name('kelas.profit');
         Route::get('/kelas/kelas-profit-10-juta/1', [KelasController::class, 'profit_1'])->name('kelas.profit.1');
         Route::get('/kelas/kelas-profit-10-juta/pdf/{link}', [KelasController::class, 'profit_pdf']);
