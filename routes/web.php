@@ -12,6 +12,8 @@ use App\Http\Controllers\TransactionController;
 use App\Domain\Website\Controllers\WebController;
 use App\Http\Middleware\VerifyCsrfToken;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AgenController;
+use App\Http\Controllers\AdminController;
 
 
 Route::post('/transaksi/callback', [TransactionController::class, 'callback'])->name('transaksi.callback');
@@ -66,11 +68,36 @@ Route::middleware('splade')->group(function () {
             return redirect()->route('dashboard');
         });
 
+        Route::middleware('role:admin')->group(function () {
+            Route::get('admin/transaksi', [AdminController::class, 'transaksi'])->name('admin.transaksi');
+            Route::get('admin/transaksi/{id}', [AdminController::class, 'transaksi_show'])->name('admin.transaksi.show');
+            Route::get('admin/peserta', [AdminController::class, 'peserta'])->name('admin.peserta');
+            Route::get('admin/peserta/{id}', [AdminController::class, 'peserta_show'])->name('admin.peserta.show');
+            Route::put('admin/peserta/update{id}', [AdminController::class, 'peserta_update'])->name('admin.peserta.update');
+            Route::get('admin/user', [AdminController::class, 'user'])->name('admin.user');
+            Route::get('admin/user/{id}', [AdminController::class, 'user_show'])->name('admin.user.show');
+            Route::put('admin/user/update{id}', [AdminController::class, 'user_update'])->name('admin.user.update');
+
+        });
+
+        Route::middleware('role:agen-plus')->group(function () {
+            Route::get('agen/plus', [AgenController::class, 'agen_plus'])->name('agen.plus');
+            Route::get('agen/plus/create', [AgenController::class, 'agen_plus_create'])->name('agen.plus.create');
+            Route::get('agen/plus/{kelas}', [AgenController::class, 'agen_plus_kelas'])->name('agen.plus.kelas');
+            Route::post('agen/plus/{kelas}', [AgenController::class, 'agen_plus_kelas_store'])->name('agen.plus.kelas.store');
+            Route::get('agen/plus/{kelas}/peserta/{id}', [AgenController::class, 'agen_plus_kelas_peserta'])->name('agen.plus.peserta');
+            Route::put('agen/plus/{kelas}/peserta/{id}', [AgenController::class, 'agen_plus_kelas_peserta_update'])->name('agen.plus.peserta.update');
+        });
+
         Route::get('/kelas/kelas-profit-10-juta', [KelasController::class, 'profit'])->name('kelas.profit');
         Route::get('/kelas/kelas-profit-10-juta/1', [KelasController::class, 'profit_1'])->name('kelas.profit.1');
         Route::get('/kelas/kelas-profit-10-juta/pdf/{link}', [KelasController::class, 'profit_pdf']);
 
+
+
     });
+
+
 
     require __DIR__.'/auth.php';
 

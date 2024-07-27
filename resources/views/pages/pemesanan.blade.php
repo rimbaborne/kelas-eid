@@ -22,9 +22,14 @@
                         <h1 class="text-xl font-semibold text-gray-900 hover:underline dark:text-white">
                             Kelas Profit 10 Juta
                         </h1>
-                        <h1 class="text-lg font-semibold text-gray-900 hover:underline dark:text-white">
-                            Rp. 57.000
-                        </h1>
+                        <div class="space-y-0">
+                            <h1 class="text-lg font-normal text-primary-900 hover:underline dark:text-white">
+                                <strike>Rp. 123.000</strike>
+                            </h1>
+                            <h1 class="text-xl font-semibold text-gray-900 hover:underline dark:text-white">
+                                Rp. 57.000
+                            </h1>
+                        </div>
                     </div>
                 </div>
             </div>
