@@ -95,7 +95,7 @@ class AgenController extends Controller
                 $peserta = Peserta::create([
                     'user_id' => $user->id,
                     'kelas_id' => 1,
-                    'agen_id' => auth()->user()->agen->id,
+                    'agen_id' => auth()->user()->id,
                 ]);
 
                 $isiwa = 'Halo '.$user->name.',
@@ -127,8 +127,14 @@ Nb : Jika Anda mengalami kendala saat mengakses materinya, silahkan hubungi Cust
                 Toast::title('Berhasil Ditambahkan !')->autoDismiss(5);
                 return response()->json('Berhasil Di Tambahkan '. $peserta);
             } else {
-                Toast::danger('Terjadi Kesalahan. Email/No WA Sudah Terdata')->autoDismiss(5);
-                return response()->json($request);
+                $peserta = Peserta::create([
+                    'user_id' => $user->id,
+                    'kelas_id' => 1,
+                    'agen_id' => auth()->user()->id,
+                ]);
+
+                Toast::title('User Terdaftar. Berhasil Ditambahkan Di Kelas')->autoDismiss(5);
+                return response()->json('Berhasil Di Tambahkan '. $peserta);
             }
     }
 

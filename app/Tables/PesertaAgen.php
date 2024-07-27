@@ -36,9 +36,8 @@ class PesertaAgen extends AbstractTable
      */
     public function for()
     {
-        if(auth()->user()->agen) {
-            return Peserta::query()->where('agen_id', auth()->user()->agen->id);
-        }
+        return Peserta::query()->where('agen_id', auth()->user()->id);
+
     }
 
     /**
