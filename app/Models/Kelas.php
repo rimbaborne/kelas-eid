@@ -12,8 +12,21 @@ class Kelas extends Model
 
     protected $fillable = [
         'nama',
+        'slug',
+        'harga_coret',
+        'harga',
+        'komisi_agen',
+        'komisi_sub_agen',
+        'gambar',
+        'link',
         'tampil',
         'aktif',
+        'mulai_event',
+        'akhir_event',
     ];
 
+    protected $casts = [
+        'mulai_event' => 'datetime',
+        'akhir_event' => 'datetime',
+    ];
 }

@@ -14,8 +14,17 @@ return new class extends Migration
         Schema::create('kelas', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->boolean('tampil'); // ditampilkan di halaman web
-            $table->boolean('aktif'); // pemesanan
+            $table->string('slug')->unique();
+            $table->integer('harga_coret')->nullable();
+            $table->integer('harga')->nullable();
+            $table->integer('komisi_agen')->nullable();
+            $table->integer('komisi_sub_agen')->nullable();
+            $table->string('gambar')->nullable();
+            $table->string('link')->nullable();
+            $table->boolean('tampil')->default(1); // ditampilkan di halaman web
+            $table->boolean('aktif')->default(1); // pemesanan
+            $table->timestamp('mulai_event')->nullable();
+            $table->timestamp('akhir_event')->nullable();
             $table->timestamps();
         });
     }
