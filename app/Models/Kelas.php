@@ -19,6 +19,7 @@ class Kelas extends Model
         'komisi_sub_agen',
         'gambar',
         'link',
+        'data',
         'tampil',
         'aktif',
         'mulai_event',

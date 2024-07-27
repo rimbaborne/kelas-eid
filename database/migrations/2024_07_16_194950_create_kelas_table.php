@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('link')->nullable();
             $table->boolean('tampil')->default(1); // ditampilkan di halaman web
             $table->boolean('aktif')->default(1); // pemesanan
+            $table->json('data')->nullable();
             $table->timestamp('mulai_event')->nullable();
             $table->timestamp('akhir_event')->nullable();
             $table->timestamps();
