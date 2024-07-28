@@ -155,10 +155,7 @@ Nb : Jika Anda mengalami kendala saat mengakses materinya, silahkan hubungi Cust
                 return redirect()->back();
             } else {
                 $peserta = null;
-                $cekuser = User::where('email', 'admin@kelasentrepreneurid.com')
-                                ->orWhere('phone_number', '8125144744')
-                                ->first();
-                if (!$cekuser) {
+                if ($user->email != 'admin@kelasentrepreneurid.com'  || $user->phone_number != '8125144744' ) {
                     try {
                         $transaksi_hq = new TransactionHQ;
                         $transaksi_hq->uuid        = Str::uuid();
