@@ -20,7 +20,7 @@
                         Mind Map
                     </div>
                     <div class="aspect-[3/4]">
-                        <iframe class="h-full w-full rounded-lg" src="https://whimsical.com/embed/kelas-profit-1-GUJAiEcZgKMMz4nDZrxV5f" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe class="h-full w-full rounded-lg" src="https://whimsical.com/kelas-profit-10-juta-GUJAiEcZgKMMz4nDZrxV5f" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
