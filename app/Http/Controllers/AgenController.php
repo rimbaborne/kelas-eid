@@ -108,7 +108,7 @@ class AgenController extends Controller
                     $transaksi_hq->id_agen     = auth()->user()->id ?? 100001;
                     $transaksi_hq->id_event    = 79;
                     $transaksi_hq->total       = 57000;
-                    $transaksi_hq->status      = 2;
+                    $transaksi_hq->status      = 3;
                     $transaksi_hq->jenis       = 1;
                     $transaksi_hq->save();
                 } catch (\Exception $e) {
@@ -169,7 +169,7 @@ Nb : Jika Anda mengalami kendala saat mengakses materinya, silahkan hubungi Cust
                         $transaksi_hq->id_agen     = auth()->user()->id ?? 100001;
                         $transaksi_hq->id_event    = 79;
                         $transaksi_hq->total       = 57000;
-                        $transaksi_hq->status      = 2;
+                        $transaksi_hq->status      = 3;
                         $transaksi_hq->jenis       = 1;
                         $transaksi_hq->save();
                     } catch (\Exception $e) {
