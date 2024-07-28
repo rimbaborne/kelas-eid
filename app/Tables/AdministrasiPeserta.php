@@ -50,10 +50,6 @@ class AdministrasiPeserta extends AbstractTable
         $table
         ->withGlobalSearch(columns: ['user.name', 'user.email'])
         ->rowLink(fn (Peserta $peserta) => route('admin.peserta.show', [ 'id' =>  $peserta->user_id ] ))
-        ->searchInput(
-            key     : 'agen.user.name',
-            label   : 'Cari Agen'
-        )
         ->column(
             key     : 'user.name',
             label   : 'Nama'
@@ -67,7 +63,7 @@ class AdministrasiPeserta extends AbstractTable
             label   : 'Nomor'
         )
         ->column(
-            key     : 'agen.user.name',
+            key     : 'agen_id',
             label   : 'Agen'
         )
         ->column(

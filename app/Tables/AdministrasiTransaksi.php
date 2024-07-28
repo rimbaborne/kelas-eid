@@ -48,14 +48,14 @@ class AdministrasiTransaksi extends AbstractTable
     public function configure(SpladeTable $table)
     {
         $table
-            ->withGlobalSearch(columns: ['user.nama', 'agen.user.nama'])
+            ->withGlobalSearch(columns: ['user.nama'])
             ->rowLink(fn (Transaction $transaction) => route('admin.transaksi.show', ['id' =>  $transaction->id ] ))
             ->column(
                 key     : 'user.name',
                 label   : 'Nama'
             )
             ->column(
-                key     : 'agen.user.name',
+                key     : 'agen_id',
                 label   : 'Agen'
             )
             ->column(

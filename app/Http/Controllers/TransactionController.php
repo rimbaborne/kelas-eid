@@ -31,7 +31,6 @@ class TransactionController extends Controller
         $this->keywords = 'Belajar Bisnis Online, entrepreneurID, Bisnis,';
         $this->sitename = 'Kelas entrepreneurID';
     }
-
     public function notifwa($nomorhp, $isipesan)
     {
         $datawa = json_decode($isipesan);
@@ -67,7 +66,6 @@ class TransactionController extends Controller
             throw $th;
         }
     }
-
     public function pemesanan_kelasprofit(Request $request)
     {
         $agen = $request->ref ?? 100001;
@@ -570,7 +568,6 @@ Nb :  Promo pendaftaran 57 ribu hanya berlaku sampai 4 Agustus 2024, setelah itu
             return response()->json(['message' => 'Transaksi tidak berhasil.'], 404);
         }
     }
-
     public function cancel() {
         return view('pages.cancel');
     }
