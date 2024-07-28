@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use App\Models\Transaction;
 use ProtoneMedia\Splade\Facades\Toast;
+use App\Models\Peserta;
 
 class KelasController extends BaseController
 {
@@ -20,7 +21,7 @@ class KelasController extends BaseController
 
     public function profit()
     {
-        $check = Transaction::where('status_pembayaran', 'paid')->where('user_id', auth()->user()->id)->where('kelas_id', 1)->first();
+        $check = Peserta::where('user_id', auth()->user()->id)->where('kelas_id', 1)->first();
         if(!null == $check) {
             return view('pages.kelas-profit');
         } else {
@@ -31,7 +32,7 @@ class KelasController extends BaseController
 
     public function profit_1()
     {
-        $check = Transaction::where('status_pembayaran', 'paid')->where('user_id', auth()->user()->id)->where('kelas_id', 1)->first();
+        $check = Peserta::where('user_id', auth()->user()->id)->where('kelas_id', 1)->first();
         if(!null == $check) {
             return view('pages.kelas-profit-1');
         } else {
@@ -42,7 +43,7 @@ class KelasController extends BaseController
 
     public function profit_pdf($link)
     {
-        $check = Transaction::where('status_pembayaran', 'paid')->where('user_id', auth()->user()->id)->where('kelas_id', 1)->first();
+        $check = Peserta::where('user_id', auth()->user()->id)->where('kelas_id', 1)->first();
         if(!null == $check) {
             $data_pdf = [
                 [ 'nama' => 'Vitamin Finansial', 'link' => '1' ],

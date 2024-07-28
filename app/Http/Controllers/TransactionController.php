@@ -19,6 +19,7 @@ use Throwable;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Pemesanan;
 use App\Mail\PemesananSelesai;
+use App\Models\Peserta;
 
 
 class TransactionController extends Controller
@@ -94,7 +95,7 @@ class TransactionController extends Controller
                 }
             }
         }
-        return view('pages.pemesanan-tutup', compact('agen'));
+        return view('pages.pemesanan', compact('agen'));
     }
     public function pemesanan_kelasprofit_store($agen, Request $request)
     {
@@ -456,6 +457,29 @@ Nb : Jika Anda ada pertanyaan, silahkan hubungi Customer Support kami di link in
                 'berhasil_bayar'         => now(),
             ]);
 
+            $cekpeserta = Peserta::where('user_id',$user->id)->first();
+            if (!$cekpeserta) {
+
+                $peserta = Peserta::create([
+                    'user_id'       => $user->id,
+                    'agen_id'       => $transaction->agen_id,
+                    'kelas_id'      => $transaction->kelas_id,
+                ]);
+            }
+
+
+            try {
+                $transaksi_hq = TransactionHQ::where('uuid', $transaction->uuid)->first();
+                $transaksi_hq->update([
+                    'status' => 3
+                ]);
+            } catch (\Exception $e) {
+                // jika terjadi error maka tidak perlu dilanjutkan
+            } finally {
+                // Menambahkan waktu timeout jika perlu
+                Http::timeout(60);
+            }
+
             $isiwa = 'Halo '.$user->name.',
 
 Selamat telah menjadi peserta di Kelas Profit 10 Juta. 😇
@@ -517,6 +541,32 @@ Nb : Jika Anda ada pertanyaan, silahkan hubungi Customer Support kami di link in
                 'status_pembayaran_code' => $status_code,
                 'status_pembayaran'      => $status,
             ]);
+
+            try {
+                $transaksi_hq = TransactionHQ::where('uuid', $transaction->uuid)->first();
+                $transaksi_hq->update([
+                    'status' => 0
+                ]);
+            } catch (\Exception $e) {
+                // jika terjadi error maka tidak perlu dilanjutkan
+            } finally {
+                // Menambahkan waktu timeout jika perlu
+                Http::timeout(60);
+            }
+
+            $isiwa = 'MOhon Maaf '.$user->name.',
+
+Invoice pemesanan Kelas Online Profit 10 juta Anda SUDAH HANGUS.
+Untuk bisa masuk kelasnya silahkan daftar ulang di '.route('pemesanan').'
+
+Salam,
+
+*Tim entrepreneurID*
+
+Nb :  Promo pendaftaran 57 ribu hanya berlaku sampai 4 Agustus 2024, setelah itu biaya pendaftaran akan naik jadi 123 ribu';
+
+            $this->notifwa($user->phone_code . $user->phone_number, $isiwa);
+
             return response()->json(['message' => 'Transaksi tidak berhasil.'], 404);
         }
     }

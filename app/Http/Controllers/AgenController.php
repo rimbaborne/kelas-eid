@@ -92,11 +92,16 @@ class AgenController extends Controller
                     'show_password'=> $request->password,
                     'password'     => Hash::make($request->password),
                 ]);
-                $peserta = Peserta::create([
-                    'user_id' => $user->id,
-                    'kelas_id' => 1,
-                    'agen_id' => auth()->user()->id,
-                ]);
+
+                $cekpeserta = Peserta::where('user_id',$user->id)->first();
+                if (!$cekpeserta) {
+                    $peserta = Peserta::create([
+                        'user_id' => $user->id,
+                        'kelas_id'=> 1,
+                        'agen_id' => auth()->user()->id,
+                    ]);
+                }
+
 
                 $isiwa = 'Halo '.$user->name.',
 
@@ -127,11 +132,19 @@ Nb : Jika Anda mengalami kendala saat mengakses materinya, silahkan hubungi Cust
                 Toast::title('Berhasil Ditambahkan !')->autoDismiss(5);
                 return response()->json('Berhasil Di Tambahkan '. $peserta);
             } else {
-                $peserta = Peserta::create([
-                    'user_id' => $user->id,
-                    'kelas_id' => 1,
-                    'agen_id' => auth()->user()->id,
-                ]);
+                $cekuser = User::where('email', 'admin@kelasentrepreneurid.com')
+                                ->orWhere('phone_number', '8125144744')
+                                ->first();
+                if (!$cekuser) {
+                    $cekpeserta = Peserta::where('user_id',$user->id)->first();
+                    if (!$cekpeserta) {
+                        $peserta = Peserta::create([
+                            'user_id' => $user->id,
+                            'kelas_id'=> 1,
+                            'agen_id' => auth()->user()->id,
+                        ]);
+                    }
+                }
 
                 Toast::title('User Terdaftar. Berhasil Ditambahkan Di Kelas')->autoDismiss(5);
                 return response()->json('Berhasil Di Tambahkan '. $peserta);
