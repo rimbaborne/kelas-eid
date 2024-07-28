@@ -15,14 +15,14 @@
             </div>
           </Link>
     </li>
-    {{-- <li class="border-gray-200 hover:bg-gray-100">
+    <li class="border-gray-200 hover:bg-gray-100">
         <Link href="{{ route('dashboard.pembayaran') }}" class="flex items-center space-x-4 p-4 block {{ request()->routeIs('pembayaran') ? 'bg-slate-50 text-primary-600' : '' }}">
             <x-carbon-money class="w-6 h-6 {{ request()->routeIs('pembayaran') ? 'text-primary-600' : '' }}"/>
             <div>
                 <h6 class="text-sm font-semibold dark:text-white {{ request()->routeIs('pembayaran') ? 'text-primary-600' : 'text-gray-900' }}">Pembayaran</h6>
             </div>
           </Link>
-    </li> --}}
+    </li>
     <li class="py-5"></li>
 
     @if (auth()->user()->hasRole('admin'))
