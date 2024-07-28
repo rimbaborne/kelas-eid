@@ -83,11 +83,12 @@ class AdminController extends Controller
         $user = User::find($id);
         $roles = Role::all();
 
+        $role[] = null;
         foreach($roles as $role_d) {
             if($user->roles->contains($role_d->id)) {
                 $role[] = $role_d->id;
             }
-        }
+    }
         return view('admin.user-show', compact('user', 'roles', 'role'));
     }
 
