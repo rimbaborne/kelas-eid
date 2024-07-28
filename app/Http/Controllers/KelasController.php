@@ -41,6 +41,17 @@ class KelasController extends BaseController
         }
     }
 
+    public function profit_2()
+    {
+        $check = Peserta::where('user_id', auth()->user()->id)->where('kelas_id', 1)->first();
+        if(!null == $check) {
+            return view('pages.kelas-profit-2');
+        } else {
+            Toast::warning('Anda Belum Memiliki Akses Kelas Ini !');
+            return redirect()->route('dashboard.data');
+        }
+    }
+
     public function profit_pdf($link)
     {
         $check = Peserta::where('user_id', auth()->user()->id)->where('kelas_id', 1)->first();

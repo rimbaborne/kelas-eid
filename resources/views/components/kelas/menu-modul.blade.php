@@ -15,6 +15,12 @@
                 Video Pembelajaran
             </a>
         </li>
+        <li>
+            <a href="{{ url('/') }}/kelas/kelas-profit-10-juta/2" class="text-base ml-4 text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-400 transition duration-75 dark:text-gray-200 dark:hover:bg-gray-700 {{ request()->is('kelas/kelas-profit-10-juta/2') ? 'bg-slate-200' : '' }}">
+                <x-carbon-triangle-right-solid class="w-2 h-2 mx-4" />
+                Mind Map
+            </a>
+        </li>
     </ul>
 </li>
 <li class="p-4 bg-white rounded-lg">
