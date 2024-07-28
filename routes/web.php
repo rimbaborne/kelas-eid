@@ -91,6 +91,7 @@ Route::middleware('splade')->group(function () {
 
         Route::get('/kelas/kelas-profit-10-juta', [KelasController::class, 'profit'])->name('kelas.profit');
         Route::get('/kelas/kelas-profit-10-juta/1', [KelasController::class, 'profit_1'])->name('kelas.profit.1');
+        Route::get('/kelas/kelas-profit-10-juta/2', [KelasController::class, 'profit_2'])->name('kelas.profit.2');
         Route::get('/kelas/kelas-profit-10-juta/pdf/{link}', [KelasController::class, 'profit_pdf']);
 
 
