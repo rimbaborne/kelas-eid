@@ -28,7 +28,7 @@ class WebController extends Controller
             ->openGraphImage(asset('/assets/img/logo-arrahmah.png'))
             ;
 
-        return view('website.pages.lp-profit');
+        return view('website.pages.home');
     }
 
     public function kelas()

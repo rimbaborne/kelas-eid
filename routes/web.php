@@ -15,7 +15,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AgenController;
 use App\Http\Controllers\AdminController;
 
-Route::get("/", [WebController::class, "home"])->name("website.home");
 
 Route::post('/transaksi/callback', [TransactionController::class, 'callback'])->name('transaksi.callback');
 
@@ -31,6 +30,7 @@ Route::post('/transaksi/callback', [TransactionController::class, 'callback'])->
 */
 
 Route::middleware('splade')->group(function () {
+    Route::get("/", [WebController::class, "home"])->name("website.home");
 
     // Registers routes to support the interactive components...
     Route::spladeWithVueBridge();
