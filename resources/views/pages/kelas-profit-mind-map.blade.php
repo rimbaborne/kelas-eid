@@ -17,7 +17,7 @@
                 <!-- Konten untuk grid 3/4 -->
                 <div class="h-full p-6 flex-1 bg-white divide-y rounded-lg divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                     <div class="text-3xl font-bold pb-3">
-                        Mind Map
+                        Mind Map Kelas Profit 10 Juta
                     </div>
                     <div class="py-4 flex items-center justify-between">
                         <div></div>

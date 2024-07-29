@@ -30,7 +30,7 @@
                         </button>
                     </div>
                     <div class="aspect-[16/9]">
-                        <iframe id="pdfViewer" class="h-full w-full rounded-lg" src="https://drive.google.com/file/d/1__50TH2U5Hf0NP6STnlzoLZzRtDfhkm_/preview" title="PDF viewer" frameborder="0" allow="fullscreen"></iframe>
+                        <iframe id="pdfViewer" class="h-full w-full rounded-lg" src="https://drive.google.com/file/d/1zBRsbjBfeaxImYZgssl4BA09XIFgS_mJ/preview" title="PDF viewer" frameborder="0" allow="fullscreen"></iframe>
                     </div>
                 </div>
 
