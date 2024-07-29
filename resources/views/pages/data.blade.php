@@ -9,7 +9,7 @@
         <div class="mx-auto w-full flex-none max-w-2xl xl:max-w-4xl">
             <div class="space-y-4">
                 @if ($data)
-                <div class="grid grid-cols-2">
+                <div class="grid grid-cols-1 sm:grid-cols-2">
                     <div class="rounded-lg border border-gray-200 bg-white p-2 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-4">
                         <div class="space-y-2 flex items-center justify-between gap-6 md:space-y-0">
                             <a href="#" class="shrink-0">
