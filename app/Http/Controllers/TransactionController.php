@@ -276,6 +276,9 @@ Segera selesaikan pendaftaran Kelas Profit 10 Juta Anda dengan cara transfer seb
 di link berikut : '.route('pemesanan.invoice', ['uuid' => $ref_id]).'
 
 Masa berlaku invoice ini hanya sampai '.$simpan->batas_bayar.'
+Jika waktunya habis, maka tidak akan bisa ikut kelasnya.
+Karena itu, selesaikan pendaftarannya sebelum invoicenya hangus.
+
 
 Salam,
 
@@ -291,6 +294,9 @@ Segera selesaikan pendaftaran Kelas Profit 10 Juta Anda dengan cara transfer seb
 di link berikut : '.route('pemesanan.invoice', ['uuid' => $ref_id]).'<br><br>
 
 Masa berlaku invoice ini hanya sampai '.$simpan->batas_bayar.'<br><br>
+Jika waktunya habis, maka tidak akan bisa ikut kelasnya. <br>
+Karena itu, selesaikan pendaftarannya sebelum invoicenya hangus. <br><br>
+
 
 Salam,<br><br>
 
