@@ -175,19 +175,19 @@ class TransactionController extends Controller
         $ref_id = Str::uuid();
         if ($request->payment_method == 'qris') {
             $expired = '24';
-            $followup = '6';
+            $followup = 6;
         } elseif ($request->payment_method == 'bsi') {
             $expired  = '3';
-            $followup = '1';
+            $followup = 1;
         } elseif ($request->payment_method == 'bri') {
             $expired  = '2';
-            $followup = '30'; //menit
+            $followup = 30; //menit
         } elseif ($request->payment_method == 'bca') {
             $expired  = '12';
-            $followup = '6';
+            $followup = 6;
         } else {
             $expired  = '3';
-            $followup = '1';
+            $followup = 1;
         }
 
         //Request Body//
