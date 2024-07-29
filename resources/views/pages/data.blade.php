@@ -21,7 +21,7 @@
                                 </div>
 
                                 <div class="flex items-center gap-4">
-                                    <a href="{{ route('kelas.profit.1') }}" class="flex items-center text-white bg-primary-700 border-0 px-4 focus:outline-none hover:bg-primary-400 rounded-lg text-sm">
+                                    <a href="{{ route('kelas.profit.video', ['link' => 1]) }}/" class="flex items-center text-white bg-primary-700 border-0 px-4 focus:outline-none hover:bg-primary-400 rounded-lg text-sm">
                                         Masuk Kelas <x-carbon-classification class="pl-4 w-8 h-8" />
                                     </a>
                                 </div>

@@ -1,5 +1,15 @@
 <li class="p-4 bg-white rounded-lg">
     <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" aria-controls="dropdown-playground-1" data-collapse-toggle="dropdown-playground-1">
+        <span class="flex-1 ml-3 text-left whitespace-nowrap font-bold" sidebar-toggle-item="">
+            KELAS PROFIT 10 JUTA
+        </span>
+        {{-- <span class="text-right font-bold">
+            1 / 3
+        </span> --}}
+    </button>
+</li>
+<li class="p-4 bg-white rounded-lg">
+    <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" aria-controls="dropdown-playground-1" data-collapse-toggle="dropdown-playground-1">
         <svg sidebar-toggle-item="" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
         <span class="flex-1 ml-3 text-left whitespace-nowrap font-bold" sidebar-toggle-item="">
             Materi Utama
@@ -8,17 +18,45 @@
             1 / 3
         </span> --}}
     </button>
+
     <ul id="dropdown-playground-1" class="space-y-2 py-2">
+        @php
+            $data_video = [
+                [ 'link_youtube' => 'DN6QmDpr0ZA', 'link' => '1' ],
+                [ 'link_youtube' => 'DN6QmDpr0ZA', 'link' => '2' ],
+                [ 'link_youtube' => 'DN6QmDpr0ZA', 'link' => '3' ]
+            ]
+        @endphp
+        @foreach ($data_video as $video)
+            <li>
+                <a href="{{ url('/') }}/kelas/kelas-profit-10-juta/video/{{ $video['link'] }}" class="text-base ml-4 text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-400 transition duration-75 dark:text-gray-200 dark:hover:bg-gray-700 {{ request()->is('kelas/kelas-profit-10-juta/video/'. $video["link"] ) ? 'bg-slate-200' : '' }}">
+                    <x-carbon-triangle-right-solid class="w-2 h-2 mx-4" />
+                    Video Pembelajaran {{ $video['link'] }}
+                </a>
+            </li>
+        @endforeach
         <li>
-            <a href="{{ url('/') }}/kelas/kelas-profit-10-juta/1" class="text-base ml-4 text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-400 transition duration-75 dark:text-gray-200 dark:hover:bg-gray-700 {{ request()->is('kelas/kelas-profit-10-juta/1') ? 'bg-slate-200' : '' }}">
+            <a href="{{ url('/') }}/kelas/kelas-profit-10-juta/slide" class="text-base ml-4 text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-400 transition duration-75 dark:text-gray-200 dark:hover:bg-gray-700 {{ request()->is('kelas/kelas-profit-10-juta/slide') ? 'bg-slate-200' : '' }}">
                 <x-carbon-triangle-right-solid class="w-2 h-2 mx-4" />
-                Video Pembelajaran
+                Slide
             </a>
         </li>
         <li>
-            <a href="{{ url('/') }}/kelas/kelas-profit-10-juta/2" class="text-base ml-4 text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-400 transition duration-75 dark:text-gray-200 dark:hover:bg-gray-700 {{ request()->is('kelas/kelas-profit-10-juta/2') ? 'bg-slate-200' : '' }}">
+            <a href="{{ url('/') }}/kelas/kelas-profit-10-juta/check-list" class="text-base ml-4 text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-400 transition duration-75 dark:text-gray-200 dark:hover:bg-gray-700 {{ request()->is('kelas/kelas-profit-10-juta/check-list') ? 'bg-slate-200' : '' }}">
+                <x-carbon-triangle-right-solid class="w-2 h-2 mx-4" />
+                Check List
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('/') }}/kelas/kelas-profit-10-juta/mind-map" class="text-base ml-4 text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-400 transition duration-75 dark:text-gray-200 dark:hover:bg-gray-700 {{ request()->is('kelas/kelas-profit-10-juta/mind-map') ? 'bg-slate-200' : '' }}">
                 <x-carbon-triangle-right-solid class="w-2 h-2 mx-4" />
                 Mind Map
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('/') }}/kelas/kelas-profit-10-juta/resume" class="text-base ml-4 text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-400 transition duration-75 dark:text-gray-200 dark:hover:bg-gray-700 {{ request()->is('kelas/kelas-profit-10-juta/resume') ? 'bg-slate-200' : '' }}">
+                <x-carbon-triangle-right-solid class="w-2 h-2 mx-4" />
+                Resume
             </a>
         </li>
     </ul>
@@ -35,15 +73,15 @@
     </button>
     @php
         $data_pdf = [
-            [ 'nama' => 'Vitamin Finansial', 'link' => '1' ],
-            [ 'nama' => 'Mulai dari Awal Lagi', 'link' => '2' ],
-            [ 'nama' => '7 Ide Bisnis Puluhan Juta', 'link' => '3' ],
-            [ 'nama' => 'Jangan Dulu Bisnis Sebelum Punya Ini', 'link' => '4' ],
-            [ 'nama' => 'Agar Bisnismu Terus Tumbuh', 'link' => '5' ],
-            [ 'nama' => 'Tembus Target Jualan Online', 'link' => '6' ],
-            [ 'nama' => 'Rahasia Jualan Anti Gagal', 'link' => '7' ],
-            [ 'nama' => 'Cara Konsiten Tanpa Tekanan', 'link' => '8' ],
-            [ 'nama' => 'Waktu Pilihan Allah', 'link' => '9' ],
+            [ 'nama' => 'Ebook Vitamin Finansial', 'link' => '1' ],
+            [ 'nama' => 'Ebook Langkah Pertama', 'link' => '2' ],
+            [ 'nama' => 'Ebook 7 Ide Bisnis Puluhan Juta', 'link' => '3' ],
+            [ 'nama' => 'Ebook Jangan Dulu Bisnis Sebelum Punya Ini', 'link' => '4' ],
+            [ 'nama' => 'Ebook Agar Bisnismu Terus Tumbuh', 'link' => '5' ],
+            [ 'nama' => 'Ebook 100 Juta Pertama', 'link' => '6' ],
+            [ 'nama' => 'Ebook Rahasia Jualan Anti Gagal', 'link' => '7' ],
+            [ 'nama' => 'Ebook Cara Konsiten Tanpa Tekanan', 'link' => '8' ],
+            [ 'nama' => 'Ebook Waktu Pilihan Allah', 'link' => '9' ],
         ];
     @endphp
     <ul id="dropdown-playground-2" class="space-y-2 py-2">
