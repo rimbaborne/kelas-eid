@@ -15,7 +15,9 @@
                         Lihat Kelas
                 </Link> --}}
                 {{-- </div> --}}
-                <img src="{{ url('/') }}/assets/img/w-eid.jpg" class="w-full rounded-lg" alt="welcome">
+                <div class="flex items-center justify-center">
+                    <img src="{{ url('/') }}/assets/img/w-eid.jpg" class="object-cover sm:aspect-[3/2] w-full mx-auto rounded-lg" alt="welcome">
+                </div>
               </div>
             </div>
           </section>
