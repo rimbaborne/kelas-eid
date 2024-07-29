@@ -50,6 +50,41 @@
                 </div>
                 <!-- End Grid -->
 
+                <div class="text-center">
+                        <div class="font-semibold text-gray-800 dark:text-neutral-200">Batas Pembayaran</div>
+                        <div class="text-primary-700 text-xl sm:text-3xl font-bold" id="countdown"></div>
+                        <x-splade-script>
+                            // Set the date we're counting down t
+                            var countDownDate = new Date("{{ $transaction->batas_bayar }}").getTime();
+
+                            // Update the count down every 1 second
+                            var x = setInterval(function() {
+
+                              // Get today's date and time
+                              var now = new Date().getTime();
+
+                              // Find the distance between now and the count down date
+                              var distance = countDownDate - now;
+
+                              // Time calculations for days, hours, minutes and seconds
+                              var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                              var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                              var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                              var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                              // Display the result in the element with id="countdown"
+                              document.getElementById("countdown").innerHTML = hours + " Jam "
+                              + minutes + " Menit " + seconds + " Detik ";
+
+                              // If the count down is finished, write some text
+                              if (distance < 0) {
+                                clearInterval(x);
+                                document.getElementById("countdown").innerHTML = "EXPIRED";
+                              }
+                            }, 1000);
+                        </x-splade-script>
+                </div>
+
                 <!-- Grid -->
                 <div class="mt-8 grid sm:grid-cols-2 gap-3">
                     <div>
@@ -70,10 +105,7 @@
                                 </dt>
                                 <dd class="col-span-2 text-gray-500 dark:text-neutral-500">{{ $transaction->created_at->format('d/m/Y H:i') }}</dd>
                             </dl>
-                            <dl class="grid sm:grid-cols-5 gap-x-3">
-                                <dt class="col-span-3 font-semibold text-gray-800 dark:text-neutral-200">Batas Pembayaran:</dt>
-                                <dd class="col-span-2 text-gray-500 dark:text-neutral-500">{{ \Carbon\Carbon::parse($transaction->batas_bayar)->format('d/m/Y H:i') }}</dd>
-                            </dl>
+
                             <dl class="grid sm:grid-cols-5 gap-x-3">
                                 <dt class="col-span-3 font-semibold text-gray-800 dark:text-neutral-200">Status Pembayaran:</dt>
                                 <dd class="col-span-2 text-gray-500 dark:text-neutral-500">
