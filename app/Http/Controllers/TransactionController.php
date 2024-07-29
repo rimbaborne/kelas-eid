@@ -153,14 +153,14 @@ class TransactionController extends Controller
         // Auth::login($user);
 
 
-        // $va           = '1179001364818964'; //get on iPaymu dashboard
-        // $apiKey       = '516A6C4F-D5F7-4D3B-AC26-18FFFEEF3B87'; //get on iPaymu dashboard
+        $va           = '1179001364818964'; //get on iPaymu dashboard
+        $apiKey       = '516A6C4F-D5F7-4D3B-AC26-18FFFEEF3B87'; //get on iPaymu dashboard
 
-        $va           = '0000008125144744'; //get on iPaymu dashboard
-        $apiKey       = 'SANDBOXDF3E6F1F-5E4A-44EF-9EDB-98D7BD737DAA'; //get on iPaymu dashboard
+        // $va           = '0000008125144744'; //get on iPaymu dashboard
+        // $apiKey       = 'SANDBOXDF3E6F1F-5E4A-44EF-9EDB-98D7BD737DAA'; //get on iPaymu dashboard
 
-        $url          = 'https://sandbox.ipaymu.com/api/v2/payment/direct'; // for development mode
-        // $url          = 'https://my.ipaymu.com/api/v2/payment/direct'; // for production mode
+        // $url          = 'https://sandbox.ipaymu.com/api/v2/payment/direct'; // for development mode
+        $url          = 'https://my.ipaymu.com/api/v2/payment/direct'; // for production mode
 
         $method       = 'POST'; //method
 
@@ -175,6 +175,7 @@ class TransactionController extends Controller
         $ref_id = Str::uuid();
         if ($request->payment_method == 'qris') {
             $expired = '24';
+            $followup = '6';
         } elseif ($request->payment_method == 'bsi') {
             $expired  = '3';
             $followup = '1';
@@ -186,7 +187,7 @@ class TransactionController extends Controller
             $followup = '6';
         } else {
             $expired  = '3';
-            $followup = '6';
+            $followup = '1';
         }
 
         //Request Body//
