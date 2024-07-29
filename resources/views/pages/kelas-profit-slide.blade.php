@@ -18,10 +18,10 @@
                 <!-- Konten untuk grid 3/4 -->
                 <div class="h-full p-6 flex-1 bg-white divide-y rounded-lg divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                     <div class="text-3xl font-bold pb-3">
-                        Resume
+                        Slide Materi Kelas Profit 10 Juta
                     </div>
                     <div class="py-4 flex items-center justify-between">
-                        <a href="{{ url('/') }}/download/kelas-profit-10-juta/Resume Kelas Profit 10 Juta.pdf" download class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                        <a href="{{ url('/') }}/download/kelas-profit-10-juta/entrepreneurID - Slide Kelas Profit 10 Juta.pdf" download class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                             Download File
                         </a>
 
@@ -29,8 +29,8 @@
                             Full Screen
                         </button>
                     </div>
-                    <div class="aspect-[3/4]">
-                        <iframe id="pdfViewer" class="h-full w-full rounded-lg" src="https://drive.google.com/file/d/1PSJhl7gBSzGHN3VuSKap98Foj1ThZdfI/preview" title="PDF viewer" frameborder="0" allow="fullscreen"></iframe>
+                    <div class="aspect-[16/9]">
+                        <iframe id="pdfViewer" class="h-full w-full rounded-lg" src="https://drive.google.com/file/d/1__50TH2U5Hf0NP6STnlzoLZzRtDfhkm_/preview" title="PDF viewer" frameborder="0" allow="fullscreen"></iframe>
                     </div>
                 </div>
 
