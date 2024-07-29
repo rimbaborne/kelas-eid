@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\Pemesanan;
 use App\Mail\PemesananSelesai;
 use App\Models\Peserta;
+use App\Jobs\NotifFollowUpInvoice;
+use Illuminate\Support\Carbon;
 
 
 class TransactionController extends Controller
@@ -151,14 +153,14 @@ class TransactionController extends Controller
         // Auth::login($user);
 
 
-        $va           = '1179001364818964'; //get on iPaymu dashboard
-        $apiKey       = '516A6C4F-D5F7-4D3B-AC26-18FFFEEF3B87'; //get on iPaymu dashboard
+        // $va           = '1179001364818964'; //get on iPaymu dashboard
+        // $apiKey       = '516A6C4F-D5F7-4D3B-AC26-18FFFEEF3B87'; //get on iPaymu dashboard
 
-        // $va           = '0000008125144744'; //get on iPaymu dashboard
-        // $apiKey       = 'SANDBOXDF3E6F1F-5E4A-44EF-9EDB-98D7BD737DAA'; //get on iPaymu dashboard
+        $va           = '0000008125144744'; //get on iPaymu dashboard
+        $apiKey       = 'SANDBOXDF3E6F1F-5E4A-44EF-9EDB-98D7BD737DAA'; //get on iPaymu dashboard
 
-        // $url          = 'https://sandbox.ipaymu.com/api/v2/payment/direct'; // for development mode
-        $url          = 'https://my.ipaymu.com/api/v2/payment/direct'; // for production mode
+        $url          = 'https://sandbox.ipaymu.com/api/v2/payment/direct'; // for development mode
+        // $url          = 'https://my.ipaymu.com/api/v2/payment/direct'; // for production mode
 
         $method       = 'POST'; //method
 
@@ -174,13 +176,17 @@ class TransactionController extends Controller
         if ($request->payment_method == 'qris') {
             $expired = '24';
         } elseif ($request->payment_method == 'bsi') {
-            $expired = '3';
-        } elseif ($request->payment_method == 'br') {
-            $expired = '2';
+            $expired  = '3';
+            $followup = '1';
+        } elseif ($request->payment_method == 'bri') {
+            $expired  = '2';
+            $followup = '30'; //menit
         } elseif ($request->payment_method == 'bca') {
-            $expired = '12';
+            $expired  = '12';
+            $followup = '6';
         } else {
-            $expired = '3';
+            $expired  = '3';
+            $followup = '6';
         }
 
         //Request Body//
@@ -243,28 +249,28 @@ class TransactionController extends Controller
                 'qris_string'       => $status_api['Data']['QrString'] ?? null,
                 'qris_nmid'         => $status_api['Data']['NMID'] ?? null,
             ]);
-            try {
-                $transaksi_hq = new TransactionHQ;
-                $transaksi_hq->uuid        = $ref_id;
-                $transaksi_hq->nama        = $user->name;
-                $transaksi_hq->email       = $user->email;
-                $transaksi_hq->panggilan   = $user->name;;
-                $transaksi_hq->kode_nohp   = $user->phone_code ?? 62;
-                $transaksi_hq->nohp        = $user->phone_number;
-                $transaksi_hq->gender      = null;
-                $transaksi_hq->tgllahir    = null;
-                $transaksi_hq->id_agen     = $request->agen ?? 100001;
-                $transaksi_hq->id_event    = 79;
-                $transaksi_hq->total       = 57000;
-                $transaksi_hq->status      = 1;
-                $transaksi_hq->jenis       = 1;
-                $transaksi_hq->save();
-            } catch (\Exception $e) {
-                // jika terjadi error maka tidak perlu dilanjutkan
-            } finally {
-                // Menambahkan waktu timeout jika perlu
-                Http::timeout(60);
-            }
+            // try {
+            //     $transaksi_hq = new TransactionHQ;
+            //     $transaksi_hq->uuid        = $ref_id;
+            //     $transaksi_hq->nama        = $user->name;
+            //     $transaksi_hq->email       = $user->email;
+            //     $transaksi_hq->panggilan   = $user->name;;
+            //     $transaksi_hq->kode_nohp   = $user->phone_code ?? 62;
+            //     $transaksi_hq->nohp        = $user->phone_number;
+            //     $transaksi_hq->gender      = null;
+            //     $transaksi_hq->tgllahir    = null;
+            //     $transaksi_hq->id_agen     = $request->agen ?? 100001;
+            //     $transaksi_hq->id_event    = 79;
+            //     $transaksi_hq->total       = 57000;
+            //     $transaksi_hq->status      = 1;
+            //     $transaksi_hq->jenis       = 1;
+            //     $transaksi_hq->save();
+            // } catch (\Exception $e) {
+            //     // jika terjadi error maka tidak perlu dilanjutkan
+            // } finally {
+            //     // Menambahkan waktu timeout jika perlu
+            //     Http::timeout(60);
+            // }
 
             $simpan->invoice_id     = date('Ymd') . $simpan->id;
             $simpan->sistem_lama_id = null;
@@ -310,6 +316,13 @@ Nb : Jika Anda ada pertanyaan, silahkan hubungi Customer Support kami di link in
             ];
 
             Mail::to($user->email)->send(new Pemesanan($data));
+
+            if ($request->payment_method == 'bri') {
+                NotifFollowUpInvoice::dispatch($simpan->id)->delay(Carbon::now()->addMinutes($followup));
+            } else {
+                NotifFollowUpInvoice::dispatch($simpan->id)->delay(Carbon::now()->addHours($followup));
+            }
+
 
             return redirect()->route('pemesanan.invoice', ['uuid' => $ref_id]);
         } else {
