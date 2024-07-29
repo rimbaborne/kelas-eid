@@ -219,13 +219,36 @@ class TransactionController extends Controller
         $timestamp    = Date('YmdHis');
         //End Generate Signature
 
-        $response = Http::withHeaders([
-            'Accept' => 'application/json',
-            'Content-Type' => 'application/json',
-            'va' => $va,
-            'signature' => $signature,
-            'timestamp' => $timestamp,
-        ])->timeout(60)->post($url, $body);
+        // $response = Http::withHeaders([
+        //     'Accept' => 'application/json',
+        //     'Content-Type' => 'application/json',
+        //     'va' => $va,
+        //     'signature' => $signature,
+        //     'timestamp' => $timestamp,
+        // ])->timeout(60)->post($url, $body);
+
+        $maxAttempts = 3;
+        $attempts = 0;
+        $response = null;
+
+        while ($attempts < $maxAttempts) {
+            try {
+                $response = Http::withHeaders([
+                    'Accept' => 'application/json',
+                    'Content-Type' => 'application/json',
+                    'va' => $va,
+                    'signature' => $signature,
+                    'timestamp' => $timestamp,
+                ])->timeout(60)->post($url, $body);
+                break; // Berhenti jika berhasil
+            } catch (\Illuminate\Http\Client\RequestException $e) {
+                $attempts++;
+                if ($attempts >= $maxAttempts) {
+                    throw $e; // Lemparkan exception jika telah mencapai maksimal percobaan
+                }
+                sleep(2); // Tunggu beberapa detik sebelum mencoba lagi
+            }
+        }
 
         $status_api = $response->json();
 
