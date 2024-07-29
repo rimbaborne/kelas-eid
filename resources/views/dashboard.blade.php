@@ -14,8 +14,8 @@
                         >
                         Lihat Kelas
                 </Link> --}}
+                {{-- </div> --}}
                 <img src="{{ url('/') }}/assets/img/w-eid.jpg" class="w-full rounded-lg" alt="welcome">
-                </div>
               </div>
             </div>
           </section>
