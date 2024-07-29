@@ -50,7 +50,8 @@
                 </div>
                 <!-- End Grid -->
 
-                <div class="text-center">
+                @if ($transaction->status_pembayaran == 'unpaid')
+                    <div class="text-center">
                         <div class="font-semibold text-gray-800 dark:text-neutral-200">Batas Pembayaran</div>
                         <div class="text-primary-700 text-xl sm:text-3xl font-bold" id="countdown"></div>
                         <x-splade-script>
@@ -60,30 +61,32 @@
                             // Update the count down every 1 second
                             var x = setInterval(function() {
 
-                              // Get today's date and time
-                              var now = new Date().getTime();
+                                // Get today's date and time
+                                var now = new Date().getTime();
 
-                              // Find the distance between now and the count down date
-                              var distance = countDownDate - now;
+                                // Find the distance between now and the count down date
+                                var distance = countDownDate - now;
 
-                              // Time calculations for days, hours, minutes and seconds
-                              var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                              var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                              var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                              var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                                // Time calculations for days, hours, minutes and seconds
+                                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                              // Display the result in the element with id="countdown"
-                              document.getElementById("countdown").innerHTML = hours + " Jam "
-                              + minutes + " Menit " + seconds + " Detik ";
+                                // Display the result in the element with id="countdown"
+                                document.getElementById("countdown").innerHTML = hours + " Jam "
+                                + minutes + " Menit " + seconds + " Detik ";
 
-                              // If the count down is finished, write some text
-                              if (distance < 0) {
+                                // If the count down is finished, write some text
+                                if (distance < 0) {
                                 clearInterval(x);
                                 document.getElementById("countdown").innerHTML = "EXPIRED";
-                              }
+                                }
                             }, 1000);
                         </x-splade-script>
-                </div>
+                    </div>
+                @endif
+
 
                 <!-- Grid -->
                 <div class="mt-8 grid sm:grid-cols-2 gap-3">
