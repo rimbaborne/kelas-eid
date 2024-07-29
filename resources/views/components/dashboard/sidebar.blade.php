@@ -3,7 +3,7 @@
         <Link href="{{ route('dashboard') }}" class="flex items-center space-x-4 p-4 block {{ request()->routeIs('dashboard') ? 'bg-slate-50 text-primary-600' : '' }}">
             <x-carbon-dashboard class="w-6 h-6 {{ request()->routeIs('dashboard') ? 'text-primary-600' : '' }}" />
             <div>
-                <h6 class="text-sm font-semibold dark:text-white {{ request()->routeIs('dashboard') ? 'text-primary-600' : 'text-gray-900' }}">Dasboard</h6>
+                <h6 class="text-sm font-semibold dark:text-white {{ request()->routeIs('dashboard') ? 'text-primary-600' : 'text-gray-900' }}">Welcome</h6>
             </div>
           </Link>
     </li>
@@ -11,7 +11,7 @@
         <Link href="{{ route('dashboard.data') }}" class="flex items-center space-x-4 p-4 block {{ request()->routeIs('data') ? 'bg-slate-50 text-primary-600' : '' }}">
             <x-carbon-data-1 class="w-6 h-6 {{ request()->routeIs('data') ? 'text-primary-600' : '' }}"/>
             <div>
-                <h6 class="text-sm font-semibold dark:text-white {{ request()->routeIs('data') ? 'text-primary-600' : 'text-gray-900' }}">Data</h6>
+                <h6 class="text-sm font-semibold dark:text-white {{ request()->routeIs('data') ? 'text-primary-600' : 'text-gray-900' }}">Kelas</h6>
             </div>
           </Link>
     </li>

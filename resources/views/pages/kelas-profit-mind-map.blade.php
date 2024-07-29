@@ -19,6 +19,13 @@
                     <div class="text-3xl font-bold pb-3">
                         Mind Map
                     </div>
+                    <div class="py-4 flex items-center justify-between">
+                        <div></div>
+
+                        <a href="https://whimsical.com/kelas-profit-10-juta-GUJAiEcZgKMMz4nDZrxV5f" target="_blank" class=" border border-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                            Full Screen
+                        </a>
+                    </div>
                     <div class="aspect-[3/4]">
                         <iframe class="h-full w-full rounded-lg" src="https://whimsical.com/embed/kelas-profit-10-juta-GUJAiEcZgKMMz4nDZrxV5f" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>

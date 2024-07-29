@@ -9,6 +9,7 @@
         <div class="mx-auto w-full flex-none max-w-2xl xl:max-w-4xl">
             <div class="space-y-4">
                 @if ($data)
+                <div class="grid grid-cols-2">
                     <div class="rounded-lg border border-gray-200 bg-white p-2 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-4">
                         <div class="space-y-2 flex items-center justify-between gap-6 md:space-y-0">
                             <a href="#" class="shrink-0">
@@ -28,6 +29,8 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
                 @else
                 <div class="flex items-start justify-center">
                     <h4 class="text-lg text-gray-400">Anda belum memiliki kelas</h4>
