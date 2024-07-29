@@ -15,6 +15,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AgenController;
 use App\Http\Controllers\AdminController;
 
+Route::get("/", [WebController::class, "home"])->name("website.home");
 
 Route::post('/transaksi/callback', [TransactionController::class, 'callback'])->name('transaksi.callback');
 
@@ -30,7 +31,6 @@ Route::post('/transaksi/callback', [TransactionController::class, 'callback'])->
 */
 
 Route::middleware('splade')->group(function () {
-    Route::get("/", [WebController::class, "home"])->name("website.home");
 
     // Registers routes to support the interactive components...
     Route::spladeWithVueBridge();
@@ -93,6 +93,13 @@ Route::middleware('splade')->group(function () {
         Route::get('/kelas/kelas-profit-10-juta/1', [KelasController::class, 'profit_1'])->name('kelas.profit.1');
         Route::get('/kelas/kelas-profit-10-juta/2', [KelasController::class, 'profit_2'])->name('kelas.profit.2');
         Route::get('/kelas/kelas-profit-10-juta/pdf/{link}', [KelasController::class, 'profit_pdf']);
+        Route::get('/kelas/kelas-profit-10-juta/video/{link}', [KelasController::class, 'profit_video'])->name('kelas.profit.video');
+        Route::get('/kelas/kelas-profit-10-juta/check-list', [KelasController::class, 'profit_checklist'])->name('kelas.profit.checklist');
+        Route::get('/kelas/kelas-profit-10-juta/mind-map', [KelasController::class, 'profit_mindmap'])->name('kelas.profit.mindmap');
+        Route::get('/kelas/kelas-profit-10-juta/resume', [KelasController::class, 'profit_resume'])->name('kelas.profit.resume');
+        Route::get('/kelas/kelas-profit-10-juta/slide', [KelasController::class, 'profit_slide'])->name('kelas.profit.slide');
+
+
 
 
 
@@ -122,6 +129,8 @@ Route::middleware('splade')->group(function () {
     Route::get('/transaksi/cancel', [TransactionController::class, 'cancel'])->name('transaksi.cancel');
     Route::get('/transaksi/selesai', [TransactionController::class, 'selesai'])->name('transaksi.selesai');
 
+    Route::get('/pemesanan/kelas-profit-10-juta/100188', [TransactionController::class, 'pemesanan_kelasprofit_plus'])->name('pemesanan.plus');
+    Route::post('/pemesanan/kelas-profit-10-juta/plus/store/{agen}', [TransactionController::class, 'pemesanan_kelasprofit_plus_store'])->name('pemesanan.profit.plus.store');
 
 
 });
