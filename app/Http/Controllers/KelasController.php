@@ -128,7 +128,7 @@ class KelasController extends BaseController
             $youtube_  = 'DN6QmDpr0ZA';
         } elseif($link == 2) {
             $judul = 'Materi Kelas Profit 10 Juta Part 2';
-            $youtube_  = 'DN6QmDpr0ZA';
+            $youtube_  = 'NBezwDCtWUk';
         } elseif($link == 3) {
             $judul = 'Materi Kelas Profit 10 Juta Part 3';
             $youtube_  = 'DN6QmDpr0ZA';
