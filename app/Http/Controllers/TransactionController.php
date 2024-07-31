@@ -656,8 +656,6 @@ Nb :  Promo pendaftaran 57 ribu hanya berlaku sampai 4 Agustus 2024, setelah itu
                 'name'           => ['required', 'string', 'max:255'],
                 'email'          => ['required', 'string', 'email', 'max:255'],
                 'phone_number'   => ['required', 'string', 'max:15'],
-                'phone_code'     => ['max:6'],
-                'password'       => ['required', 'min:6']
             ]);
 
             // Menghapus karakter '0' di awal nomor telepon yang dimasukkan oleh pengguna
@@ -689,6 +687,111 @@ Nb :  Promo pendaftaran 57 ribu hanya berlaku sampai 4 Agustus 2024, setelah itu
             $peserta = Peserta::create([
                 'user_id'       => $user->id,
                 'agen_id'       => $agen,
+                'kelas_id'      => 1,
+            ]);
+        }
+
+        $isiwa = 'Halo '.$user->name.',
+
+Selamat telah menjadi peserta di Kelas Profit 10 Juta. 😇
+Silahkan akses materinya disini https://kelasentrepreneurid.com/login
+
+Masuk dengan akun Anda
+Email : '.$user->email.'
+Password : '.$user->show_password.'
+
+Selain akses materi diatas, Anda juga bisa dapat bimbingan via WA dan dapat update materi kursus ini dengan cara
+👇👇👇
+Chat nomor WA 082318989848
+Dengan format : Peserta KPS eID
+Atau kalau mau lebih cepat, bisa klik link ini https://wa.me/6282318989848?text=Peserta%20KPS%20eID
+
+Sekali lagi selamat belajar.
+Semoga ini jadi wasilah untuk pertumbuhan bisnis Anda, aamiin. 🤲
+
+Salam,
+
+*Tim entrepreneurID*
+
+Nb : Jika Anda mengalami kendala saat mengakses materinya, silahkan hubungi Customer Support kami di link ini ➡️ bit.ly/CS-eID';
+
+            $this->notifwa($user->phone_code . $user->phone_number, $isiwa);
+
+            $isiemail = 'Dear '.$user->name.', <br><br>
+
+Selamat telah menjadi peserta di Kelas Profit 10 Juta. 😇 <br>
+Silahkan akses materinya disini https://kelasentrepreneurid.com/login <br><br>
+
+Masuk dengan akun Anda <br>
+Email : '.$user->email.'<br>
+Password : '.$user->show_password.'<br><br>
+
+Selain akses materi diatas, Anda juga bisa dapat bimbingan via WA dan dapat update materi kursus ini dengan cara <br>
+👇👇👇<br>
+Chat nomor WA 082318989848<br>
+Dengan format : Peserta KPS eID<br>
+Atau kalau mau lebih cepat, bisa klik link ini https://wa.me/6282318989848?text=Peserta%20KPS%20eID <br><br>
+
+Salam,<br><br>
+
+Tim entrepreneurID <br><br>
+
+Nb : Jika Anda ada pertanyaan, silahkan hubungi Customer Support kami di link ini ➡️ bit.ly/CS-eID';
+
+        $data = [
+            'subject'  => '[Akses Kelas Profit 10 Juta Anda]',
+            'isi' => $isiemail,
+        ];
+
+        Mail::to($user->email)->send(new Pemesanan($data));
+
+        event(new Registered($user));
+
+        Auth::login($user);
+
+        return redirect('/dashboard/data');
+
+    }
+
+    public function pemesanan_kelasprofit_daftar(Request $request)
+    {
+        if (!Auth::check()) {
+            $request->validate([
+                'name'           => ['required', 'string', 'max:100'],
+                'email'          => ['required', 'string', 'email', 'max:255'],
+                'phone_number'   => ['required', 'string', 'max:15'],
+                'password'       => ['required', 'string'],
+            ]);
+
+            // Menghapus karakter '0' di awal nomor telepon yang dimasukkan oleh pengguna
+            $phone_number = ltrim($request->phone_number, '0');
+
+            // Cek apakah user sudah ada di database
+            $user = User::where('email', $request->email)
+                        ->orWhere('phone_number', $phone_number)
+                        ->first();
+
+            if (!$user) {
+                $user = User::create([
+                    'name'         => strtolower($request->name),
+                    'email'        => strtolower($request->email),
+                    'phone_code'   => '62',
+                    'phone_number' => $phone_number,
+                    'show_password'=> $request->password,
+                    'password'     => Hash::make($request->password),
+                ]);
+            }
+        } else {
+            $user = Auth::user();
+        }
+
+
+        $cekpeserta = Peserta::where('user_id',$user->id)->first();
+        if (!$cekpeserta) {
+
+            $peserta = Peserta::create([
+                'user_id'       => $user->id,
+                'agen_id'       => 100188,
                 'kelas_id'      => 1,
             ]);
         }
