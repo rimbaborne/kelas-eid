@@ -36,7 +36,7 @@ class AdministrasiTransaksi extends AbstractTable
      */
     public function for()
     {
-        return Transaction::query();
+        return Transaction::query()->orderBy('id', 'desc');
     }
 
     /**
@@ -74,6 +74,8 @@ class AdministrasiTransaksi extends AbstractTable
                 key     : 'created_at',
                 label   : 'Tanggal'
             )
+            ->paginate(10)
+
 
             // ->searchInput()
             // ->selectFilter()

@@ -36,7 +36,7 @@ class AdministrasiPeserta extends AbstractTable
      */
     public function for()
     {
-        return Peserta::query();
+        return Peserta::query()->orderBy('id', 'desc');
     }
 
     /**
