@@ -19,6 +19,9 @@ Route::get("/", [WebController::class, "home"])->name("website.home");
 
 Route::post('/transaksi/callback', [TransactionController::class, 'callback'])->name('transaksi.callback');
 
+Route::get('/phpinfo', function () {
+    phpinfo();
+})->name('phpinfo');
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -131,6 +134,7 @@ Route::middleware('splade')->group(function () {
 
     Route::get('/pemesanan/kelas-profit-10-juta/100188', [TransactionController::class, 'pemesanan_kelasprofit_plus'])->name('pemesanan.plus');
     Route::post('/pemesanan/kelas-profit-10-juta/plus/store/{agen}', [TransactionController::class, 'pemesanan_kelasprofit_plus_store'])->name('pemesanan.profit.plus.store');
+
 
 
 });
