@@ -125,13 +125,13 @@ class KelasController extends BaseController
         ];
         if($link == 1) {
             $judul = 'Materi Kelas Profit 10 Juta Part 1';
-            $youtube_  = 'DN6QmDpr0ZA';
+            $youtube_  = 'BJpi9cWHt-A';
         } elseif($link == 2) {
             $judul = 'Materi Kelas Profit 10 Juta Part 2';
             $youtube_  = 'NBezwDCtWUk';
         } elseif($link == 3) {
             $judul = 'Materi Kelas Profit 10 Juta Part 3';
-            $youtube_  = 'DN6QmDpr0ZA';
+            $youtube_  = 'Mk0r85pX3tU';
         }
         if(!null == $check) {
             return view('pages.kelas-profit-video', compact('judul', 'youtube_'));
