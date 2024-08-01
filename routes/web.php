@@ -126,6 +126,7 @@ Route::middleware('splade')->group(function () {
     Route::post('/pemesanan/kelas-profit-10-juta/store/{agen}', [TransactionController::class, 'pemesanan_kelasprofit_store'])->name('pemesanan.profit.store');
     Route::get('/pemesanan/invoice/{uuid}', [TransactionController::class, 'invoice'])->name('pemesanan.invoice');
     Route::get('/pemesanan/cek', [TransactionController::class, 'pembayaran'])->name('pemesanan.cek');
+    Route::get('/pemesanan/kendala', [TransactionController::class, 'pemesanan_kendala'])->name('pemesanan.kendala');
 
     Route::get('/transaksi', [TransactionController::class, 'transaksi'])->name('transaksi');
     Route::get('/transaksi/pembayaran', [TransactionController::class, 'pembayaran'])->name('transaksi.pembayaran');

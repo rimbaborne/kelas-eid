@@ -155,12 +155,12 @@ class TransactionController extends Controller
 
         $va           = '1179001364818964'; //get on iPaymu dashboard
         $apiKey       = '516A6C4F-D5F7-4D3B-AC26-18FFFEEF3B87'; //get on iPaymu dashboard
+        $url          = 'https://my.ipaymu.com/api/v2/payment/direct'; // for production mode
+
 
         // $va           = '0000008125144744'; //get on iPaymu dashboard
         // $apiKey       = 'SANDBOXDF3E6F1F-5E4A-44EF-9EDB-98D7BD737DAA'; //get on iPaymu dashboard
-
         // $url          = 'https://sandbox.ipaymu.com/api/v2/payment/direct'; // for development mode
-        $url          = 'https://my.ipaymu.com/api/v2/payment/direct'; // for production mode
 
         $method       = 'POST'; //method
 
@@ -227,131 +227,139 @@ class TransactionController extends Controller
         //     'timestamp' => $timestamp,
         // ])->timeout(60)->post($url, $body);
 
-        $maxAttempts = 3;
-        $attempts = 0;
         $response = null;
 
-        while ($attempts < $maxAttempts) {
             try {
-                $response = Http::withHeaders([
+                $response = Http::timeout(30)->retry(3, 1000)->withHeaders([
                     'Accept' => 'application/json',
                     'Content-Type' => 'application/json',
                     'va' => $va,
                     'signature' => $signature,
                     'timestamp' => $timestamp,
-                ])->timeout(60)->retry(3, 1000)->post($url, $body);
-                break; // Berhenti jika berhasil
+                ])->post($url, $body);
             } catch (\Illuminate\Http\Client\RequestException $e) {
-                $attempts++;
-                if ($attempts >= $maxAttempts) {
-                    throw $e; // Lemparkan exception jika telah mencapai maksimal percobaan
-                }
-                sleep(2); // Tunggu beberapa detik sebelum mencoba lagi
+
+                $ref = $request->agen ?? 100001;
+                return redirect()->route('pemesanan.kendala', ['ref' => $ref]);
+
             }
-        }
+            try{
 
-        $status_api = $response->json();
+                    $status_api = $response->json();
 
-        if ($status_api['Status'] == 200) {
-            $payment_number_ = $method_ == 'qris' ? 'QRIS' : $status_api['Data']['PaymentNo'];
-            $simpan = Transaction::create([
-                'uuid'              => $status_api['Data']['SessionId'],
-                'user_id'           => $user->id,
-                'kelas_id'          => 1,
-                'agen_id'           => $agen ?? 100001,
-                'id_ipaymu'         => $status_api['Data']['TransactionId'],
-                'subtotal'          => 57000,
-                'fee'               => $status_api['Data']['Fee'],
-                'total'             => $status_api['Data']['Total'],
-                'batas_bayar'       => $status_api['Data']['Expired'],
-                'via'               => $method_,
-                'channel'           => $status_api['Data']['Channel'],
-                'payment_number'    => $payment_number_,
-                'payment_name'      => $status_api['Data']['PaymentName'],
-                'status_desc'       => 'Menunggu Pembayaran',
-                'status_pembayaran' => 'unpaid',
-                'qris_string'       => $status_api['Data']['QrString'] ?? null,
-                'qris_nmid'         => $status_api['Data']['NMID'] ?? null,
-            ]);
-            try {
-                $transaksi_hq = new TransactionHQ;
-                $transaksi_hq->uuid        = $ref_id;
-                $transaksi_hq->nama        = $user->name;
-                $transaksi_hq->email       = $user->email;
-                $transaksi_hq->panggilan   = $user->name;;
-                $transaksi_hq->kode_nohp   = $user->phone_code ?? 62;
-                $transaksi_hq->nohp        = $user->phone_number;
-                $transaksi_hq->gender      = null;
-                $transaksi_hq->tgllahir    = null;
-                $transaksi_hq->id_agen     = $request->agen ?? 100001;
-                $transaksi_hq->id_event    = 79;
-                $transaksi_hq->total       = 57000;
-                $transaksi_hq->status      = 1;
-                $transaksi_hq->jenis       = 1;
-                $transaksi_hq->save();
-            } catch (\Exception $e) {
-                // jika terjadi error maka tidak perlu dilanjutkan
-            } finally {
-                // Menambahkan waktu timeout jika perlu
-                Http::timeout(60);
+                    if ($status_api['Status'] == 200) {
+                        $payment_number_ = $method_ == 'qris' ? 'QRIS' : $status_api['Data']['PaymentNo'];
+                        $simpan = Transaction::create([
+                            'uuid'              => $status_api['Data']['SessionId'],
+                            'user_id'           => $user->id,
+                            'kelas_id'          => 1,
+                            'agen_id'           => $agen ?? 100001,
+                            'id_ipaymu'         => $status_api['Data']['TransactionId'],
+                            'subtotal'          => 57000,
+                            'fee'               => $status_api['Data']['Fee'],
+                            'total'             => $status_api['Data']['Total'],
+                            'batas_bayar'       => $status_api['Data']['Expired'],
+                            'via'               => $method_,
+                            'channel'           => $status_api['Data']['Channel'],
+                            'payment_number'    => $payment_number_,
+                            'payment_name'      => $status_api['Data']['PaymentName'],
+                            'status_desc'       => 'Menunggu Pembayaran',
+                            'status_pembayaran' => 'unpaid',
+                            'qris_string'       => $status_api['Data']['QrString'] ?? null,
+                            'qris_nmid'         => $status_api['Data']['NMID'] ?? null,
+                        ]);
+                        try {
+                            $transaksi_hq = new TransactionHQ;
+                            $transaksi_hq->uuid        = $ref_id;
+                            $transaksi_hq->nama        = $user->name;
+                            $transaksi_hq->email       = $user->email;
+                            $transaksi_hq->panggilan   = $user->name;;
+                            $transaksi_hq->kode_nohp   = $user->phone_code ?? 62;
+                            $transaksi_hq->nohp        = $user->phone_number;
+                            $transaksi_hq->gender      = null;
+                            $transaksi_hq->tgllahir    = null;
+                            $transaksi_hq->id_agen     = $request->agen ?? 100001;
+                            $transaksi_hq->id_event    = 79;
+                            $transaksi_hq->total       = 57000;
+                            $transaksi_hq->status      = 1;
+                            $transaksi_hq->jenis       = 1;
+                            $transaksi_hq->save();
+                        } catch (\Exception $e) {
+                            // jika terjadi error maka tidak perlu dilanjutkan
+                        } finally {
+                            // Menambahkan waktu timeout jika perlu
+                            Http::timeout(60);
+                        }
+
+                        $simpan->invoice_id     = date('Ymd') . $simpan->id;
+                        $simpan->sistem_lama_id = null;
+                        $simpan->save();
+
+                        $isiwa = 'Halo '.$user->name.',
+
+            Segera selesaikan pendaftaran Kelas Profit 10 Juta Anda dengan cara transfer sebesar Rp '.number_format($simpan->total, 0, ',', '.').'
+            di link berikut : '.route('pemesanan.invoice', ['uuid' => $ref_id]).'
+
+            Masa berlaku invoice ini hanya sampai '.$simpan->batas_bayar.'
+            Jika waktunya habis, maka tidak akan bisa ikut kelasnya.
+            Karena itu, selesaikan pendaftarannya sebelum invoicenya hangus.
+
+
+            Salam,
+
+            *Tim entrepreneurID*
+
+            Nb : Jika Anda ada pertanyaan, silahkan balas chat ini. 🙂';
+
+                        $this->notifwa($user->phone_code . $user->phone_number, $isiwa);
+
+                        $isiemail = 'Dear '.$user->name.', <br><br>
+
+            Segera selesaikan pendaftaran Kelas Profit 10 Juta Anda dengan cara transfer sebesar Rp '.number_format($simpan->total, 0, ',', '.').'<br>
+            di link berikut : '.route('pemesanan.invoice', ['uuid' => $ref_id]).'<br><br>
+
+            Masa berlaku invoice ini hanya sampai '.$simpan->batas_bayar.'<br><br>
+            Jika waktunya habis, maka tidak akan bisa ikut kelasnya. <br>
+            Karena itu, selesaikan pendaftarannya sebelum invoicenya hangus. <br><br>
+
+
+            Salam,<br><br>
+
+            Tim entrepreneurID <br><br>
+
+            Nb : Jika Anda ada pertanyaan, silahkan hubungi Customer Support kami di link ini ➡️ bit.ly/CS-eID';
+
+                        $data = [
+                            'subject'  => '[Invoice Pendaftaran Kelas 10 Juta]',
+                            'isi' => $isiemail,
+                        ];
+
+                        Mail::to($user->email)->send(new Pemesanan($data));
+
+                        if ($request->payment_method == 'bri') {
+                            NotifFollowUpInvoice::dispatch($simpan->id)->delay(Carbon::now()->addMinutes($followup));
+                        } else {
+                            NotifFollowUpInvoice::dispatch($simpan->id)->delay(Carbon::now()->addHours($followup));
+                        }
+
+
+                        return redirect()->route('pemesanan.invoice', ['uuid' => $ref_id]);
+                    } else {
+                        $ref = $request->agen ?? 100001;
+                        return redirect()->route('pemesanan.kendala', ['ref' => $ref]);
+                    }
+
+            } catch (\Illuminate\Http\Client\RequestException $e) {
+
+                $ref = $request->agen ?? 100001;
+                return redirect()->route('pemesanan.kendala', ['ref' => $ref]);
+
             }
 
-            $simpan->invoice_id     = date('Ymd') . $simpan->id;
-            $simpan->sistem_lama_id = null;
-            $simpan->save();
+    }
 
-            $isiwa = 'Halo '.$user->name.',
-
-Segera selesaikan pendaftaran Kelas Profit 10 Juta Anda dengan cara transfer sebesar Rp '.number_format($simpan->total, 0, ',', '.').'
-di link berikut : '.route('pemesanan.invoice', ['uuid' => $ref_id]).'
-
-Masa berlaku invoice ini hanya sampai '.$simpan->batas_bayar.'
-Jika waktunya habis, maka tidak akan bisa ikut kelasnya.
-Karena itu, selesaikan pendaftarannya sebelum invoicenya hangus.
-
-
-Salam,
-
-*Tim entrepreneurID*
-
-Nb : Jika Anda ada pertanyaan, silahkan balas chat ini. 🙂';
-
-            $this->notifwa($user->phone_code . $user->phone_number, $isiwa);
-
-            $isiemail = 'Dear '.$user->name.', <br><br>
-
-Segera selesaikan pendaftaran Kelas Profit 10 Juta Anda dengan cara transfer sebesar Rp '.number_format($simpan->total, 0, ',', '.').'<br>
-di link berikut : '.route('pemesanan.invoice', ['uuid' => $ref_id]).'<br><br>
-
-Masa berlaku invoice ini hanya sampai '.$simpan->batas_bayar.'<br><br>
-Jika waktunya habis, maka tidak akan bisa ikut kelasnya. <br>
-Karena itu, selesaikan pendaftarannya sebelum invoicenya hangus. <br><br>
-
-
-Salam,<br><br>
-
-Tim entrepreneurID <br><br>
-
-Nb : Jika Anda ada pertanyaan, silahkan hubungi Customer Support kami di link ini ➡️ bit.ly/CS-eID';
-
-            $data = [
-                'subject'  => '[Invoice Pendaftaran Kelas 10 Juta]',
-                'isi' => $isiemail,
-            ];
-
-            Mail::to($user->email)->send(new Pemesanan($data));
-
-            if ($request->payment_method == 'bri') {
-                NotifFollowUpInvoice::dispatch($simpan->id)->delay(Carbon::now()->addMinutes($followup));
-            } else {
-                NotifFollowUpInvoice::dispatch($simpan->id)->delay(Carbon::now()->addHours($followup));
-            }
-
-
-            return redirect()->route('pemesanan.invoice', ['uuid' => $ref_id]);
-        } else {
-            return $status_api;
-        }
+    public function pemesanan_kendala() {
+        return view('pages.pemesanan-kendala');
     }
     public function invoice($uuid)
     {
