@@ -239,7 +239,7 @@ class TransactionController extends Controller
                     'va' => $va,
                     'signature' => $signature,
                     'timestamp' => $timestamp,
-                ])->timeout(60)->post($url, $body);
+                ])->timeout(60)->retry(3, 1000)->post($url, $body);
                 break; // Berhenti jika berhasil
             } catch (\Illuminate\Http\Client\RequestException $e) {
                 $attempts++;
