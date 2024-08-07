@@ -297,37 +297,37 @@ class TransactionController extends Controller
 
                         $isiwa = 'Halo '.$user->name.',
 
-            Segera selesaikan pendaftaran Kelas Profit 10 Juta Anda dengan cara transfer sebesar Rp '.number_format($simpan->total, 0, ',', '.').'
-            di link berikut : '.route('pemesanan.invoice', ['uuid' => $ref_id]).'
+Segera selesaikan pendaftaran Kelas Profit 10 Juta Anda dengan cara transfer sebesar Rp '.number_format($simpan->total, 0, ',', '.').'
+di link berikut : '.route('pemesanan.invoice', ['uuid' => $ref_id]).'
 
-            Masa berlaku invoice ini hanya sampai '.$simpan->batas_bayar.'
-            Jika waktunya habis, maka tidak akan bisa ikut kelasnya.
-            Karena itu, selesaikan pendaftarannya sebelum invoicenya hangus.
+Masa berlaku invoice ini hanya sampai '.$simpan->batas_bayar.'
+Jika waktunya habis, maka tidak akan bisa ikut kelasnya.
+Karena itu, selesaikan pendaftarannya sebelum invoicenya hangus.
 
 
-            Salam,
+Salam,
 
-            *Tim entrepreneurID*
+*Tim entrepreneurID*
 
-            Nb : Jika Anda ada pertanyaan, silahkan balas chat ini. 🙂';
+Nb : Jika Anda ada pertanyaan, silahkan balas chat ini. 🙂';
 
                         $this->notifwa($user->phone_code . $user->phone_number, $isiwa);
 
                         $isiemail = 'Dear '.$user->name.', <br><br>
 
-            Segera selesaikan pendaftaran Kelas Profit 10 Juta Anda dengan cara transfer sebesar Rp '.number_format($simpan->total, 0, ',', '.').'<br>
-            di link berikut : '.route('pemesanan.invoice', ['uuid' => $ref_id]).'<br><br>
+Segera selesaikan pendaftaran Kelas Profit 10 Juta Anda dengan cara transfer sebesar Rp '.number_format($simpan->total, 0, ',', '.').'<br>
+di link berikut : '.route('pemesanan.invoice', ['uuid' => $ref_id]).'<br><br>
 
-            Masa berlaku invoice ini hanya sampai '.$simpan->batas_bayar.'<br><br>
-            Jika waktunya habis, maka tidak akan bisa ikut kelasnya. <br>
-            Karena itu, selesaikan pendaftarannya sebelum invoicenya hangus. <br><br>
+Masa berlaku invoice ini hanya sampai '.$simpan->batas_bayar.'<br><br>
+Jika waktunya habis, maka tidak akan bisa ikut kelasnya. <br>
+Karena itu, selesaikan pendaftarannya sebelum invoicenya hangus. <br><br>
 
 
-            Salam,<br><br>
+Salam,<br><br>
 
-            Tim entrepreneurID <br><br>
+Tim entrepreneurID <br><br>
 
-            Nb : Jika Anda ada pertanyaan, silahkan hubungi Customer Support kami di link ini ➡️ bit.ly/CS-eID';
+Nb : Jika Anda ada pertanyaan, silahkan hubungi Customer Support kami di link ini ➡️ bit.ly/CS-eID';
 
                         $data = [
                             'subject'  => '[Invoice Pendaftaran Kelas 10 Juta]',
