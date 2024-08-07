@@ -147,9 +147,7 @@ Terimakasih. 😊
 
 Salam,
 
-*Tim entrepreneurID*
-
-Nb : Jika Anda mengalami kendala saat mengakses materinya, silahkan hubungi Customer Support kami di link ini ➡️ bit.ly/CS-eID';
+*Tim entrepreneurID*';
 
             $this->notifwa($user->phone_code . $user->phone_number, $isiwa);
 
@@ -212,9 +210,7 @@ Terimakasih. 😊
 
 Salam,
 
-*Tim entrepreneurID*
-
-Nb : Jika Anda mengalami kendala saat mengakses materinya, silahkan hubungi Customer Support kami di link ini ➡️ bit.ly/CS-eID';
+*Tim entrepreneurID*';
 
             $this->notifwa($user->phone_code . $user->phone_number, $isiwa);
 
