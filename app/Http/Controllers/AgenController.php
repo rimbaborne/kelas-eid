@@ -95,28 +95,28 @@ class AgenController extends Controller
                     'password'     => Hash::make($request->password),
                 ]);
 
-                try {
-                    $transaksi_hq = new TransactionHQ;
-                    $transaksi_hq->uuid        = Str::uuid();
-                    $transaksi_hq->nama        = $user->name;
-                    $transaksi_hq->email       = $user->email;
-                    $transaksi_hq->panggilan   = $user->name;
-                    $transaksi_hq->kode_nohp   = $user->phone_code ?? 62;
-                    $transaksi_hq->nohp        = $user->phone_number;
-                    $transaksi_hq->gender      = null;
-                    $transaksi_hq->tgllahir    = null;
-                    $transaksi_hq->id_agen     = auth()->user()->id ?? 100001;
-                    $transaksi_hq->id_event    = 79;
-                    $transaksi_hq->total       = 57000;
-                    $transaksi_hq->status      = 3;
-                    $transaksi_hq->jenis       = 1;
-                    $transaksi_hq->save();
-                } catch (\Exception $e) {
-                    // jika terjadi error maka tidak perlu dilanjutkan
-                } finally {
-                    // Menambahkan waktu timeout jika perlu
-                    Http::timeout(60);
-                }
+                // try {
+                //     $transaksi_hq = new TransactionHQ;
+                //     $transaksi_hq->uuid        = Str::uuid();
+                //     $transaksi_hq->nama        = $user->name;
+                //     $transaksi_hq->email       = $user->email;
+                //     $transaksi_hq->panggilan   = $user->name;
+                //     $transaksi_hq->kode_nohp   = $user->phone_code ?? 62;
+                //     $transaksi_hq->nohp        = $user->phone_number;
+                //     $transaksi_hq->gender      = null;
+                //     $transaksi_hq->tgllahir    = null;
+                //     $transaksi_hq->id_agen     = auth()->user()->id ?? 100001;
+                //     $transaksi_hq->id_event    = 79;
+                //     $transaksi_hq->total       = 57000;
+                //     $transaksi_hq->status      = 3;
+                //     $transaksi_hq->jenis       = 1;
+                //     $transaksi_hq->save();
+                // } catch (\Exception $e) {
+                //     // jika terjadi error maka tidak perlu dilanjutkan
+                // } finally {
+                //     // Menambahkan waktu timeout jika perlu
+                //     Http::timeout(60);
+                // }
 
                 $peserta = Peserta::create([
                     'user_id' => $user->id,
@@ -127,21 +127,21 @@ class AgenController extends Controller
 
                 $isiwa = 'Halo '.$user->name.',
 
-Selamat telah menjadi peserta di Kelas Profit 10 Juta. 😇
-Silahkan akses materinya disini https://kelasentrepreneurid.com/login
+Sekali lagi selamat sudah terdaftar sebagai peserta di Kelas Profit 10 Juta.
 
-Masuk dengan akun Anda
+Lewat pesan ini kami ingin memberitahu cara baru mengaskes kelas yang Anda ikuti ya.
+
+Caranya :
+Klik https://kelasentrepreneurID.com/login
+
+Lalu masuk dengan akun ini
 Email : '.$user->email.'
 Password : '.$user->show_password.'
 
-Selain akses materi diatas, Anda juga bisa dapat bimbingan via WA dan dapat update materi kursus ini dengan cara
-👇👇👇
-Chat nomor WA 082318989848
-Dengan format : Peserta KPS eID
-Atau kalau mau lebih cepat, bisa klik link ini https://wa.me/6282318989848?text=Peserta%20KPS%20eID
+Silahkan dicoba ya.
 
-Sekali lagi selamat belajar.
-Semoga ini jadi wasilah untuk pertumbuhan bisnis Anda, aamiin. 🤲
+Jika ada kendala dalam mengakses kelasnya, silahkan balas pesan ini.
+Terimakasih. 😊
 
 Salam,
 
@@ -156,28 +156,28 @@ Nb : Jika Anda mengalami kendala saat mengakses materinya, silahkan hubungi Cust
             } else {
                 $peserta = null;
                 if ($user->email != 'admin@kelasentrepreneurid.com'  || $user->phone_number != '8125144744' ) {
-                    try {
-                        $transaksi_hq = new TransactionHQ;
-                        $transaksi_hq->uuid        = Str::uuid();
-                        $transaksi_hq->nama        = $user->name;
-                        $transaksi_hq->email       = $user->email;
-                        $transaksi_hq->panggilan   = $user->name;
-                        $transaksi_hq->kode_nohp   = $user->phone_code ?? 62;
-                        $transaksi_hq->nohp        = $user->phone_number;
-                        $transaksi_hq->gender      = null;
-                        $transaksi_hq->tgllahir    = null;
-                        $transaksi_hq->id_agen     = auth()->user()->id ?? 100001;
-                        $transaksi_hq->id_event    = 79;
-                        $transaksi_hq->total       = 57000;
-                        $transaksi_hq->status      = 3;
-                        $transaksi_hq->jenis       = 1;
-                        $transaksi_hq->save();
-                    } catch (\Exception $e) {
-                        // jika terjadi error maka tidak perlu dilanjutkan
-                    } finally {
-                        // Menambahkan waktu timeout jika perlu
-                        Http::timeout(60);
-                    }
+                    // try {
+                    //     $transaksi_hq = new TransactionHQ;
+                    //     $transaksi_hq->uuid        = Str::uuid();
+                    //     $transaksi_hq->nama        = $user->name;
+                    //     $transaksi_hq->email       = $user->email;
+                    //     $transaksi_hq->panggilan   = $user->name;
+                    //     $transaksi_hq->kode_nohp   = $user->phone_code ?? 62;
+                    //     $transaksi_hq->nohp        = $user->phone_number;
+                    //     $transaksi_hq->gender      = null;
+                    //     $transaksi_hq->tgllahir    = null;
+                    //     $transaksi_hq->id_agen     = auth()->user()->id ?? 100001;
+                    //     $transaksi_hq->id_event    = 79;
+                    //     $transaksi_hq->total       = 57000;
+                    //     $transaksi_hq->status      = 3;
+                    //     $transaksi_hq->jenis       = 1;
+                    //     $transaksi_hq->save();
+                    // } catch (\Exception $e) {
+                    //     // jika terjadi error maka tidak perlu dilanjutkan
+                    // } finally {
+                    //     // Menambahkan waktu timeout jika perlu
+                    //     Http::timeout(60);
+                    // }
                     $cekpeserta = Peserta::where('user_id',$user->id)->first();
                     if (!$cekpeserta) {
                         $peserta = Peserta::create([
@@ -190,21 +190,21 @@ Nb : Jika Anda mengalami kendala saat mengakses materinya, silahkan hubungi Cust
 
                 $isiwa = 'Halo '.$user->name.',
 
-Selamat telah menjadi peserta di Kelas Profit 10 Juta. 😇
-Silahkan akses materinya disini https://kelasentrepreneurid.com/login
+Sekali lagi selamat sudah terdaftar sebagai peserta di Kelas Profit 10 Juta.
 
-Masuk dengan akun Anda
+Lewat pesan ini kami ingin memberitahu cara baru mengaskes kelas yang Anda ikuti ya.
+
+Caranya :
+Klik https://kelasentrepreneurID.com/login
+
+Lalu masuk dengan akun ini
 Email : '.$user->email.'
 Password : '.$user->show_password.'
 
-Selain akses materi diatas, Anda juga bisa dapat bimbingan via WA dan dapat update materi kursus ini dengan cara
-👇👇👇
-Chat nomor WA 082318989848
-Dengan format : Peserta KPS eID
-Atau kalau mau lebih cepat, bisa klik link ini https://wa.me/6282318989848?text=Peserta%20KPS%20eID
+Silahkan dicoba ya.
 
-Sekali lagi selamat belajar.
-Semoga ini jadi wasilah untuk pertumbuhan bisnis Anda, aamiin. 🤲
+Jika ada kendala dalam mengakses kelasnya, silahkan balas pesan ini.
+Terimakasih. 😊
 
 Salam,
 
