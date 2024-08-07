@@ -125,7 +125,8 @@ class AgenController extends Controller
                 ]);
 
 
-                $isiwa = 'Halo '.$user->name.',
+                $isiwa = '*UPDATE AKSES KELAS PROFIT 10 JUTA*
+Halo '.$user->name.',
 
 Sekali lagi selamat sudah terdaftar sebagai peserta di Kelas Profit 10 Juta.
 
@@ -188,7 +189,8 @@ Nb : Jika Anda mengalami kendala saat mengakses materinya, silahkan hubungi Cust
                     }
                 }
 
-                $isiwa = 'Halo '.$user->name.',
+                $isiwa = '*UPDATE AKSES KELAS PROFIT 10 JUTA*
+Halo '.$user->name.',
 
 Sekali lagi selamat sudah terdaftar sebagai peserta di Kelas Profit 10 Juta.
 
