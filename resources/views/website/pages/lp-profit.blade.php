@@ -566,12 +566,12 @@
                                                       <div class="elementor-element elementor-element-4d448981 elementor-widget elementor-widget-text-editor" data-id="4d448981" data-element_type="widget" data-widget_type="text-editor.default">
                                                          <div class="elementor-widget-container">
                                                             <p style="text-align: center;"><span style="color: #000000;"><b>Dan bayangkan</b>, solusi masalah hidup selama ini bisa Anda langsung dapatkan hanya dengan<br /></span></p>
-                                                            <p style="text-align: center;"><span style="color: #ff0000;"><strong><del> 199 ribu  <br /></del></strong></span><span style="color: #ff0000;"><strong><del> 123 ribu </del></strong></span></p>
+                                                            <p style="text-align: center;"><span style="color: #ff0000;"><strong><del> 299 ribu  <br /></del></strong></span><span style="color: #ff0000;"><strong><del> 183 ribu </del></strong></span></p>
                                                          </div>
                                                       </div>
                                                       <div class="elementor-element elementor-element-28d41d66 elementor-widget elementor-widget-text-editor" data-id="28d41d66" data-element_type="widget" data-widget_type="text-editor.default">
                                                          <div class="elementor-widget-container">
-                                                            <p style="text-align: center;"><span style="color: #339966;">57 Ribu</span></p>
+                                                            <p style="text-align: center;"><span style="color: #339966;">123 RIbu</span></p>
                                                          </div>
                                                       </div>
                                                       <div class="elementor-element elementor-element-40719e2b elementor-widget elementor-widget-text-editor" data-id="40719e2b" data-element_type="widget" data-widget_type="text-editor.default">
@@ -821,7 +821,7 @@
                                           </section>
                                           <div class="elementor-element elementor-element-3b0ce5f5 elementor-widget elementor-widget-text-editor" data-id="3b0ce5f5" data-element_type="widget" data-widget_type="text-editor.default">
                                              <div class="elementor-widget-container">
-                                                <h3 style="text-align: center;"><span style="color: #000000;"><strong>Coba hitung baik-baik apa yang bisa Anda bawa pulang<br />HANYA DENGAN 57 RIBU??</strong></span></h3>
+                                                <h3 style="text-align: center;"><span style="color: #000000;"><strong>Coba hitung baik-baik apa yang bisa Anda bawa pulang<br />HANYA DENGAN 123 RIbu??</strong></span></h3>
                                                 <p><span style="color: #720004;">Ilmu Meningkatkan Penghasilan + Support Maksimal + Solusi Bisnis + Solusi Hidup + 9 Bonus Spesial yang bermanfaat untuk Bisnis Anda </span></p>
                                                 <h2><span style="color: #000000;"><strong>Banyak banget kan? </strong></span></h2>
                                              </div>
@@ -854,7 +854,7 @@
                                                             <div class="elementor-image-box-wrapper">
                                                                <div class="elementor-image-box-content">
                                                                   <div class="elementor-image-box-title"> Daftar Kelas Profit 10 Juta</div>
-                                                                  <p class="elementor-image-box-description">123 Ribu </p>
+                                                                  <p class="elementor-image-box-description">183 Ribu </p>
                                                                </div>
                                                             </div>
                                                          </div>
@@ -863,7 +863,7 @@
                                                          <div class="elementor-widget-container">
                                                             <div class="elementor-image-box-wrapper">
                                                                <div class="elementor-image-box-content">
-                                                                  <div class="elementor-image-box-title">57 Ribu</div>
+                                                                  <div class="elementor-image-box-title">123 RIbu</div>
                                                                </div>
                                                             </div>
                                                          </div>
