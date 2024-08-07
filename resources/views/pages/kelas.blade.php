@@ -10,7 +10,7 @@
                     <small class="text-gray-900 text-xs hidden md:block">new</small>
                     <h1 class="text-md sm:text-2xl font-semibold text-gray-700 pb-2">Kelas PROFIT 10 JUTA</h1>
                     {{-- <p class="text-sm sm:text text-gray-500 leading-6">Kelas Online mindset usaha</p> --}}
-                    <h1 class="text-xl sm:text-2xl font-semibold text-gray-900 pb-2">Rp 57.000</h1>
+                    <h1 class="text-xl sm:text-2xl font-semibold text-gray-900 pb-2">Rp 123.000</h1>
 
                     <div class="pb-4 mt-4">
                         <a href="#" title=""

@@ -24,7 +24,7 @@
                             Kelas Profit 10 Juta
                         </h1>
                         <h1 class="text-lg font-semibold text-gray-900 hover:underline dark:text-white">
-                            Rp. 57.000
+                            Rp. 123.000
                         </h1>
                     </div>
                 </div>

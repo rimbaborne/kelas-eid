@@ -24,10 +24,10 @@
                         </h1>
                         <div class="space-y-0">
                             <h1 class="text-lg font-normal text-primary-900 hover:underline dark:text-white">
-                                <strike>Rp. 123.000</strike>
+                                <strike>Rp. 183.000</strike>
                             </h1>
                             <h1 class="text-xl font-semibold text-gray-900 hover:underline dark:text-white">
-                                Rp. 57.000
+                                Rp. 123.000
                             </h1>
                         </div>
                     </div>
@@ -393,13 +393,13 @@
                         <h3 class="text-lg font-semibold mb-2">e-Wallet</h3>
                         <div class="space-y-2">
                             <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
-                                <x-splade-radio name="payment_method" value="linkaja" class="mr-2" data-fee="{{ 57000 * 0.007 }}" data-inis="LinkAja" data-type="e_wallet"/>
+                                <x-splade-radio name="payment_method" value="linkaja" class="mr-2" data-fee="{{ 123000 * 0.007 }}" data-inis="LinkAja" data-type="e_wallet"/>
                                 <img src="{{ url('/') }}/assets/pembayaran/linkaja.svg" alt="LinkAja"
                                     class="h-6 mr-2">
                                 LinkAja
                             </label>
                             <label class="flex items-center p-4  border rounded-lg cursor-pointer hover:bg-gray-50">
-                                <x-splade-radio name="payment_method" value="dana" class="mr-2" data-fee="{{ 57000 * 0.007 }}" data-inis="Dana" data-type="e_wallet"/>
+                                <x-splade-radio name="payment_method" value="dana" class="mr-2" data-fee="{{ 123000 * 0.007 }}" data-inis="Dana" data-type="e_wallet"/>
                                 <img src="{{ url('/') }}/assets/pembayaran/dana.svg" alt="Dana"
                                     class="h-6 mr-2">
                                 Dana
@@ -415,7 +415,7 @@
                     <div class="space-y-2">
                         <dl class="flex items-center justify-between gap-4">
                             <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Harga</dt>
-                            <dd class="text-base font-medium text-gray-900 dark:text-white">Rp 57.000</dd>
+                            <dd class="text-base font-medium text-gray-900 dark:text-white">Rp 123.000</dd>
                         </dl>
 
                         <dl class="flex items-center justify-between gap-4">
@@ -439,7 +439,7 @@
                         elem.addEventListener("change", function(event) {
                             var fee = event.target.getAttribute('data-fee');
                             var name = event.target.getAttribute('data-inis');
-                            var total = 57000 + parseInt(fee);
+                            var total = 123000 + parseInt(fee);
                             document.getElementById('transaction-fee').innerText = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(fee);
                             document.getElementById('total-cost').innerText = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(total);
                             document.getElementById('metode-pembayaran').innerText = name;

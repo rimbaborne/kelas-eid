@@ -11,7 +11,7 @@
                     <div class="p-3 md:p-6 text-center">
                         <h1 class="text-md font-semibold text-gray-700 pb-2">Kelas Profit 10 Juta</h1>
                         {{-- <p class="text-sm sm:text text-gray-500 leading-6">Kelas Online mindset usaha</p> --}}
-                        <h1 class="text-xl font-semibold text-gray-900 pb-2">Rp 57.000</h1>
+                        <h1 class="text-xl font-semibold text-gray-900 pb-2">Rp 123.000</h1>
 
                         <div class="pb-4 mt-4">
 

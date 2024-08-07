@@ -28,7 +28,7 @@
                 <img class="h-64 p-4" src="https://admin.entrepreneurid.org/img/produk/KPS-2024-1.png">
                 <div class="p-3 md:p-6 text-center">
                     <h1 class="text-xl sm:text-2xl font-semibold text-gray-700 pb-2 ">Kelas Profit 10 Juta</h1>
-                    <h1 class="text-xl sm:text-2xl font-semibold text-gray-900 pb-2 ">Rp 57.000</h1>
+                    <h1 class="text-xl sm:text-2xl font-semibold text-gray-900 pb-2 ">Rp 123.000</h1>
 
                     <div class="gap-4 pb-2 items-center justify-center flex">
 

@@ -194,8 +194,8 @@ class TransactionController extends Controller
         $body    = [
             'product'        => ['Kelas Profit 10 Juta'],
             'qty'            => ['1'],
-            'price'          => ['57000'],
-            'amount'         => '57000',
+            'price'          => ['123000'],
+            'amount'         => '123000',
             'returnUrl'      => 'https://kelasentrepreneurid.com/transaksi/selesai',
             'cancelUrl'      => 'https://kelasentrepreneurid.com/transaksi/cancel',
             'notifyUrl'      => 'https://kelasentrepreneurid.com/transaksi/callback',
@@ -255,7 +255,7 @@ class TransactionController extends Controller
                             'kelas_id'          => 1,
                             'agen_id'           => $agen ?? 100001,
                             'id_ipaymu'         => $status_api['Data']['TransactionId'],
-                            'subtotal'          => 57000,
+                            'subtotal'          => 123000,
                             'fee'               => $status_api['Data']['Fee'],
                             'total'             => $status_api['Data']['Total'],
                             'batas_bayar'       => $status_api['Data']['Expired'],
@@ -280,7 +280,7 @@ class TransactionController extends Controller
                             $transaksi_hq->tgllahir    = null;
                             $transaksi_hq->id_agen     = $request->agen ?? 100001;
                             $transaksi_hq->id_event    = 79;
-                            $transaksi_hq->total       = 57000;
+                            $transaksi_hq->total       = 123000;
                             $transaksi_hq->status      = 1;
                             $transaksi_hq->jenis       = 1;
                             $transaksi_hq->save();
@@ -398,8 +398,8 @@ class TransactionController extends Controller
         $body    = [
             'product'        => ['Pemesanan Kelas Profit 10 Juta'],
             'qty'            => ['1'],
-            'price'          => ['57000'],
-            'amount'         => '57000',
+            'price'          => ['123000'],
+            'amount'         => '123000',
             'returnUrl'      => 'https://kelasentrepreneurid.com/pemesanan/selesai',
             'cancelUrl'      => 'https://kelasentrepreneurid.com/pemesanan/cancel',
             'notifyUrl'      => 'https://kelasentrepreneurid.com/transaksi/callback',

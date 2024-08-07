@@ -54,7 +54,7 @@ class RoleAndPermission extends Seeder
             'nama' => 'Kelas Profit 10 Juta',
             'slug' => 'kelas-profit-10-juta',
             'harga_coret' => 125000,
-            'harga' => 57000,
+            'harga' => 123000,
             'komisi_agen' => 25000,
             'komisi_sub_agen' => 0,
             'gambar' => 'https://admin.entrepreneurid.org/img/produk/KPS-2024-1.png',
