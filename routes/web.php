@@ -133,7 +133,7 @@ Route::middleware('splade')->group(function () {
     Route::get('/transaksi/cancel', [TransactionController::class, 'cancel'])->name('transaksi.cancel');
     Route::get('/transaksi/selesai', [TransactionController::class, 'selesai'])->name('transaksi.selesai');
 
-    Route::get('/pemesanan/kelas-profit-10-juta/100188', [TransactionController::class, 'pemesanan_kelasprofit_plus'])->name('pemesanan.plus');
+    // Route::get('/pemesanan/kelas-profit-10-juta/100188', [TransactionController::class, 'pemesanan_kelasprofit_plus'])->name('pemesanan.plus');
     Route::post('/pemesanan/kelas-profit-10-juta/plus/store/{agen}', [TransactionController::class, 'pemesanan_kelasprofit_plus_store'])->name('pemesanan.profit.plus.store');
 
 
