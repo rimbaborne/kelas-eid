@@ -125,9 +125,7 @@ class AgenController extends Controller
                 ]);
 
 
-                $isiwa = '*UPDATE AKSES KELAS PROFIT 10 JUTA*
-
-Halo '.$user->name.',
+                $isiwa = 'Halo '.$user->name.',
 
 Selamat telah menjadi peserta di Kelas Profit 10 Juta. 😇
 Silahkan akses materinya disini https://kelasentrepreneurid.com/login
@@ -189,29 +187,28 @@ Nb : Jika Anda mengalami kendala saat mengakses materinya, silahkan hubungi Cust
                     }
                 }
 
-                $isiwa = '*UPDATE AKSES KELAS PROFIT 10 JUTA*
+                $isiwa = 'Halo '.$user->name.',
 
-Halo '.$user->name.',
+Selamat telah menjadi peserta di Kelas Profit 10 Juta. 😇
+Silahkan akses materinya disini https://kelasentrepreneurid.com/login
 
-Sekali lagi selamat sudah terdaftar sebagai peserta di Kelas Profit 10 Juta.
-
-Lewat pesan ini kami ingin memberitahu cara baru mengaskes kelas yang Anda ikuti ya.
-
-Caranya :
-Klik https://kelasentrepreneurID.com/login
-
-Lalu masuk dengan akun ini
 Email : '.$user->email.'
 Password : '.$user->show_password.'
 
-Silahkan dicoba ya.
+Selain akses materi diatas, Anda juga bisa dapat bimbingan via WA dan dapat update materi kursus ini dengan cara
+👇👇👇
+Chat nomor WA 082318989848
+Dengan format : Peserta KPS eID
+Atau kalau mau lebih cepat, bisa klik link ini https://wa.me/6282318989848?text=Peserta%20KPS%20eID
 
-Jika ada kendala dalam mengakses kelasnya, silahkan balas pesan ini.
-Terimakasih. 😊
+Sekali lagi selamat belajar.
+Semoga ini jadi wasilah untuk pertumbuhan bisnis Anda, aamiin. 🤲
 
 Salam,
 
-*Tim entrepreneurID*';
+*Tim entrepreneurID*
+
+Nb : Jika Anda mengalami kendala saat mengakses materinya, silahkan hubungi Customer Support kami di link ini ➡️ bit.ly/CS-eID';
 
             $this->notifwa($user->phone_code . $user->phone_number, $isiwa);
 
